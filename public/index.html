@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Matrix Sales Software</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <div class="app-layout">
+    <!-- Left Corporate Sidebar -->
+    <aside class="sidebar">
+      <div class="brand-box">
+        <div class="brand-logo">M</div>
+        <div>
+          <div class="brand-title">MATRIX SALES SOFTWARE</div>
+          <div class="brand-subtitle">Datasheets • Tenders • CRM</div>
+        </div>
+      </div>
+
+      <div class="nav-section-label">Core Operations</div>
+      <ul class="nav-list" role="tablist" aria-label="Main Application Modules">
+        <li>
+          <button class="nav-btn active" data-tab="tab-datasheets" type="button">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+            <span>Product Datasheets</span>
+            <span class="nav-badge" id="nav-count-products">3</span>
+          </button>
+        </li>
+        <li>
+          <button class="nav-btn" data-tab="tab-contacts" type="button">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            <span>Contacts & Phone Sync</span>
+            <span class="nav-badge" id="nav-count-contacts">4</span>
+          </button>
+        </li>
+        <li>
+          <button class="nav-btn" data-tab="tab-factories" type="button">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M3 21h18"/><path d="M5 21V7l8-4v18"/><path d="M19 21V11l-6-4"/><line x1="9" y1="9" x2="9" y2="9.01"/><line x1="9" y1="13" x2="9" y2="13.01"/><line x1="9" y1="17" x2="9" y2="17.01"/></svg>
+            <span>Factories Directory</span>
+            <span class="nav-badge" id="nav-count-factories">4</span>
+          </button>
+        </li>
+        <li>
+          <button class="nav-btn" data-tab="tab-tenders" type="button">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+            <span>Tender Spec Analyzer</span>
+            <span class="nav-badge" id="nav-count-rules">4</span>
+          </button>
+        </li>
+        <li>
+          <button class="nav-btn" data-tab="tab-pricing" type="button">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+            <span>Bid Price Estimator</span>
+            <span class="nav-badge">BOQ</span>
+          </button>
+        </li>
+        <li>
+          <button class="nav-btn" data-tab="tab-sql" type="button">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+            <span>SQL Server (SSMS)</span>
+          </button>
+        </li>
+      </ul>
+
+      <div class="sidebar-footer">
+        <div class="role-switcher-box">
+          <label for="activeUserSelect">Active Session Role (RBAC)</label>
+          <select id="activeUserSelect" aria-label="Switch active user role to test permissions"></select>
+        </div>
+        <div id="activeUserRoleNote" style="font-size: 0.7rem; color: #94a3b8;"></div>
+      </div>
+    </aside>
+
+    <!-- Main Workspace -->
+    <div class="main-area">
+      <!-- Top Status Header -->
+      <header class="topbar">
+        <div class="status-pills">
+          <span class="pill sql-pill" id="sqlStatusBadge">
+            <span class="dot"></span>
+            <span id="sqlStatusText">Database: MS SQL Server (SSMS Schema Synced)</span>
+          </span>
+          <span class="pill ai-pill">
+            <span id="aiModeBadgeText">Analysis Engine: Rule & Statistical Model (Local)</span>
+          </span>
+        </div>
+        <div class="action-row">
+          <a href="/api/sql/ssms-script" class="btn btn-sm" download="MatrixFactoryDB_SSMS_FullSync.sql">
+            Export SSMS .SQL Script
+          </a>
+          <button class="btn btn-sm btn-primary" type="button" onclick="switchTab('tab-datasheets'); window.print();">
+            Print Active Datasheet PDF
+          </button>
+        </div>
+      </header>
+
+      <main class="workspace-content">
+        <!-- =============================================================== -->
+        <!-- MODULE 1: PRODUCT PDF DATASHEET CREATOR                         -->
+        <!-- =============================================================== -->
+        <section id="tab-datasheets" class="tab-panel active">
+          <div class="section-header">
+            <div>
+              <h1>Product Technical Datasheet Generator</h1>
+              <p>Configure product parameters, project submittal metadata, and export print-ready technical datasheets.</p>
+            </div>
+            <div class="action-row">
+              <button class="btn" type="button" id="btnOpenNewProductModal">New Product SKU</button>
+              <button class="btn btn-primary" type="button" id="btnGeneratePDF">Export PDF Datasheet</button>
+            </div>
+          </div>
+
+          <div class="datasheet-workspace">
+            <!-- Left Control Panel -->
+            <div class="card datasheet-controls" style="display:flex; flex-direction:column; gap:0.9rem;">
+              <div class="card-title">
+                <span>Submittal Parameters</span>
+                <span class="badge badge-blue">A4 Document</span>
+              </div>
+
+              <div>
+                <label class="field-label" for="dsCategoryFilter">Filter by SajayaTech Product Line</label>
+                <select id="dsCategoryFilter">
+                  <option value="ALL">All SajayaTech Product Lines (33 Models)</option>
+                  <option value="Personal Computers (Desktops)">Personal Computers — TechDesk Towers (B1Q, S300, S500, S700)</option>
+                  <option value="Small Form Factor (SFF) Desktops">Small Form Factor (SFF) — TechDesk SFF (C20S, B20S, B70S)</option>
+                  <option value="Mini PCs">Mini PCs — TechDesk Mini (C20M, B20M, B70M / W20M)</option>
+                  <option value="Workstations">Workstations — TechDesk (W20T, W50T/W70T, W90T Threadripper)</option>
+                  <option value="Laptops (TechBook)">Laptops — Sajaya TechBook (L300, L500, W70H/L700)</option>
+                  <option value="All-in-One PCs">All-in-One PCs — TechDesk (A240, A270/Horizon, A300 4K)</option>
+                  <option value="Monitors (Commercial & Gaming)">Monitors — Sajaya TechView (B24S, B27S, B32H, 240Hz Gaming)</option>
+                  <option value="Interactive Touch Screens">Interactive Screens — Sajaya Smart (I650 65", I750 75", I860 86")</option>
+                  <option value="UPS & Power Systems (Sajaya Power)">Online UPS Systems — Sajaya Power (HP9336C 3Ph, HP9511CRT, HP9511D)</option>
+                  <option value="CCTV & NVR Surveillance">CCTV & NVR — Sajaya Vision (B400, D500, D80 4K, NVR08P/32E)</option>
+                  <option value="Charge Carts & IT Accessories">Charge Carts & Docks — TechGears (36-Bay USB-C Cart, Dock 12P, Arm D2)</option>
+                  <option value="Gaming PCs & Peripherals">Gaming PCs & Peripherals — TechSpace & TechGears (G500-G900, B850, Mice/Headsets)</option>
+                </select>
+              </div>
+
+              <div>
+                <label class="field-label" for="dsProductSelect">Select SajayaTech Model / SKU</label>
+                <select id="dsProductSelect"></select>
+              </div>
+
+              <div class="form-grid">
+                <div>
+                  <label class="field-label" for="dsCustomClient">Client / Issuing Authority</label>
+                  <input type="text" id="dsCustomClient" placeholder="e.g., Ministry of Digital Economy" value="Ministry of Education & Higher Research" />
+                </div>
+                <div>
+                  <label class="field-label" for="dsCustomProject">Project / Tender Reference</label>
+                  <input type="text" id="dsCustomProject" placeholder="e.g., TND-GOV-2026-409" value="TND-GOV-2026-409 (IT & Power Pkg)" />
+                </div>
+              </div>
+
+              <div class="form-grid">
+                <div>
+                  <label class="field-label" for="dsDocCode">Document Control No.</label>
+                  <input type="text" id="dsDocCode" class="mono" value="DS-MTX-2026-001" />
+                </div>
+                <div>
+                  <label class="field-label" for="dsAccentColor">Document Header Theme</label>
+                  <select id="dsAccentColor">
+                    <option value="#1e3a8a">Corporate Navy (#1e3a8a)</option>
+                    <option value="#0f172a">Industrial Charcoal (#0f172a)</option>
+                    <option value="#0f766e">Engineering Teal (#0f766e)</option>
+                    <option value="#1e293b">Standard Slate (#1e293b)</option>
+                  </select>
+                </div>
+              </div>
+
+              <div style="border-top: 1px solid var(--border-subtle); padding-top: 0.75rem;">
+                <label class="field-label">Append / Override Technical Specification Row</label>
+                <div style="display:grid; grid-template-columns: 1fr 1fr auto; gap:0.4rem;">
+                  <input type="text" id="newSpecKey" placeholder="Parameter (e.g. Altitude)" />
+                  <input type="text" id="newSpecVal" placeholder="Value (e.g. 1000m ASL)" />
+                  <button class="btn btn-primary btn-sm" type="button" id="btnAddSpecRow">Add Row</button>
+                </div>
+              </div>
+
+              <div style="border-top: 1px solid var(--border-subtle); padding-top: 0.75rem;">
+                <div class="field-label">Submittal Generation Log</div>
+                <div id="datasheetHistoryList" style="font-size:0.76rem; color:var(--text-secondary); display:flex; flex-direction:column; gap:0.35rem;"></div>
+              </div>
+            </div>
+
+            <!-- Right Live Printable A4 Datasheet Sheet -->
+            <div class="datasheet-paper" id="printableDatasheet">
+              <div class="ds-header">
+                <div class="ds-brand">
+                  <div class="ds-brand-mark" id="dsBrandMark">M</div>
+                  <div>
+                    <div style="font-size:1.1rem; font-weight:800; letter-spacing:0.01em; color:#0f172a;" id="dsFactoryHeaderName">MATRIX MAIN INDUSTRIAL PLANT</div>
+                    <div style="font-size:0.75rem; color:#475569;" id="dsFactoryHeaderSub">ISO 9001 • IEC Type-Tested Manufacturing Facility • Riyadh, KSA</div>
+                  </div>
+                </div>
+                <div class="ds-doc-meta">
+                  <div style="font-weight:700; color:#1e3a8a; font-size:0.82rem; letter-spacing:0.04em;">TECHNICAL DATA SHEET</div>
+                  <div><strong>DOC NO:</strong> <span id="previewDocCode">DS-MTX-2026-001</span></div>
+                  <div><strong>MODEL SKU:</strong> <span id="previewSKU">MTX-SWG-4000A</span></div>
+                  <div><strong>REV:</strong> <span id="previewRev">Rev 3.2</span> | <strong>DATE:</strong> <span id="previewDate">2026-10-29</span></div>
+                </div>
+              </div>
+
+              <div class="ds-title-banner" id="dsTitleBanner">
+                <div style="font-size:0.7rem; font-weight:700; text-transform:uppercase; color:#1e3a8a; letter-spacing:0.05em;" id="previewCategory">LV Switchgear & MCC</div>
+                <h2 id="previewProductName">Matrix PowerCore 4000A Low Voltage Main Distribution Switchgear</h2>
+                <div style="font-size:0.8rem; color:#334155; margin-top:0.25rem;" id="previewSummary"></div>
+              </div>
+
+              <div style="display:grid; grid-template-columns: 1fr 1fr; gap:0.5rem 1rem; background:#f8fafc; border:1px solid #cbd5e1; padding:0.65rem 0.85rem; margin-bottom:1rem; font-size:0.76rem;">
+                <div><strong>CLIENT / AUTHORITY:</strong> <span id="previewClientName">National Water & Infrastructure Authority</span></div>
+                <div><strong>TENDER / PROJECT REF:</strong> <span id="previewProjectName" class="mono">TND-SEC-2026-8841</span></div>
+                <div><strong>MANUFACTURING PLANT:</strong> <span id="previewFactoryOrigin">Matrix Main Industrial Plant (Saudi Arabia)</span></div>
+                <div><strong>WARRANTY PERIOD:</strong> <span id="previewWarranty">36 Months Official Factory Warranty</span></div>
+              </div>
+
+              <div style="margin-bottom:1rem;">
+                <h3 style="font-size:0.8rem; text-transform:uppercase; letter-spacing:0.05em; color:#0f172a; border-bottom:1px solid #94a3b8; padding-bottom:0.25rem; margin-bottom:0.5rem;">
+                  1. Design & Engineering Features
+                </h3>
+                <ul id="previewFeaturesList" style="padding-left:1.15rem; font-size:0.79rem; color:#1e293b; display:grid; grid-template-columns:1fr 1fr; gap:0.3rem 1.25rem;"></ul>
+              </div>
+
+              <div>
+                <h3 style="font-size:0.8rem; text-transform:uppercase; letter-spacing:0.05em; color:#0f172a; border-bottom:1px solid #94a3b8; padding-bottom:0.25rem;">
+                  2. Technical Schedule & Guaranteed Ratings
+                </h3>
+                <table class="ds-spec-table">
+                  <thead>
+                    <tr>
+                      <th>Characteristic / Parameter</th>
+                      <th>Guaranteed Factory Value</th>
+                    </tr>
+                  </thead>
+                  <tbody id="previewSpecsBody"></tbody>
+                </table>
+              </div>
+
+              <div style="margin-top:1rem; padding:0.55rem 0.85rem; background:#f1f5f9; border:1px solid #cbd5e1; font-size:0.76rem; color:#1e293b;">
+                <strong>APPLICABLE STANDARDS & CERTIFICATIONS:</strong> <span id="previewCompliance">IEC 61439-2, IEC 61641, SASO, ISO 9001</span>
+              </div>
+
+              <div class="ds-footer">
+                <div>Generated by Matrix Sales Software • Official Factory Technical Submittal</div>
+                <div>Form QF-ENG-042 • Page 1 of 1</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- =============================================================== -->
+        <!-- MODULE 2: SHARED CONTACTS & PHONE VCARD (.VCF) IMPORT/EXPORT    -->
+        <!-- =============================================================== -->
+        <section id="tab-contacts" class="tab-panel">
+          <div class="section-header">
+            <div>
+              <h1>Shared Corporate Contacts & Mobile vCard Sync</h1>
+              <p>Role-permissioned contact directory synchronized with SQL Server. Supports iOS/Android vCard (`.vcf`) and `.csv` bulk transfers.</p>
+            </div>
+            <div class="action-row">
+              <button class="btn" type="button" id="btnOpenPhoneImportModal">Import Phone File (.vcf / .csv)</button>
+              <button class="btn" type="button" id="btnExportAllVCard">Export Directory (.vcf)</button>
+              <button class="btn btn-primary" type="button" id="btnOpenNewContactModal">New Contact Record</button>
+            </div>
+          </div>
+
+          <div class="kpi-grid">
+            <div class="kpi-card">
+              <div class="kpi-label">Total Database Records</div>
+              <div class="kpi-value" id="kpiTotalContacts">4</div>
+              <div class="kpi-sub">Table: dbo.Contacts</div>
+            </div>
+            <div class="kpi-card">
+              <div class="kpi-label">Authorized for Current Role</div>
+              <div class="kpi-value" id="kpiVisibleContacts">4</div>
+              <div class="kpi-sub" id="kpiRolePermissionLabel">Admin Clearance</div>
+            </div>
+            <div class="kpi-card">
+              <div class="kpi-label">Mobile Transfer Protocol</div>
+              <div class="kpi-value">vCard 3.0</div>
+              <div class="kpi-sub">iOS & Android Address Book Standard</div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="form-grid" style="margin-bottom: 0.9rem;">
+              <div>
+                <label class="field-label" for="contactSearchInput">Filter by Name, Organization, Tag, or Phone</label>
+                <input type="search" id="contactSearchInput" placeholder="Filter records..." />
+              </div>
+              <div>
+                <label class="field-label" for="contactFactoryFilter">Associated Manufacturing Plant</label>
+                <select id="contactFactoryFilter">
+                  <option value="">All Plants & External Organizations</option>
+                </select>
+              </div>
+              <div>
+                <label class="field-label" for="contactVisibilityFilter">Security Clearance Level</label>
+                <select id="contactVisibilityFilter">
+                  <option value="">All Authorized Levels</option>
+                  <option value="Public">Public (All Staff)</option>
+                  <option value="Restricted">Restricted (Management)</option>
+                  <option value="AdminOnly">AdminOnly (Executive / Costing)</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Responsive Table following modern-web-guidance -->
+            <div tabindex="0" role="region" aria-labelledby="contacts-table-caption" class="table-wrapper">
+              <table class="data-table" style="--label-2: 'Position & Organization'; --label-3: 'Telephone & Email'; --label-4: 'Department Tags & Notes'; --label-5: 'Clearance & Actions';">
+                <caption id="contacts-table-caption">Corporate Contact Directory (Filtered by Active Role Clearance)</caption>
+                <thead>
+                  <tr>
+                    <th>Full Name</th>
+                    <th>Position & Organization</th>
+                    <th>Telephone & Email</th>
+                    <th>Classification & Remarks</th>
+                    <th>Clearance & Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="contactsTableBody"></tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- =============================================================== -->
+        <!-- MODULE 3: AI TENDER DOCUMENT ANALYZER & LEARNING LOOP           -->
+        <!-- =============================================================== -->
+        <section id="tab-tenders" class="tab-panel">
+          <div class="section-header">
+            <div>
+              <h1>Tender Specification Analyzer & Rule Classification</h1>
+              <p>Parse tender clauses and train classification rules in SQL Server (`dbo.AIFeedbackRules`) to flag critical cost drivers vs. non-essential clauses.</p>
+            </div>
+            <div class="action-row">
+              <button class="btn" type="button" id="btnLoadSampleTenderText">Load Sample RFP Clauses</button>
+            </div>
+          </div>
+
+          <div class="responsive-two-col">
+            <!-- Left: Tender Analyzer Input & Extracted Clauses -->
+            <div style="display:flex; flex-direction:column; gap:1rem;">
+              <div class="card">
+                <div class="card-title">
+                  <span>Tender Document Ingestion</span>
+                  <span class="badge badge-blue">Rule Classifier</span>
+                </div>
+                <form id="tenderAnalyzeForm" style="display:flex; flex-direction:column; gap:0.75rem;">
+                  <div class="form-grid">
+                    <div>
+                      <label class="field-label" for="tenderTitleInput">Project / Tender Title</label>
+                      <input type="text" id="tenderTitleInput" placeholder="e.g., Jubail Phase 4 Substation & Pumping Pkg" required />
+                    </div>
+                    <div>
+                      <label class="field-label" for="tenderClientInput">Issuing Client / Authority</label>
+                      <input type="text" id="tenderClientInput" placeholder="e.g., SWCC / SEC / Aramco" required />
+                    </div>
+                  </div>
+                  <div class="form-grid">
+                    <div>
+                      <label class="field-label" for="tenderFileInput">Select Document File (`.txt`, `.pdf`, `.docx`, `.csv`)</label>
+                      <input type="file" id="tenderFileInput" accept=".txt,.pdf,.doc,.docx,.csv" />
+                    </div>
+                    <div>
+                      <label class="field-label" for="tenderCustomQuestion">Specific Compliance Query</label>
+                      <input type="text" id="tenderCustomQuestion" placeholder="e.g., Check liquidated damages, warranty, and busbar specs" />
+                    </div>
+                  </div>
+                  <div>
+                    <label class="field-label" for="tenderRawTextInput">Specification Text / Clauses</label>
+                    <textarea id="tenderRawTextInput" rows="4" placeholder="Paste specification clauses here or load a file..."></textarea>
+                  </div>
+                  <div class="action-row" style="justify-content:flex-end;">
+                    <button class="btn btn-primary" type="submit">Run Specification Analysis</button>
+                  </div>
+                </form>
+              </div>
+
+              <!-- Extracted Tender Items List -->
+              <div class="card">
+                <div class="card-title">
+                  <span id="activeTenderHeaderTitle">Extracted Specification Clauses</span>
+                  <div class="action-row">
+                    <select id="tenderFilterImportance" style="width:auto; padding:0.28rem 0.55rem; font-size:0.75rem;">
+                      <option value="ALL">All Clauses</option>
+                      <option value="Important">Flagged Important Only</option>
+                      <option value="NotNeeded">Flagged Not Needed Only</option>
+                    </select>
+                  </div>
+                </div>
+                <div id="tenderCustomAnswerBanner" style="display:none; margin-bottom:0.85rem; padding:0.7rem 0.9rem; background:#eff6ff; border:1px solid #bfdbfe; border-radius:4px; font-size:0.8rem; color:#1e3a8a;"></div>
+                <div id="tenderExtractionsContainer" style="display:flex; flex-direction:column; gap:0.65rem;"></div>
+              </div>
+            </div>
+
+            <!-- Right: Trained AI Memory Rules Table -->
+            <div class="card">
+              <div class="card-title">
+                <span>Classification Rules (`dbo.AIFeedbackRules`)</span>
+                <span class="badge badge-public">Active Ruleset</span>
+              </div>
+              <p style="font-size:0.78rem; color:var(--text-secondary); margin-bottom:0.85rem;">
+                Marking any extracted clause as <strong>Important</strong> or <strong>Not Needed</strong> persists a classification rule in SQL Server for subsequent tender documents.
+              </p>
+              <div id="aiRulesListContainer" style="display:flex; flex-direction:column; gap:0.55rem;"></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- =============================================================== -->
+        <!-- MODULE 4: FACTORIES DIRECTORY (WHAT THEY DO, CONTACTS, SPECS)   -->
+        <!-- =============================================================== -->
+        <section id="tab-factories" class="tab-panel">
+          <div class="section-header">
+            <div>
+              <h1>Manufacturing Plants & OEM Suppliers Directory</h1>
+              <p>Registry of internal manufacturing facilities and approved partner factories, production scopes, certifications, and assigned personnel.</p>
+            </div>
+            <div class="action-row">
+              <button class="btn btn-primary" type="button" id="btnOpenNewFactoryModal">Register Factory</button>
+            </div>
+          </div>
+
+          <div class="card">
+            <div style="margin-bottom: 0.9rem;">
+              <label class="field-label" for="factorySearchInput">Search by Plant Name, Country, Scope of Supply, or ISO/IEC Certification</label>
+              <input type="search" id="factorySearchInput" placeholder="Filter factories..." />
+            </div>
+            <div id="factoriesCardsGrid" class="factories-grid"></div>
+          </div>
+        </section>
+
+        <!-- =============================================================== -->
+        <!-- MODULE 5: AI SMART PRICING & HISTORICAL COMPETITOR ESTIMATOR    -->
+        <!-- =============================================================== -->
+        <section id="tab-pricing" class="tab-panel">
+          <div class="section-header">
+            <div>
+              <h1>Commercial Bid Estimator & Competitor Price Benchmark</h1>
+              <p>Calculates unit bid prices using historical competitor tender records adjusted for inflation, freight, customs duties, and raw material indices.</p>
+            </div>
+            <div class="action-row">
+              <button class="btn" type="button" id="btnOpenNewCompetitorBidModal">Log Historical Competitor Bid</button>
+            </div>
+          </div>
+
+          <div class="responsive-pricing-grid">
+            <!-- Left: Pricing Estimator Calculator Form -->
+            <div class="card">
+              <div class="card-title">
+                <span>Cost & Market Escalation Parameters</span>
+                <span class="badge badge-blue">Estimator</span>
+              </div>
+              <form id="pricingEstimateForm" style="display:flex; flex-direction:column; gap:0.75rem;">
+                <div>
+                  <label class="field-label" for="estCategory">SajayaTech Product Line Category</label>
+                  <select id="estCategory">
+                    <option value="Personal Computers (Desktops)">Personal Computers — TechDesk (B1Q / S300 / S500 / S700)</option>
+                    <option value="Small Form Factor (SFF) Desktops">Small Form Factor (SFF) — TechDesk SFF (C20S / B20S / B70S)</option>
+                    <option value="Mini PCs">Mini PCs — TechDesk Mini (M300 / M500 / M700)</option>
+                    <option value="Workstations">Workstations — TechDesk (W500 / W700 / W900)</option>
+                    <option value="Laptops (TechBook)">Laptops — Sajaya TechBook (L300 / L500 / APEX-16)</option>
+                    <option value="All-in-One PCs">All-in-One PCs — TechDesk (A240 / A270 / A300)</option>
+                    <option value="Monitors (Commercial & Gaming)">Monitors — Sajaya TechView (B24S / B27S / B32H / Gaming)</option>
+                    <option value="Interactive Touch Screens">Interactive Touch Screens — Sajaya Smart (I650 / I750 / I860)</option>
+                    <option value="UPS & Power Systems (Sajaya Power)">Online UPS Systems — Sajaya Power (HP9336C / HP9511CRT / HP9511D)</option>
+                    <option value="CCTV & NVR Surveillance">CCTV & NVR Surveillance — Sajaya Vision</option>
+                    <option value="Charge Carts & IT Accessories">Charge Carts & Docks — Sajaya TechGears</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="field-label" for="estDescription">BOQ Line Item Description & Rating</label>
+                  <input type="text" id="estDescription" value="SajayaTech B1Q / S500 Commercial Desktop (Core i5/i7 14th Gen, Q-Chipset, 16GB DDR5, 512GB NVMe, TPM 2.0)" required />
+                </div>
+                <div class="form-grid">
+                  <div>
+                    <label class="field-label" for="estBaseCost">Net Factory Cost (USD)</label>
+                    <input type="number" id="estBaseCost" class="mono" value="460" step="10" required />
+                  </div>
+                  <div>
+                    <label class="field-label" for="estQuantity">BOQ Quantity</label>
+                    <input type="number" id="estQuantity" class="mono" value="450" min="1" required />
+                  </div>
+                </div>
+
+                <div style="border-top:1px solid var(--border-subtle); padding-top:0.65rem;">
+                  <div class="field-label" style="color:var(--accent-primary);">Market & Supply Chain Adjustment Factors (%)</div>
+                  <div class="form-grid">
+                    <div>
+                      <label class="field-label" for="estInflation">Annual Inflation (%)</label>
+                      <input type="number" id="estInflation" class="mono" value="4.2" step="0.1" />
+                    </div>
+                    <div>
+                      <label class="field-label" for="estShipping">Freight & Insurance (%)</label>
+                      <input type="number" id="estShipping" class="mono" value="6.5" step="0.1" />
+                    </div>
+                    <div>
+                      <label class="field-label" for="estCustoms">Customs & Tariffs (%)</label>
+                      <input type="number" id="estCustoms" class="mono" value="5.0" step="0.1" />
+                    </div>
+                    <div>
+                      <label class="field-label" for="estMaterial">Material Escalation (%)</label>
+                      <input type="number" id="estMaterial" class="mono" value="7.8" step="0.1" />
+                    </div>
+                  </div>
+                </div>
+
+                <div>
+                  <label class="field-label" for="estTargetMargin">Target Gross Margin (%)</label>
+                  <input type="number" id="estTargetMargin" class="mono" value="18" step="1" />
+                </div>
+
+                <button class="btn btn-primary" type="submit">Calculate Commercial Bid Tiers</button>
+              </form>
+            </div>
+
+            <!-- Right: 3-Tier Recommendation + Historical Competitor Table -->
+            <div style="display:flex; flex-direction:column; gap:1rem;">
+              <div class="card" id="pricingResultsCard">
+                <div class="card-title">
+                  <span>Recommended Commercial Bid Schedule</span>
+                  <span class="badge badge-public" id="pricingSummaryBadge">Ready</span>
+                </div>
+                <div id="pricingBreakdownBanner" style="font-size:0.79rem; color:var(--text-secondary); margin-bottom:0.65rem; padding:0.65rem; background:var(--bg-subtle); border:1px solid var(--border-subtle); border-radius:4px;"></div>
+                <div class="pricing-tiers-grid" id="pricingTiersContainer"></div>
+              </div>
+
+              <div class="card">
+                <div class="card-title">
+                  <span>Historical Competitor Tender Database (`dbo.CompetitorPrices`)</span>
+                  <span class="badge badge-blue">SQL Benchmark</span>
+                </div>
+                <div tabindex="0" role="region" aria-labelledby="competitor-table-caption" class="table-wrapper">
+                  <table class="data-table" style="--label-2: 'Item & Specs'; --label-3: 'Competitor'; --label-4: 'Competitor Price'; --label-5: 'Outcome';">
+                    <caption id="competitor-table-caption">Historical Competitor Bids & Technical Specifications</caption>
+                    <thead>
+                      <tr>
+                        <th>Tender Ref & Date</th>
+                        <th>Item Description & Rating</th>
+                        <th>Competitor & Origin</th>
+                        <th>Competitor Unit Bid</th>
+                        <th>Matrix Bid & Award Status</th>
+                      </tr>
+                    </thead>
+                    <tbody id="competitorPricesTableBody"></tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- =============================================================== -->
+        <!-- MODULE 6: MICROSOFT SQL SERVER MANAGEMENT STUDIO (SSMS) CENTER  -->
+        <!-- =============================================================== -->
+        <section id="tab-sql" class="tab-panel">
+          <div class="section-header">
+            <div>
+              <h1>Microsoft SQL Server (SSMS) & System Configuration</h1>
+              <p>Configure your MS SQL Server connection string, export the complete T-SQL schema and live dataset for SSMS, or set external API credentials.</p>
+            </div>
+            <div class="action-row">
+              <a href="/api/sql/ssms-script" class="btn btn-primary" download="MatrixFactoryDB_SSMS_FullSync.sql">
+                Download Complete SSMS .SQL Script
+              </a>
+            </div>
+          </div>
+
+          <div class="responsive-sql-grid">
+            <div class="card">
+              <div class="card-title">
+                <span>MS SQL Server Connection Parameters</span>
+                <span class="badge badge-public">node-mssql</span>
+              </div>
+              <form id="sqlConfigForm" style="display:flex; flex-direction:column; gap:0.75rem;">
+                <div class="form-grid">
+                  <div>
+                    <label class="field-label" for="sqlServerInput">Server / Instance Name</label>
+                    <input type="text" id="sqlServerInput" class="mono" value="localhost\SQLEXPRESS" placeholder="localhost\SQLEXPRESS" />
+                  </div>
+                  <div>
+                    <label class="field-label" for="sqlDatabaseInput">Database Name</label>
+                    <input type="text" id="sqlDatabaseInput" class="mono" value="MatrixFactoryDB" />
+                  </div>
+                </div>
+                <div class="form-grid">
+                  <div>
+                    <label class="field-label" for="sqlUserInput">SQL Authentication User</label>
+                    <input type="text" id="sqlUserInput" class="mono" value="sa" />
+                  </div>
+                  <div>
+                    <label class="field-label" for="sqlPassInput">Password</label>
+                    <input type="password" id="sqlPassInput" placeholder="Enter SQL Server password" />
+                  </div>
+                </div>
+                <div id="sqlTestResultBox" style="padding:0.65rem; border-radius:4px; border:1px solid var(--border-subtle); background:var(--bg-subtle); font-size:0.78rem; color:var(--text-secondary);">
+                  All application records are persisted locally and compiled into the downloadable <strong>MatrixFactoryDB_SSMS_FullSync.sql</strong> script for direct execution in SQL Server Management Studio.
+                </div>
+                <div class="action-row">
+                  <button class="btn btn-primary" type="submit">Test & Connect SQL Server</button>
+                </div>
+              </form>
+            </div>
+
+            <div class="card">
+              <div class="card-title">
+                <span>External LLM API Configuration (Optional)</span>
+                <span class="badge badge-blue">Placeholder Active</span>
+              </div>
+              <p style="font-size:0.79rem; color:var(--text-secondary); margin-bottom:0.85rem;">
+                The system operates out-of-the-box using its internal rule-based specification parser and statistical pricing estimator. To connect an external LLM provider later, enter your key below.
+              </p>
+              <div style="display:flex; flex-direction:column; gap:0.75rem;">
+                <div>
+                  <label class="field-label" for="aiProviderSelect">Processing Engine</label>
+                  <select id="aiProviderSelect">
+                    <option value="placeholder">Internal Rule & Statistical Engine (Default — No API Key Required)</option>
+                    <option value="gemini">Google Gemini API (gemini-2.5-pro)</option>
+                    <option value="openai">OpenAI API (gpt-4o)</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="field-label" for="aiApiKeyInput">API Key (`GEMINI_API_KEY` / `OPENAI_API_KEY`)</label>
+                  <input type="password" id="aiApiKeyInput" class="mono" placeholder="sk-... or AIza..." />
+                </div>
+                <div>
+                  <button class="btn btn-primary" type="button" onclick="alert('Configuration saved.')">
+                    Save API Configuration
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- NATIVE HTML <dialog closedby="any"> MODALS (Modern Web Guidance)      -->
+  <!-- ===================================================================== -->
+
+  <!-- 1. Phone Contacts (.vcf / .csv) Import & Staging Modal -->
+  <dialog id="dialogPhoneImport" class="app-dialog" closedby="any" aria-labelledby="dialogPhoneImportTitle">
+    <div class="dialog-header">
+      <h2 id="dialogPhoneImportTitle" style="font-size:0.98rem;">Import Mobile Contacts (.vcf vCard / .csv)</h2>
+      <button class="btn btn-sm" type="button" onclick="document.getElementById('dialogPhoneImport').close()">Close</button>
+    </div>
+    <div style="display:flex; flex-direction:column; gap:0.85rem;">
+      <p style="font-size:0.8rem; color:var(--text-secondary);">
+        Select a <code>.vcf</code> (vCard) file exported from iOS Contacts or Android Contacts, or load the sample batch to test staging.
+      </p>
+      <div class="action-row">
+        <input type="file" id="vcfFileInput" accept=".vcf,.vcard,.csv" style="max-width:300px;" />
+        <button class="btn btn-sm" type="button" id="btnLoadSampleVcf">Load Sample Phone .vcf Batch</button>
+      </div>
+      <div class="form-grid">
+        <div>
+          <label class="field-label" for="importDefaultFactory">Link Imported Batch to Factory</label>
+          <select id="importDefaultFactory">
+            <option value="">-- Unassigned / General --</option>
+          </select>
+        </div>
+        <div>
+          <label class="field-label" for="importDefaultVisibility">Security Clearance Level</label>
+          <select id="importDefaultVisibility">
+            <option value="Public">Public (All Staff)</option>
+            <option value="Restricted">Restricted (Management)</option>
+            <option value="AdminOnly">AdminOnly</option>
+          </select>
+        </div>
+      </div>
+      <div id="vcfPreviewBox" style="max-height:200px; overflow:auto; border:1px solid var(--border-color); border-radius:4px; padding:0.65rem; font-size:0.78rem; background:var(--bg-subtle);">
+        No file selected. Choose a <code>.vcf</code> file or click "Load Sample Phone .vcf Batch".
+      </div>
+      <div class="action-row" style="justify-content:flex-end;">
+        <button class="btn" type="button" onclick="document.getElementById('dialogPhoneImport').close()">Cancel</button>
+        <button class="btn btn-primary" type="button" id="btnConfirmVcfImport">Commit Import to Database</button>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- 2. Add New Shared Contact Modal -->
+  <dialog id="dialogNewContact" class="app-dialog" closedby="any" aria-labelledby="dialogNewContactTitle">
+    <div class="dialog-header">
+      <h2 id="dialogNewContactTitle" style="font-size:0.98rem;">New Corporate Contact Record</h2>
+      <button class="btn btn-sm" type="button" onclick="document.getElementById('dialogNewContact').close()">Close</button>
+    </div>
+    <form id="formNewContact" style="display:flex; flex-direction:column; gap:0.75rem;">
+      <div class="form-grid">
+        <div>
+          <label class="field-label">Full Name *</label>
+          <input type="text" name="FullName" required placeholder="Eng. Fahad Al-Otaibi" />
+        </div>
+        <div>
+          <label class="field-label">Job Title</label>
+          <input type="text" name="JobTitle" placeholder="Chief Estimation Engineer" />
+        </div>
+      </div>
+      <div class="form-grid">
+        <div>
+          <label class="field-label">Associated Factory</label>
+          <select name="FactoryId" id="newContactFactorySelect">
+            <option value="">-- External / Client Organization --</option>
+          </select>
+        </div>
+        <div>
+          <label class="field-label">Security Clearance Level</label>
+          <select name="VisibilityLevel">
+            <option value="Public">Public (All Staff)</option>
+            <option value="Restricted">Restricted (Management)</option>
+            <option value="AdminOnly">AdminOnly (Executive)</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-grid">
+        <div>
+          <label class="field-label">Telephone / Mobile *</label>
+          <input type="text" name="Phone" class="mono" required placeholder="+966 55 123 4567" />
+        </div>
+        <div>
+          <label class="field-label">Email Address</label>
+          <input type="email" name="Email" placeholder="fahad@company.com" />
+        </div>
+      </div>
+      <div class="form-grid">
+        <div>
+          <label class="field-label">Company / Organization</label>
+          <input type="text" name="CompanyName" placeholder="National Grid KSA" />
+        </div>
+        <div>
+          <label class="field-label">Classification Tags</label>
+          <input type="text" name="Tags" placeholder="Switchgear, Consultant" />
+        </div>
+      </div>
+      <div>
+        <label class="field-label">Operational Remarks</label>
+        <textarea name="Notes" rows="2" placeholder="Enter notes..."></textarea>
+      </div>
+      <div class="action-row" style="justify-content:flex-end;">
+        <button class="btn" type="button" onclick="document.getElementById('dialogNewContact').close()">Cancel</button>
+        <button class="btn btn-primary" type="submit">Save Record</button>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- 3. Add New Factory Modal -->
+  <dialog id="dialogNewFactory" class="app-dialog" closedby="any" aria-labelledby="dialogNewFactoryTitle">
+    <div class="dialog-header">
+      <h2 id="dialogNewFactoryTitle" style="font-size:0.98rem;">Register Manufacturing Plant / OEM Supplier</h2>
+      <button class="btn btn-sm" type="button" onclick="document.getElementById('dialogNewFactory').close()">Close</button>
+    </div>
+    <form id="formNewFactory" style="display:flex; flex-direction:column; gap:0.75rem;">
+      <div class="form-grid">
+        <div>
+          <label class="field-label">Factory Official Name *</label>
+          <input type="text" name="Name" required placeholder="Arabia Heavy Switchgear Factory" />
+        </div>
+        <div>
+          <label class="field-label">Classification</label>
+          <select name="Status">
+            <option value="Our Factory">Internal Plant (Our Factory)</option>
+            <option value="Active Partner">OEM Partner</option>
+            <option value="Approved Vendor">Approved Vendor</option>
+          </select>
+        </div>
+      </div>
+      <div>
+        <label class="field-label">Scope of Supply / Manufacturing Specialization *</label>
+        <input type="text" name="Specialization" required placeholder="Medium Voltage 13.8kV Switchgear, Ring Main Units & Package Substations" />
+      </div>
+      <div>
+        <label class="field-label">Production & Testing Capabilities</label>
+        <textarea name="Capabilities" rows="2" placeholder="Laser cutting, SF6 gas filling line, 50kV dielectric test bay..."></textarea>
+      </div>
+      <div class="form-grid">
+        <div>
+          <label class="field-label">Certifications Held</label>
+          <input type="text" name="Certifications" placeholder="ISO 9001, IEC 62271, SASO, SEC" />
+        </div>
+        <div>
+          <label class="field-label">Country</label>
+          <input type="text" name="Country" value="Saudi Arabia" required />
+        </div>
+      </div>
+      <div>
+        <label class="field-label">Commercial & Lead-Time Notes</label>
+        <textarea name="Notes" rows="2" placeholder="Standard lead times, discount terms..."></textarea>
+      </div>
+      <div class="action-row" style="justify-content:flex-end;">
+        <button class="btn" type="button" onclick="document.getElementById('dialogNewFactory').close()">Cancel</button>
+        <button class="btn btn-primary" type="submit">Save Factory Record</button>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- 4. Add New Product for Datasheet Creator Modal -->
+  <dialog id="dialogNewProduct" class="app-dialog" closedby="any" aria-labelledby="dialogNewProductTitle">
+    <div class="dialog-header">
+      <h2 id="dialogNewProductTitle" style="font-size:0.98rem;">Register Catalog Product SKU</h2>
+      <button class="btn btn-sm" type="button" onclick="document.getElementById('dialogNewProduct').close()">Close</button>
+    </div>
+    <form id="formNewProduct" style="display:flex; flex-direction:column; gap:0.75rem;">
+      <div class="form-grid">
+        <div>
+          <label class="field-label">Product Designation *</label>
+          <input type="text" name="Name" required placeholder="Matrix UltraFlow 500kW Fire Pump Set" />
+        </div>
+        <div>
+          <label class="field-label">Model / SKU Code *</label>
+          <input type="text" name="SKU" class="mono" required placeholder="MTX-FP-500UL" />
+        </div>
+      </div>
+      <div class="form-grid">
+        <div>
+          <label class="field-label">Manufacturing Plant</label>
+          <select name="FactoryId" id="newProductFactorySelect"></select>
+        </div>
+        <div>
+          <label class="field-label">Product Category</label>
+          <input type="text" name="Category" value="Industrial Pumps & Fluid Skids" required />
+        </div>
+      </div>
+      <div class="form-grid">
+        <div>
+          <label class="field-label">Base Factory Cost (USD)</label>
+          <input type="number" name="BaseFactoryCost" class="mono" value="19500" />
+        </div>
+        <div>
+          <label class="field-label">Compliance Standards</label>
+          <input type="text" name="ComplianceStandards" value="UL Listed, FM Approved, NFPA 20, SASO" />
+        </div>
+      </div>
+      <div>
+        <label class="field-label">Technical Description</label>
+        <textarea name="Summary" rows="2" placeholder="Technical summary for datasheet header..."></textarea>
+      </div>
+      <div class="action-row" style="justify-content:flex-end;">
+        <button class="btn" type="button" onclick="document.getElementById('dialogNewProduct').close()">Cancel</button>
+        <button class="btn btn-primary" type="submit">Create SKU</button>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- 5. Add Historical Competitor Bid Modal -->
+  <dialog id="dialogNewCompetitorBid" class="app-dialog" closedby="any" aria-labelledby="dialogNewCompetitorBidTitle">
+    <div class="dialog-header">
+      <h2 id="dialogNewCompetitorBidTitle" style="font-size:0.98rem;">Log Historical Competitor Tender Bid</h2>
+      <button class="btn btn-sm" type="button" onclick="document.getElementById('dialogNewCompetitorBid').close()">Close</button>
+    </div>
+    <form id="formNewCompetitorBid" style="display:flex; flex-direction:column; gap:0.75rem;">
+      <div class="form-grid">
+        <div>
+          <label class="field-label">Tender Reference *</label>
+          <input type="text" name="TenderReference" class="mono" required placeholder="TND-2025-9910" />
+        </div>
+        <div>
+          <label class="field-label">Product Category</label>
+          <select name="ItemCategory">
+            <option value="Personal Computers (Desktops)">Personal Computers (Desktops)</option>
+            <option value="Small Form Factor (SFF) Desktops">Small Form Factor (SFF) Desktops</option>
+            <option value="Mini PCs">Mini PCs</option>
+            <option value="Workstations">Workstations</option>
+            <option value="Laptops (TechBook)">Laptops (TechBook)</option>
+            <option value="All-in-One PCs">All-in-One PCs</option>
+            <option value="Monitors (Commercial & Gaming)">Monitors (Commercial & Gaming)</option>
+            <option value="Interactive Touch Screens">Interactive Touch Screens</option>
+            <option value="UPS & Power Systems (Sajaya Power)">UPS & Power Systems (Sajaya Power)</option>
+            <option value="CCTV & NVR Surveillance">CCTV & NVR Surveillance</option>
+            <option value="Charge Carts & IT Accessories">Charge Carts & IT Accessories</option>
+          </select>
+        </div>
+      </div>
+      <div>
+        <label class="field-label">Line Item & Specification Summary *</label>
+        <input type="text" name="ItemDescription" required placeholder="4000A Form 4b Switchgear 85kA IP54" />
+      </div>
+      <div class="form-grid">
+        <div>
+          <label class="field-label">Competitor Name *</label>
+          <input type="text" name="CompetitorName" required placeholder="Competitor Manufacturer" />
+        </div>
+        <div>
+          <label class="field-label">Competitor Unit Price (USD) *</label>
+          <input type="number" name="QuotedUnitPrice" class="mono" required placeholder="24500" />
+        </div>
+      </div>
+      <div class="form-grid">
+        <div>
+          <label class="field-label">Matrix Quoted Unit Price (USD)</label>
+          <input type="number" name="OurQuotedUnitPrice" class="mono" placeholder="25100" />
+        </div>
+        <div>
+          <label class="field-label">Award Outcome</label>
+          <select name="WasWinningBid">
+            <option value="true">Competitor Awarded Contract</option>
+            <option value="false">Competitor Did Not Win</option>
+          </select>
+        </div>
+      </div>
+      <div class="action-row" style="justify-content:flex-end;">
+        <button class="btn" type="button" onclick="document.getElementById('dialogNewCompetitorBid').close()">Cancel</button>
+        <button class="btn btn-primary" type="submit">Save Benchmark Record</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script src="/app.js"></script>
+</body>
+</html>

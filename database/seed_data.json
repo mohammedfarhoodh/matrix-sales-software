@@ -1,0 +1,1453 @@
+{
+  "users": [
+    {
+      "Id": 1,
+      "FullName": "Mohammed",
+      "Email": "mohammed@sajaya-tech.com",
+      "Role": "Admin",
+      "Department": "Executive & Sales Tendering",
+      "CanViewRestrictedContacts": true,
+      "IsActive": true
+    },
+    {
+      "Id": 2,
+      "FullName": "Tariq Al-Zoubi",
+      "Email": "tariq@sajaya-tech.com",
+      "Role": "Manager",
+      "Department": "OEM Supply Chain & Factory Relations",
+      "CanViewRestrictedContacts": true,
+      "IsActive": true
+    },
+    {
+      "Id": 3,
+      "FullName": "Rania Haddad",
+      "Email": "rania@sajaya-tech.com",
+      "Role": "Engineer",
+      "Department": "Technical Submittals & Pre-Sales",
+      "CanViewRestrictedContacts": false,
+      "IsActive": true
+    },
+    {
+      "Id": 4,
+      "FullName": "Omar Al-Majali",
+      "Email": "omar@sajaya-tech.com",
+      "Role": "Viewer",
+      "Department": "Corporate Sales Support",
+      "CanViewRestrictedContacts": false,
+      "IsActive": true
+    }
+  ],
+  "factories": [
+    {
+      "Id": 1,
+      "Name": "Matrix / SajayaTech Main Assembly & Testing Plant",
+      "Code": "SJ-AMM-01",
+      "Specialization": "Personal Computers (TechDesk), SFF Desktops, Workstations, Custom Gaming Rigs (TechSpace), Burn-In Testing & BIOS Imaging",
+      "Capabilities": "Automated ESD Assembly Lines, 24-Hour OCCT/3DMark Thermal Burn-In Chambers, Custom Government/Enterprise OS & BIOS Imaging, Local Spare Parts Hub",
+      "Certifications": "ISO 9001:2015, ISO 14001, CE, RoHS, JSMO Approved",
+      "Country": "Jordan",
+      "City": "Amman",
+      "Address": "Amman Industrial Zone, Matrix Business Technology Facility",
+      "Website": "https://sajaya-tech.com",
+      "Rating": 5,
+      "Status": "Our Factory",
+      "Notes": "Primary local factory for SajayaTech PCs, Workstations, and local SLA warranty fulfillment across Jordan."
+    },
+    {
+      "Id": 2,
+      "Name": "Sajaya Power Systems & UPS Manufacturing Division",
+      "Code": "SJ-PWR-02",
+      "Specialization": "Online Double-Conversion UPS Systems: HP9xxx 3-Phase (10kVA-120kVA), HP9xxx RT Convertible Rack/Tower (1-10kVA), HP9xxx D Tower (1-20kVA)",
+      "Capabilities": "3-Level IGBT Inverter Testing, Parallel N+X Load Bank Testing, Battery Bank Assembly, SNMP/MODBUS Telemetry Integration",
+      "Certifications": "CE, ISO 9001, RoHS, TLC, TÜV, IEC 62040-1/2",
+      "Country": "China / Jordan Assembly",
+      "City": "Shenzhen / Amman",
+      "Address": "High-Tech Power Industrial Park",
+      "Website": "https://sajaya-tech.com/products/sajaya-power",
+      "Rating": 5,
+      "Status": "Our Factory",
+      "Notes": "Produces Sajaya HP9336C, HP9511CRT, and HP9511D/HP9531D Online UPS series."
+    },
+    {
+      "Id": 3,
+      "Name": "Sajaya TechView & Smart Display OEM Partner",
+      "Code": "SJ-DSP-03",
+      "Specialization": "Enterprise IPS Monitors (B24S, B27S, B32H), Gaming Monitors (240Hz G24H/G27H/G34H), All-in-One PCs & Interactive Touch Screens (65\", 75\", 86\")",
+      "Capabilities": "Zero-Gap Optical Bonding Line, Factory Delta E < 1 Color Calibration, Zero-Bright-Dot Panel Sorting, OPS Windows Module Integration",
+      "Certifications": "CE, RoHS, TÜV Rheinland Low Blue Light, Energy Star, ISO 9001",
+      "Country": "China",
+      "City": "Guangzhou",
+      "Address": "Display Technology Park, Science City",
+      "Website": "https://sajaya-tech.com/products/monitors",
+      "Rating": 5,
+      "Status": "Active Partner",
+      "Notes": "OEM partner for all Sajaya TechView monitors, Horizon/A-Series All-in-Ones, and Sajaya Smart Interactive Panels."
+    },
+    {
+      "Id": 4,
+      "Name": "Sajaya Vision & TechGears Precision Factory",
+      "Code": "SJ-PER-04",
+      "Specialization": "AI IP CCTV Cameras (B400, D500, D80), Enterprise PoE NVRs (8Ch/32Ch), 36-Bay USB-C PD Charging Carts, Docks, Monitor Arms & Esports Peripherals",
+      "Capabilities": "SMT PCB Line, IP67/IK10 Environmental & Impact Chambers, Cold-Rolled Steel Sheet Fabrication (Charge Carts), PixArt Sensor Calibration",
+      "Certifications": "CE, FCC, RoHS, IP67, IK10, UL/CE Power Delivery",
+      "Country": "China",
+      "City": "Dongguan / Shenzhen",
+      "Address": "Smart Hardware Manufacturing Zone",
+      "Website": "https://sajaya-tech.com",
+      "Rating": 4,
+      "Status": "Active Partner",
+      "Notes": "Handles Sajaya TechBook laptops, Mini PCs, CHGCT36USBCPD-2E Charge Carts, CCTV/NVRs, and TechGears mice/headsets/pads."
+    }
+  ],
+  "contacts": [
+    {
+      "Id": 1,
+      "FactoryId": 1,
+      "FullName": "Eng. Zaid Al-Khasawneh",
+      "JobTitle": "Head of PC Production & Government Tenders",
+      "Department": "Assembly & QA",
+      "CompanyName": "Matrix / SajayaTech Main Assembly Plant",
+      "Email": "zaid.k@sajaya-tech.com",
+      "Phone": "+962 6 580 1100",
+      "MobilePhone": "+962 79 512 4401",
+      "WhatsApp": "+962795124401",
+      "VisibilityLevel": "Public",
+      "Source": "Manual",
+      "Tags": "TechDesk, B1Q, Government Tenders, BIOS Imaging",
+      "Notes": "Coordinates custom specs, BIOS logo locks, and Windows 11 Pro licensing for ministry and university tenders."
+    },
+    {
+      "Id": 2,
+      "FactoryId": 2,
+      "FullName": "Eng. Mahmoud Al-nsour",
+      "JobTitle": "Chief Power & UPS Systems Engineer",
+      "Department": "Sajaya Power Division",
+      "CompanyName": "Sajaya Power Systems & UPS Division",
+      "Email": "m.nsour@sajaya-tech.com",
+      "Phone": "+962 6 580 1125",
+      "MobilePhone": "+962 79 604 8821",
+      "WhatsApp": "+962796048821",
+      "VisibilityLevel": "Public",
+      "Source": "Phone_vCard_Import",
+      "Tags": "UPS, HP9336C, 3-Phase, Battery Sizing",
+      "Notes": "Handles battery runtime calculations and parallel N+X sizing for data center and hospital UPS tenders."
+    },
+    {
+      "Id": 3,
+      "FactoryId": 3,
+      "FullName": "Kevin Zhang",
+      "JobTitle": "OEM Display & Interactive Panel Director",
+      "Department": "Overseas B2B Supply",
+      "CompanyName": "Sajaya TechView & Smart Display OEM Partner",
+      "Email": "kevin.zhang@techview-oem.cn",
+      "Phone": "+86 20 8911 4020",
+      "MobilePhone": "+86 139 2210 8841",
+      "WhatsApp": "+8613922108841",
+      "VisibilityLevel": "Restricted",
+      "Source": "Phone_vCard_Import",
+      "Tags": "Monitors, Interactive Screens, All-in-One, FOB Pricing",
+      "Notes": "Direct factory allocation contact for 65/75/86-inch interactive panels and B24S/B27S/B32H monitors."
+    },
+    {
+      "Id": 4,
+      "FactoryId": 4,
+      "FullName": "Helen Chen",
+      "JobTitle": "VP of OEM Costing & Chassis Tooling",
+      "Department": "Executive OEM Supply",
+      "CompanyName": "Sajaya Vision & TechGears Precision Factory",
+      "Email": "helen.chen@sajaya-oem.cn",
+      "Phone": "+86 755 3390 1180",
+      "MobilePhone": "+86 136 0091 7720",
+      "WhatsApp": "+8613600917720",
+      "VisibilityLevel": "AdminOnly",
+      "Source": "CSV_Import",
+      "Tags": "Confidential, Net FOB Cost, TechBook, Charge Cart, CCTV",
+      "Notes": "CONFIDENTIAL: Holds net factory BOM pricing for TechBook laptops, Charge Carts, and Sajaya Vision CCTV."
+    }
+  ],
+  "products": [
+    {
+      "Id": 1,
+      "FactoryId": 1,
+      "SKU": "SAJAYA-B1Q",
+      "Name": "SajayaTech B1Q Commercial Business Desktop (Q-Series)",
+      "Series": "Sajaya TechDesk (Desktops)",
+      "Category": "Personal Computers (Desktops)",
+      "Summary": "Engineered for government tenders, corporate fleets, and administrative workstations in Jordan. Powered by Intel 14th Gen Core i5/i7 processors, enterprise Q-series chipset, hardware TPM 2.0 security, and DDR5 memory.",
+      "Specifications": {
+        "Model Code": "SAJAYA-B1Q",
+        "Processor": "Intel Core i5 / i7 (14th Gen Processors)",
+        "Motherboard & Chipset": "Intel Q-Series Enterprise Chipset (Q670 / Q870)",
+        "Memory (RAM)": "8GB to 64GB DDR5 High-Speed RAM (Dual-Channel)",
+        "Storage Drive": "512GB to 2TB M.2 PCIe NVMe Solid State Drive (SSD)",
+        "Graphics Processing": "Integrated Intel Graphics with Shared System Memory",
+        "Video Output": "1x HDMI and 1x DisplayPort (Dual Digital Display Support)",
+        "I/O Ports & Connectivity": "1x USB Type-C, 4x USB 3.2 Type-A, 1x RJ-45 Gigabit LAN, 3.5mm Universal Audio Jack",
+        "Enterprise Security": "Integrated TPM 2.0 (Trusted Platform Module) Cryptographic Module",
+        "Operating System": "FreeDOS / Windows 11 Home / Windows 11 Pro (64-bit)",
+        "Chassis & Power": "Tower Commercial Chassis, 220V 50Hz Internal Power Supply with MK Cable",
+        "Factory Warranty": "3-Year Factory Warranty & Local Jordan SLA Support"
+      },
+      "Features": [
+        "Standardized enterprise Q-Series BIOS for government & corporate fleet imaging",
+        "100% 24-hour factory burn-in tested in Amman prior to deployment",
+        "Hardware TPM 2.0 cryptographic security & chassis intrusion protection",
+        "Whisper-quiet thermal design (< 26 dBA) rated for 42°C MTBF continuous operation"
+      ],
+      "ComplianceStandards": "ISO 9001:2015, CE, RoHS, JSMO, Energy Star",
+      "BaseFactoryCost": 420,
+      "Currency": "USD",
+      "WarrantyMonths": 36,
+      "Revision": "Rev 2026.1"
+    },
+    {
+      "Id": 2,
+      "FactoryId": 1,
+      "SKU": "SAJAYA-S300",
+      "Name": "Sajaya TechDesk C20T-I (Business & Office Essential Tower)",
+      "Series": "Sajaya TechDesk (Desktops)",
+      "Category": "Personal Computers (Desktops)",
+      "Summary": "Streamlined, space-saving 16L micro-tower desktop engineered for high reliability in daily office, administrative, point-of-sale, and educational environments.",
+      "Specifications": {
+        "Model Code / SKU": "C20T-I / SAJAYA-S300",
+        "Form Factor & Chassis": "Compact Micro-ATX Micro-Tower Chassis (16L)",
+        "Processor": "Intel Core i3-14100 (14th Gen) / AMD Ryzen 5 8500G",
+        "Memory (RAM)": "Supports from 8GB to 64GB DDR5 / DDR4 RAM",
+        "Storage": "512GB to 2TB M.2 NVMe PCIe 4.0 SSD",
+        "Graphics": "Integrated Intel UHD 730 / Radeon 740M",
+        "Front & Rear I/O": "4x USB 3.2 Gen 1, 2x USB 2.0, HDMI 2.0, DP 1.4, Gigabit LAN",
+        "Power Supply": "350W 80 PLUS Bronze Certified (Active PFC)",
+        "Factory Warranty": "3-Year Factory Warranty & Local Jordan Service"
+      },
+      "Features": [
+        "Space-saving 16-liter micro-tower chassis with tool-less service access",
+        "80 PLUS Bronze active PFC power supply for grid stability",
+        "Dual digital display support via HDMI 2.0 and DisplayPort 1.4",
+        "Backed by local Amman spare parts inventory and 3-year SLA warranty"
+      ],
+      "ComplianceStandards": "ISO 9001, CE, RoHS, JSMO",
+      "BaseFactoryCost": 340,
+      "Currency": "USD",
+      "WarrantyMonths": 36,
+      "Revision": "Rev 2026.1"
+    },
+    {
+      "Id": 3,
+      "FactoryId": 1,
+      "SKU": "SAJAYA-S500",
+      "Name": "Sajaya TechDesk B20T-I (Enterprise Fleet Standard Tower)",
+      "Series": "Sajaya TechDesk (Desktops)",
+      "Category": "Personal Computers (Desktops)",
+      "Summary": "Our workhorse 24L commercial mid-tower delivering exceptional multitasking, DDR5 speed, dual 4K display output, and low lifecycle maintenance for corporate fleets.",
+      "Specifications": {
+        "Model Code / SKU": "B20T-I / SAJAYA-S500",
+        "Form Factor & Chassis": "Enterprise Mid-Tower Precision Fleet Chassis (24L)",
+        "Processor": "Intel Core i5-14500 (14th Gen) / AMD Ryzen 7 8700G",
+        "Motherboard": "Sajaya Industrial B760M-Pro with Solid Japanese Capacitors",
+        "Memory (RAM)": "16GB / 32GB (Supports 8GB to 64GB) DDR5 5600MHz",
+        "Storage": "1TB M.2 NVMe PCIe 4.0 SSD (Supports 512GB to 4TB)",
+        "Graphics": "Intel UHD 770 / Optional NVIDIA T400 4GB",
+        "Front & Rear I/O": "6x USB 3.2 Gen 2, 1x USB-C 3.2 Gen 2, Dual DP 1.4, HDMI 2.1, 2.5GbE LAN",
+        "Security": "Discrete TPM 2.0 Chip, Kensington Security Slot, Chassis Intrusion Alert",
+        "Power Supply": "500W 80 PLUS Gold Certified (Efficiency >= 90%)",
+        "Operating System": "Windows 11 Pro Genuine Local License / Ubuntu Enterprise Ready",
+        "Factory Warranty": "3-Year Factory Warranty & Local Jordan Service"
+      },
+      "Features": [
+        "Most popular corporate fleet standard desktop across Jordan",
+        "Triple 4K display output via Dual DisplayPort 1.4 and HDMI 2.1",
+        "500W 80 PLUS Gold high-efficiency power supply (>= 90% efficiency)",
+        "Solid Japanese capacitors and military-grade component selection"
+      ],
+      "ComplianceStandards": "ISO 9001, CE, RoHS, TPM 2.0, Energy Star",
+      "BaseFactoryCost": 495,
+      "Currency": "USD",
+      "WarrantyMonths": 36,
+      "Revision": "Rev 2026.2"
+    },
+    {
+      "Id": 4,
+      "FactoryId": 1,
+      "SKU": "SAJAYA-S700",
+      "Name": "Sajaya TechDesk B70T-I (High-Performance Business Tower)",
+      "Series": "Sajaya TechDesk (Desktops)",
+      "Category": "Personal Computers (Desktops)",
+      "Summary": "Expanded 34L thermal capacity and dedicated GPU acceleration for data analysts, AutoCAD drafting, digital media creators, and power business users.",
+      "Specifications": {
+        "Model Code / SKU": "B70T-I / SAJAYA-S700",
+        "Form Factor & Chassis": "Full Expansion High-Airflow Studio Mid-Tower (34L)",
+        "Processor": "Intel Core i7-14700 (14th Gen) / AMD Ryzen 9 7900",
+        "Memory (RAM)": "32GB / 64GB DDR5 6000MHz Dual-Channel",
+        "Storage": "1TB / 2TB Gen4 NVMe SSD + 2TB Enterprise SATA HDD",
+        "Graphics": "Dedicated NVIDIA GeForce RTX 4060 8GB / NVIDIA RTX A2000",
+        "Front & Rear I/O": "8x USB 3.2, 2x USB-C 3.2 Gen 2x2, 2.5GbE LAN, Wi-Fi 6E + Bluetooth 5.3",
+        "Power Supply": "650W 80 PLUS Gold Certified Modular PSU",
+        "Factory Warranty": "3-Year Factory Warranty & Local Jordan Service"
+      },
+      "Features": [
+        "Dedicated NVIDIA RTX GPU acceleration for CAD and creative workloads",
+        "High-airflow 34L studio tower with whisper-quiet cooling",
+        "Integrated Wi-Fi 6E, Bluetooth 5.3, and 2.5GbE high-speed networking",
+        "650W 80 PLUS Gold modular power architecture"
+      ],
+      "ComplianceStandards": "ISO 9001, CE, RoHS, JSMO",
+      "BaseFactoryCost": 790,
+      "Currency": "USD",
+      "WarrantyMonths": 36,
+      "Revision": "Rev 2026.1"
+    },
+    {
+      "Id": 5,
+      "FactoryId": 1,
+      "SKU": "SAJAYA-S300-SFF",
+      "Name": "Sajaya TechDesk C20S-I (8.2L Compact SFF Desktop)",
+      "Series": "Sajaya TechDesk SFF",
+      "Category": "Small Form Factor (SFF) Desktops",
+      "Summary": "Engineered for high-density office desks, administrative workspaces, and bank teller stations with 65% less footprint than conventional towers.",
+      "Specifications": {
+        "Model Code / SKU": "C20S-I / SAJAYA-S300-SFF",
+        "Form Factor": "8.2L Slim SFF Steel Chassis (Horizontal or Vertical Placement)",
+        "Processor": "Supports Intel Core i3 / i5 14th Gen / AMD Ryzen 5 Series",
+        "Memory (RAM)": "Supports from 8GB to 64GB DDR5 RAM",
+        "Storage": "Supports from 512GB to 2TB NVMe PCIe 4.0 SSD",
+        "Graphics": "Integrated Intel UHD 730 / Radeon 740M (Low-Profile PCIe Slot)",
+        "Front & Rear I/O": "4x USB 3.2 Gen 1, 2x USB 2.0, Dual HDMI 2.0, DP 1.4, Gigabit LAN",
+        "Power Supply": "300W 80 PLUS Platinum Internal Flex-ATX PSU",
+        "Factory Warranty": "3-Year Factory Warranty & Priority Local Jordan SLA"
+      },
+      "Features": [
+        "Ultra-slim 8.2-liter steel chassis saves 65% desk space",
+        "Dual orientation: supports vertical or horizontal monitor-riser placement",
+        "300W 80 PLUS Platinum ultra-high efficiency internal PSU",
+        "Low-profile PCIe expansion slot for multi-display upgrades"
+      ],
+      "ComplianceStandards": "ISO 9001, CE, RoHS, 80 PLUS Platinum",
+      "BaseFactoryCost": 365,
+      "Currency": "USD",
+      "WarrantyMonths": 36,
+      "Revision": "Rev 2026.1"
+    },
+    {
+      "Id": 6,
+      "FactoryId": 1,
+      "SKU": "SAJAYA-S500-SFF",
+      "Name": "Sajaya TechDesk B20S-I (9.5L Enterprise Fleet SFF Desktop)",
+      "Series": "Sajaya TechDesk SFF",
+      "Category": "Small Form Factor (SFF) Desktops",
+      "Summary": "Balanced commercial SFF desktop delivering multi-monitor financial and logistical productivity in a compact 9.5-liter reinforced steel chassis.",
+      "Specifications": {
+        "Model Code / SKU": "B20S-I / SAJAYA-S500-SFF",
+        "Form Factor": "9.5L Enterprise SFF Reinforced Chassis with Kensington Lock",
+        "Processor": "Supports Intel Core i5 / i7 14th Gen / AMD Ryzen 7 Series",
+        "Memory (RAM)": "Supports from 8GB to 64GB DDR5 RAM",
+        "Storage": "Supports from 512GB to 2TB NVMe SSD",
+        "Graphics": "Low-Profile NVIDIA T400 4GB / Intel UHD 770",
+        "Front & Rear I/O": "6x USB 3.2 Gen 2, 1x USB-C 3.2, Dual DP 1.4, HDMI 2.1, 2.5GbE LAN",
+        "Power Supply": "400W 80 PLUS Gold High-Efficiency Flex-ATX PSU",
+        "Factory Warranty": "3-Year Factory Warranty & Priority Local Jordan SLA"
+      },
+      "Features": [
+        "9.5L compact commercial footprint with low-profile GPU acceleration",
+        "Supports quad display setups for financial trading and logistics",
+        "Integrated Kensington security lock and TPM 2.0 protection",
+        "400W 80 PLUS Gold internal power supply"
+      ],
+      "ComplianceStandards": "ISO 9001, CE, RoHS, Energy Star",
+      "BaseFactoryCost": 510,
+      "Currency": "USD",
+      "WarrantyMonths": 36,
+      "Revision": "Rev 2026.1"
+    },
+    {
+      "Id": 7,
+      "FactoryId": 1,
+      "SKU": "SAJAYA-S700-SFF",
+      "Name": "Sajaya TechDesk B70S-I (11.5L High-Density Pro SFF)",
+      "Series": "Sajaya TechDesk SFF",
+      "Category": "Small Form Factor (SFF) Desktops",
+      "Summary": "Workstation-grade performance in an 11.5L compact form factor designed for CAD engineers, medical imaging workstations, and power professionals.",
+      "Specifications": {
+        "Model Code / SKU": "B70S-I / SAJAYA-S700-SFF",
+        "Form Factor": "11.5L Performance SFF Studio Chamber with Dual Exhaust Fans",
+        "Processor": "Supports Intel Core i7 / i9 14th Gen / AMD Ryzen 9 Series",
+        "Memory (RAM)": "Supports from 8GB to 64GB DDR5 RAM",
+        "Storage": "Supports from 512GB to 2TB NVMe SSD",
+        "Graphics": "Supports RTX 40 Series Low-Profile / NVIDIA RTX A-Series",
+        "Front & Rear I/O": "8x USB 3.2, 2x USB-C 3.2 Gen 2, 2.5GbE LAN, Wi-Fi 6E + BT 5.3",
+        "Power Supply": "500W 80 PLUS Gold Internal Modular PSU",
+        "Factory Warranty": "3-Year Factory Warranty & Priority Local Jordan SLA"
+      },
+      "Features": [
+        "Supports dual-slot low-profile RTX 40 Series & RTX Ada workstation GPUs",
+        "Dual exhaust thermal chamber keeps i9/Ryzen 9 cool under sustained load",
+        "High-speed 2.5GbE LAN + Wi-Fi 6E + 10x total USB ports",
+        "500W 80 PLUS Gold internal modular PSU"
+      ],
+      "ComplianceStandards": "ISO 9001, CE, RoHS",
+      "BaseFactoryCost": 820,
+      "Currency": "USD",
+      "WarrantyMonths": 36,
+      "Revision": "Rev 2026.1"
+    },
+    {
+      "Id": 8,
+      "FactoryId": 4,
+      "SKU": "SAJAYA-M300",
+      "Name": "Sajaya TechDesk C20M-I (0.6L Ultra-Compact Mini PC)",
+      "Series": "Sajaya TechDesk Mini PC",
+      "Category": "Mini PCs",
+      "Summary": "Space-saving 0.6L palm-sized desktop designed for customer service counters, kiosks, digital signage, retail POS, and everyday corporate tasks.",
+      "Specifications": {
+        "Model Code / SKU": "C20M-I / SAJAYA-M300",
+        "Form Factor": "0.6L VESA-Mountable Enclosure (115 x 115 x 45 mm)",
+        "Processor": "Supports Intel Core i3 13th Gen",
+        "Memory (RAM)": "Supports from 8GB to 64GB DDR5 RAM",
+        "Storage": "Supports from 512GB to 2TB M.2 NVMe SSD",
+        "Display Outputs": "2x HDMI 2.0 (Dual 4K @ 60Hz Displays)",
+        "Networking": "Gigabit LAN RJ45, Wi-Fi 6, Bluetooth 5.2",
+        "Power Consumption": "Ultra-Low 15W Idle / 45W Peak External Adapter",
+        "Warranty": "3-Year Local Factory Warranty with Jordan SLA"
+      },
+      "Features": [
+        "0.6L ultra-compact footprint mounts invisibly behind any monitor via VESA",
+        "Drives dual 4K @ 60Hz displays simultaneously via dual HDMI 2.0",
+        "Ultra-low 15W idle power consumption reduces enterprise electricity costs"
+      ],
+      "ComplianceStandards": "CE, FCC, RoHS, ISO 9001",
+      "BaseFactoryCost": 280,
+      "Currency": "USD",
+      "WarrantyMonths": 36,
+      "Revision": "Rev 2026.1"
+    },
+    {
+      "Id": 9,
+      "FactoryId": 4,
+      "SKU": "SAJAYA-M500",
+      "Name": "Sajaya TechDesk B20M-I (0.8L Enterprise Mini PC)",
+      "Series": "Sajaya TechDesk Mini PC",
+      "Category": "Mini PCs",
+      "Summary": "Robust 0.8L brushed aluminum commercial mini desktop delivering triple 4K monitor support, 2.5GbE networking, and whisper-quiet <24 dBA operation.",
+      "Specifications": {
+        "Model Code / SKU": "B20M-I / SAJAYA-M500",
+        "Form Factor": "0.8L Brushed Aluminum Chassis with Kensington Lock",
+        "Processor": "Supports Intel Core i5 13th Gen / AMD Ryzen 5 Series",
+        "Memory (RAM)": "Supports from 8GB to 64GB DDR5 RAM",
+        "Storage": "Supports from 512GB to 2TB M.2 NVMe SSD",
+        "Display Support": "Triple 4K Displays: 2x HDMI 2.1 + 1x USB-C DisplayPort",
+        "Connectivity": "2.5GbE RJ45 LAN, Wi-Fi 6E, Bluetooth 5.3, 4x USB 3.2",
+        "Cooling": "Copper Heatpipe Quiet Blower Fan (<24 dBA)",
+        "Warranty": "3-Year Local Factory Warranty with SLA"
+      },
+      "Features": [
+        "Brushed aluminum 0.8L enclosure with VESA mount bracket included",
+        "Supports 3 simultaneous 4K displays (2x HDMI 2.1 + USB-C DP)",
+        "Copper heatpipe thermal module operating under 24 dBA"
+      ],
+      "ComplianceStandards": "CE, FCC, RoHS, ISO 9001",
+      "BaseFactoryCost": 390,
+      "Currency": "USD",
+      "WarrantyMonths": 36,
+      "Revision": "Rev 2026.1"
+    },
+    {
+      "Id": 10,
+      "FactoryId": 4,
+      "SKU": "SAJAYA-M700",
+      "Name": "Sajaya TechDesk B70M-I / W20M-I (Quad-4K Power Mini Station)",
+      "Series": "Sajaya TechDesk Mini PC",
+      "Category": "Mini PCs",
+      "Summary": "Workstation-grade palm-sized PC with Intel Core i7 / Core Ultra 7 processor, Dual 2.5GbE LAN, and Quad 4K display outputs via HDMI 2.1 and USB4.",
+      "Specifications": {
+        "Model Code / SKU": "B70M-I / W20M-I (SAJAYA-M700 / SJ-MINI-NANO)",
+        "Form Factor": "0.8L - 1.0L Reinforced Alloy Chassis with 75/100mm VESA Bracket",
+        "Processor": "Supports Intel Core i7 13th Gen / Core Ultra 7 / Ryzen 7 Series",
+        "Graphics": "Intel Arc Graphics with Hardware AV1 & Ray Tracing",
+        "Memory (RAM)": "Supports from 8GB to 64GB DDR5 RAM",
+        "Storage": "Supports from 512GB to 2TB NVMe SSD",
+        "Display Support": "Quad 4K Displays: 2x HDMI 2.1 + 2x USB4 40Gbps Type-C",
+        "Networking": "Dual 2.5Gbps Ethernet RJ45 + Wi-Fi 6E + Bluetooth 5.3",
+        "Cooling": "Dual-Fan Vapor Chamber Thermal Design",
+        "Warranty": "3-Year Local Factory Warranty with Priority SLA"
+      },
+      "Features": [
+        "Drives up to 4 independent 4K @ 60Hz monitors for trading & control rooms",
+        "Dual 2.5GbE LAN ports for network redundancy and firewall/edge use",
+        "Dual-fan copper vapor chamber cooling for sustained 45W TDP loads"
+      ],
+      "ComplianceStandards": "CE, FCC, RoHS, ISO 9001",
+      "BaseFactoryCost": 540,
+      "Currency": "USD",
+      "WarrantyMonths": 36,
+      "Revision": "Rev 2026.1"
+    },
+    {
+      "Id": 11,
+      "FactoryId": 1,
+      "SKU": "SAJAYA-W500",
+      "Name": "Sajaya TechDesk W20T-I (Precision Engineering & 3D Workstation)",
+      "Series": "Sajaya TechDesk Workstations",
+      "Category": "Workstations",
+      "Summary": "Certified workstation for CAD, BIM, and architectural workflows with quiet acoustics, DDR5 up to 128GB, and NVIDIA RTX Ada / RTX 40 Series graphics.",
+      "Specifications": {
+        "Model Code / SKU": "W20T-I / SAJAYA-W500",
+        "Processor": "Supports Intel Core i7 14th Gen / AMD Ryzen 9 Series",
+        "Memory (RAM)": "Supports from 8GB to 128GB DDR5 RAM",
+        "Storage": "Supports from 512GB to 4TB M.2 PCIe NVMe SSD",
+        "Graphics": "Supports NVIDIA RTX 40 Series / RTX Ada Workstation Series",
+        "Cooling & Acoustic": "High-CFM Quiet Tower Air Cooler (220W TDP rated)",
+        "Networking": "2.5GbE RJ45 LAN + Wi-Fi 6E + Bluetooth 5.3",
+        "Power Supply": "850W 80 PLUS Gold Certified Modular PSU",
+        "Warranty & Support": "3-Year Factory Warranty & On-Site Hardware Support"
+      },
+      "Features": [
+        "ISV-optimized for AutoCAD, Revit, SolidWorks, and BIM modeling",
+        "220W TDP high-CFM quiet air cooling for sustained rendering",
+        "850W 80 PLUS Gold modular power supply"
+      ],
+      "ComplianceStandards": "ISO 9001, CE, RoHS, ISV Certified",
+      "BaseFactoryCost": 1150,
+      "Currency": "USD",
+      "WarrantyMonths": 36,
+      "Revision": "Rev 2026.1"
+    },
+    {
+      "Id": 12,
+      "FactoryId": 1,
+      "SKU": "SAJAYA-W700",
+      "Name": "Sajaya TechDesk W70T-I / W50T-I (Simulation & Xeon/i9 Workstation)",
+      "Series": "Sajaya TechDesk Workstations",
+      "Category": "Workstations",
+      "Summary": "High-throughput dual-chamber workstation supporting Intel Core i9 14th Gen or Intel Xeon W-Series, ECC DDR5 memory, and 360mm liquid cooling.",
+      "Specifications": {
+        "Model Code / SKU": "W70T-I / W50T-I (SAJAYA-W700 / SJ-WS-TITAN)",
+        "Processor": "Supports Intel Core i9 14th Gen / Intel Xeon W-Series / Ryzen 9",
+        "Memory (RAM)": "Supports from 16GB to 512GB DDR5 / DDR5 ECC RAM",
+        "Storage Array": "Supports from 512GB to 4TB+ Gen4/Gen5 NVMe SSD",
+        "Graphics": "Supports NVIDIA RTX 40 Series / RTX Ada Generation",
+        "Cooling System": "360mm Closed-Loop Liquid Thermal System (350W TDP rated)",
+        "Chassis & Thermal": "Reinforced 1.2mm SECC Steel, Negative-Pressure Dust Filtered Chambers",
+        "Networking": "Dual 2.5GbE + Optional 10GbE RJ45 + Wi-Fi 6E",
+        "Power Supply": "1200W Platinum / 2000W 80 PLUS Titanium Fully Modular",
+        "Certifications": "ISV Certified for Autodesk, Dassault Systèmes, Adobe, and ANSYS",
+        "Warranty & Support": "3-Year Factory Warranty & On-Site Hardware Support"
+      },
+      "Features": [
+        "Certified for mission-critical CAD, ANSYS simulation, and medical imaging",
+        "360mm liquid thermal system rated for 350W continuous processor TDP",
+        "Supports ECC error-correcting memory up to 512GB"
+      ],
+      "ComplianceStandards": "ISV Certified, ISO 9001, CE, RoHS",
+      "BaseFactoryCost": 1850,
+      "Currency": "USD",
+      "WarrantyMonths": 36,
+      "Revision": "Rev 2026.1"
+    },
+    {
+      "Id": 13,
+      "FactoryId": 1,
+      "SKU": "SAJAYA-W900",
+      "Name": "Sajaya TechDesk W90T-A (Threadripper PRO Extreme Multi-GPU AI Station)",
+      "Series": "Sajaya TechDesk Workstations",
+      "Category": "Workstations",
+      "Summary": "Massive compute capability powered by AMD Threadripper PRO 7000 Series, up to 512GB DDR5 ECC RAM, and Multi-GPU RTX Ada support for LLM fine-tuning and industrial simulation.",
+      "Specifications": {
+        "Model Code / SKU": "W90T-A / SAJAYA-W900",
+        "Processor": "Supports AMD Ryzen Threadripper PRO 7000 Series",
+        "Memory (RAM)": "Supports from 64GB to 512GB DDR5 ECC Registered RAM",
+        "Storage Array": "Supports from 1TB to 4TB+ Enterprise NVMe SSD Array",
+        "Graphics": "Supports Multi-GPU NVIDIA RTX Ada Series / RTX 4090",
+        "Power Supply": "1600W 80 PLUS Titanium Certified (Dual EPS 12V)",
+        "Chassis": "Enterprise Heavy-Duty Steel Chassis (SSI-EEB / 65L)",
+        "Cooling": "Dual-Pump Custom Loop / Heavy-Duty Industrial Copper Vapor Chambers",
+        "Warranty & Support": "3-Year Factory Warranty & Mission-Critical SLA"
+      },
+      "Features": [
+        "Engineered for local LLM training, neural networks, and multi-GPU rendering",
+        "65L SSI-EEB full-tower steel chassis with 1600W 80 PLUS Titanium power",
+        "8-channel DDR5 ECC memory architecture"
+      ],
+      "ComplianceStandards": "ISO 9001, CE, RoHS, ISV Certified",
+      "BaseFactoryCost": 3900,
+      "Currency": "USD",
+      "WarrantyMonths": 36,
+      "Revision": "Rev 2026.1"
+    },
+    {
+      "Id": 14,
+      "FactoryId": 4,
+      "SKU": "SAJAYA-L300",
+      "Name": "Sajaya TechBook B20U-I (14\" Portable Corporate Notebook)",
+      "Series": "Sajaya TechBook Laptops",
+      "Category": "Laptops (TechBook)",
+      "Summary": "Lightweight 1.38kg 14-inch enterprise laptop engineered for mobile professionals, educators, and corporate fleets with up to 12 hours battery life.",
+      "Specifications": {
+        "Model Code / SKU": "B20U-I / SAJAYA-L300",
+        "Display Panel": "14\" FHD IPS (1920x1080), 300 nits, Anti-Glare, 100% sRGB",
+        "Processor": "Supports Intel Core i5 13th Gen",
+        "Graphics": "Intel Iris Xe Graphics",
+        "Memory (RAM)": "Supports from 8GB to 64GB DDR5 RAM",
+        "Storage": "Supports from 512GB to 2TB M.2 NVMe SSD",
+        "Weight & Battery": "1.38 kg | 57Wh Battery (Up to 12h) with 65W USB-C Fast Charging",
+        "Connectivity": "Thunderbolt 4, USB-A 3.2, HDMI 2.0, Wi-Fi 6E, Bluetooth 5.3",
+        "Warranty": "3-Year Local Factory Warranty with Amman SLA Support"
+      },
+      "Features": [
+        "Ultra-light 1.38 kg chassis ideal for field operations and business travel",
+        "Thunderbolt 4 and 65W USB-C Power Delivery charging",
+        "100% sRGB anti-glare IPS display"
+      ],
+      "ComplianceStandards": "CE, FCC, RoHS, ISO 9001",
+      "BaseFactoryCost": 460,
+      "Currency": "USD",
+      "WarrantyMonths": 36,
+      "Revision": "Rev 2026.1"
+    },
+    {
+      "Id": 15,
+      "FactoryId": 4,
+      "SKU": "SAJAYA-L500",
+      "Name": "Sajaya TechBook B20S-I (15.6\" QHD 165Hz Enterprise Power Laptop)",
+      "Series": "Sajaya TechBook Laptops",
+      "Category": "Laptops (TechBook)",
+      "Summary": "High-performance 15.6-inch commercial laptop balancing Intel Core i7 processing, RTX 40 Series graphics support, full numeric keypad, and security features.",
+      "Specifications": {
+        "Model Code / SKU": "B20S-I / SAJAYA-L500",
+        "Display Panel": "15.6\" QHD IPS (2560x1440), 165Hz, 100% sRGB, 400 nits",
+        "Processor": "Supports Intel Core i7 13th Gen",
+        "Graphics": "Supports NVIDIA GeForce RTX 40 Series",
+        "Memory (RAM)": "Supports from 8GB to 64GB DDR5 RAM",
+        "Storage": "Supports from 512GB to 2TB M.2 NVMe SSD",
+        "Battery & Power": "75Wh High-Capacity Cell with 100W USB-C GaN Rapid Charger",
+        "Security": "Fingerprint Reader, Discrete TPM 2.0, Windows Hello IR Camera",
+        "Warranty": "3-Year Factory Warranty & Priority Local Support"
+      },
+      "Features": [
+        "15.6-inch QHD 2560x1440 165Hz 400-nit display for sharp financial & dev work",
+        "Built-in biometric fingerprint reader, IR facial login, and TPM 2.0",
+        "Includes 100W GaN USB-C rapid charger"
+      ],
+      "ComplianceStandards": "CE, FCC, RoHS, TPM 2.0, ISO 9001",
+      "BaseFactoryCost": 680,
+      "Currency": "USD",
+      "WarrantyMonths": 36,
+      "Revision": "Rev 2026.1"
+    },
+    {
+      "Id": 16,
+      "FactoryId": 4,
+      "SKU": "SJ-APEX-16",
+      "Name": "Sajaya TechBook W70H-I / W20H-I (16\" Mobile Workstation Laptop)",
+      "Series": "Sajaya TechBook Laptops",
+      "Category": "Laptops (TechBook)",
+      "Summary": "Flagship 16-inch CNC aluminum mobile workstation engineered for architecture, 3D rendering, and simulation with i9 13th/14th Gen, RTX 40 Series, and dual vapor chambers.",
+      "Specifications": {
+        "Model Code / SKU": "W70H-I / W20H-I (SJ-APEX-16 / SAJAYA-L700)",
+        "Display": "16\" QHD+ (2560x1600) or 3.2K (3200x2000), 165Hz, 500 nits, 100% DCI-P3",
+        "Processor": "Supports Intel Core i9 13th / 14th Gen",
+        "Graphics": "Supports NVIDIA GeForce RTX 40 Series",
+        "Memory (RAM)": "Supports from 8GB to 64GB DDR5 RAM",
+        "Storage": "Supports from 512GB to 2TB PCIe Gen4 NVMe SSD",
+        "Cooling System": "Dual Vapor Chambers with Liquid Metal Thermal Interface",
+        "Battery & Power": "99.9Wh High-Capacity Li-Polymer, 330W GaN Fast Charger",
+        "Connectivity": "Thunderbolt 4, HDMI 2.1, 2.5G RJ-45, Wi-Fi 7, Bluetooth 5.4",
+        "Chassis Material": "CNC-Milled Aerospace Grade Aluminum Alloy",
+        "Warranty & Support": "3 Years Local Jordan Factory Warranty with Priority On-Site Service"
+      },
+      "Features": [
+        "500-nit 100% DCI-P3 factory-calibrated 16:10 creator display",
+        "Maximum legal flight capacity 99.9Wh battery + 330W GaN adapter",
+        "Dual vapor chamber cooling with liquid metal thermal compound"
+      ],
+      "ComplianceStandards": "CE, FCC, RoHS, ISO 9001",
+      "BaseFactoryCost": 1190,
+      "Currency": "USD",
+      "WarrantyMonths": 36,
+      "Revision": "Rev 2026.1"
+    },
+    {
+      "Id": 17,
+      "FactoryId": 3,
+      "SKU": "SAJAYA-A240",
+      "Name": "Sajaya TechDesk A240 (23.8\" Micro-Edge All-in-One PC)",
+      "Series": "Sajaya TechDesk All-in-One",
+      "Category": "All-in-One PCs",
+      "Summary": "Sleek, cable-free desktop integrating a 23.8-inch FHD IPS display, 5MP pop-up privacy webcam, stereo speakers, and commercial DDR5 reliability.",
+      "Specifications": {
+        "Model Code / SKU": "SAJAYA-A240",
+        "Display Panel": "23.8\" IPS FHD (1920x1080) Anti-Glare, 99% sRGB, 250 nits, 3-sided Micro-Edge",
+        "Processor": "Supports Intel Core i3 13th Gen / AMD Ryzen 5 Series",
+        "Memory (RAM)": "Supports from 8GB to 64GB DDR5 RAM",
+        "Storage": "Supports from 512GB to 2TB NVMe SSD",
+        "Webcam & Audio": "5MP Pop-up Privacy IR Camera with Dual Noise-Cancelling Microphones",
+        "Speakers": "Integrated 2x 3W Stereo Speakers",
+        "Connectivity": "Gigabit LAN, Wi-Fi 6, Bluetooth 5.2, 4x USB 3.2, HDMI Out",
+        "Warranty": "3-Year Local Factory Warranty with On-Site Service"
+      },
+      "Features": [
+        "Single power cord minimalist footprint for reception desks, clinics, and banks",
+        "Physical pop-up 5MP IR camera guarantees hardware privacy when closed",
+        "HDMI output supports connecting a secondary extended monitor"
+      ],
+      "ComplianceStandards": "CE, RoHS, ISO 9001, Energy Star",
+      "BaseFactoryCost": 430,
+      "Currency": "USD",
+      "WarrantyMonths": 36,
+      "Revision": "Rev 2026.1"
+    },
+    {
+      "Id": 18,
+      "FactoryId": 3,
+      "SKU": "SAJAYA-A270",
+      "Name": "Sajaya TechDesk A270 / Horizon 27 (27\" QHD Business All-in-One)",
+      "Series": "Sajaya TechDesk All-in-One",
+      "Category": "All-in-One PCs",
+      "Summary": "Executive all-in-one computer featuring a 27-inch QHD 2560x1440 IPS display, 130mm height-adjustable stand, Windows Hello pop-up IR camera, and dual 5W speakers.",
+      "Specifications": {
+        "Model Code / SKU": "SAJAYA-A270 / SJ-AIO-27",
+        "Display Panel": "27-inch IPS QHD (2560x1440) Anti-Glare, 99% sRGB, 350 nits, Micro-Edge",
+        "Processor": "Supports Intel Core i5 / i7 14th Gen / AMD Ryzen 7 Series",
+        "Memory (RAM)": "Supports from 8GB to 64GB DDR5 RAM",
+        "Storage": "Supports from 512GB to 2TB M.2 NVMe SSD",
+        "Privacy Camera": "5MP Pop-up Windows Hello IR Webcam with Physical Shutter",
+        "Speakers & Mic": "Dual 5W Front-Firing Tuned Studio Speakers + AI Noise-Cancelling Mic Array",
+        "Stand Adjustment": "Height Adjust (120-130mm), Tilt (-5° to +20°), Swivel (±45°)",
+        "Warranty": "3-Year Local Factory Warranty with On-Site SLA"
+      },
+      "Features": [
+        "Crisp QHD 2560x1440 IPS panel on a full ergonomic height-adjustable stand",
+        "Windows Hello facial recognition via pop-up 5MP IR camera",
+        "Front-firing studio speakers and AI noise-cancelling microphone array"
+      ],
+      "ComplianceStandards": "CE, RoHS, ISO 9001, Energy Star",
+      "BaseFactoryCost": 590,
+      "Currency": "USD",
+      "WarrantyMonths": 36,
+      "Revision": "Rev 2026.1"
+    },
+    {
+      "Id": 19,
+      "FactoryId": 3,
+      "SKU": "SAJAYA-A300",
+      "Name": "Sajaya TechDesk A300 (31.5\" 4K Creator All-in-One Station)",
+      "Series": "Sajaya TechDesk All-in-One",
+      "Category": "All-in-One PCs",
+      "Summary": "Flagship all-in-one desktop featuring a grand 31.5-inch 4K UHD HDR400 display, dedicated NVIDIA RTX 40 Series graphics, and 20W quad speaker array with subwoofer.",
+      "Specifications": {
+        "Model Code / SKU": "SAJAYA-A300",
+        "Display Panel": "31.5-inch IPS 4K UHD (3840x2160), 400 nits, 98% DCI-P3, HDR400",
+        "Processor": "Supports Intel Core i7 14th Gen / AMD Ryzen 7 Series",
+        "Graphics": "Supports Dedicated NVIDIA GeForce RTX 40 Series",
+        "Memory (RAM)": "Supports from 8GB to 64GB DDR5 RAM",
+        "Storage": "Supports from 512GB to 2TB NVMe SSD",
+        "Audio System": "Quad Speaker Array with Dedicated Subwoofer (20W Total Output)",
+        "Connectivity": "2.5GbE LAN, Wi-Fi 6E, Bluetooth 5.3, Thunderbolt 4, HDMI In/Out",
+        "Warranty": "3-Year Local Factory Warranty with Mission-Critical SLA"
+      },
+      "Features": [
+        "31.5-inch 4K UHD 98% DCI-P3 display for executive suites and creative studios",
+        "Dedicated NVIDIA RTX 40 Series GPU acceleration inside an all-in-one chassis",
+        "HDMI-In mode allows using the 31.5\" 4K display as an external monitor for laptops"
+      ],
+      "ComplianceStandards": "CE, RoHS, ISO 9001, VESA DisplayHDR 400",
+      "BaseFactoryCost": 980,
+      "Currency": "USD",
+      "WarrantyMonths": 36,
+      "Revision": "Rev 2026.1"
+    },
+    {
+      "Id": 20,
+      "FactoryId": 3,
+      "SKU": "SAJAYA-V240",
+      "Name": "Sajaya TechView B24S (23.8\" FHD 100Hz IPS Enterprise Monitor)",
+      "Series": "Sajaya TechView Monitors",
+      "Category": "Monitors (Commercial & Gaming)",
+      "Summary": "Everyday commercial display featuring 3-sided borderless design, 100Hz smooth refresh rate, TÜV flicker-free eye comfort, and full 130mm height/pivot ergonomic stand.",
+      "Specifications": {
+        "Model Code / SKU": "B24S / SAJAYA-V240",
+        "Panel Size & Type": "23.8-inch IPS Panel, 16:9 Aspect Ratio, Anti-Glare 3H",
+        "Resolution & Refresh": "Full HD 1920x1080 @ 100Hz Smooth Refresh Rate",
+        "Color Coverage": "99% sRGB Color Gamut, 16.7 Million Colors",
+        "Eye Care Technology": "TÜV Low Blue Light + Flicker-Free Certification",
+        "Connectivity": "HDMI 1.4, DisplayPort 1.2, VGA",
+        "Ergonomic Stand": "Height Adjust: 130mm, Tilt: -5° to +23°, Swivel: ±45°, Pivot: 90°",
+        "Mounting": "VESA 100x100mm Quick-Release Standard",
+        "Warranty": "3-Year Factory Warranty with Zero Bright Dot Guarantee"
+      },
+      "Features": [
+        "100Hz refresh rate eliminates eye fatigue during spreadsheet and document scrolling",
+        "Includes legacy VGA + modern HDMI 1.4 & DisplayPort 1.2 for universal compatibility",
+        "Backed by Sajaya 3-Year Zero-Bright-Dot replacement guarantee"
+      ],
+      "ComplianceStandards": "TÜV Rheinland, CE, RoHS, Energy Star, ISO 9001",
+      "BaseFactoryCost": 95,
+      "Currency": "USD",
+      "WarrantyMonths": 36,
+      "Revision": "Rev 2026.1"
+    },
+    {
+      "Id": 21,
+      "FactoryId": 3,
+      "SKU": "SAJAYA-V270",
+      "Name": "Sajaya TechView B27S (27\" QHD 100Hz 65W USB-C Hub Monitor)",
+      "Series": "Sajaya TechView Monitors",
+      "Category": "Monitors (Commercial & Gaming)",
+      "Summary": "Sharper productivity with 27-inch 2560x1440 QHD resolution, 100Hz refresh rate, 65W USB-C single-cable laptop docking, and Delta E < 2 factory calibration.",
+      "Specifications": {
+        "Model Code / SKU": "B27S / SAJAYA-V270",
+        "Panel Size & Type": "27-inch IPS Panel, 16:9 Aspect Ratio, Anti-Glare 3H",
+        "Resolution & Refresh": "QHD 2560x1440 @ 100Hz (77% more pixels than FHD)",
+        "USB-C Hub": "65W USB-C Video/Power Delivery + 2x USB 3.2 Hub",
+        "Color Accuracy": "99% sRGB / 95% DCI-P3, Delta E < 2 Factory Calibrated",
+        "Audio": "Integrated 2x 2W Stereo Chamber Speakers",
+        "Ergonomic Stand": "Height Adjust: 150mm, Tilt: -5° to +25°, Swivel: ±45°, Pivot: 90°",
+        "Warranty": "3-Year Factory Warranty with Zero Bright Dot Guarantee"
+      },
+      "Features": [
+        "Single USB-C cable delivers 65W laptop charging, QHD video, and USB 3.2 data hub",
+        "Factory calibrated Delta E < 2 color accuracy",
+        "150mm height-adjustable stand with 90-degree portrait pivot"
+      ],
+      "ComplianceStandards": "TÜV Rheinland, CE, RoHS, Energy Star",
+      "BaseFactoryCost": 165,
+      "Currency": "USD",
+      "WarrantyMonths": 36,
+      "Revision": "Rev 2026.1"
+    },
+    {
+      "Id": 22,
+      "FactoryId": 3,
+      "SKU": "SAJAYA-V320",
+      "Name": "Sajaya TechView B32H (32\" 4K UHD IPS Black 90W USB-C & KVM Monitor)",
+      "Series": "Sajaya TechView Monitors",
+      "Category": "Monitors (Commercial & Gaming)",
+      "Summary": "Expansive 31.5-inch 4K UHD IPS Black display with 2000:1 contrast, Delta E < 1 color fidelity, 90W USB-C Power Delivery, RJ45 LAN, and built-in Auto-KVM switch.",
+      "Specifications": {
+        "Model Code / SKU": "B32H / SAJAYA-V320 (SJ-MON-32U)",
+        "Panel Technology": "31.5-inch IPS Black, 4K UHD (3840x2160), 2000:1 Contrast Ratio",
+        "Color Spectrum": "10-bit (1.07 Billion Colors), 99% DCI-P3, 100% sRGB, Delta E < 1",
+        "USB-C Docking Hub": "90W USB-C Video/Power/Data + 4x USB 3.2 Gen2 + Gigabit LAN RJ-45",
+        "Built-in KVM": "Auto-KVM switches keyboard & mouse across two connected computers",
+        "HDR Support": "VESA DisplayHDR 400 with 400 nits Peak Brightness",
+        "Eye Comfort": "TÜV Rheinland Low Blue Light Hardware Solution with Zero-Flicker",
+        "Warranty": "3-Year Factory Warranty with Zero Bright Dot Guarantee"
+      },
+      "Features": [
+        "IPS Black technology delivers 2000:1 contrast ratio with deep true blacks",
+        "Integrated 90W USB-C docking station with RJ-45 Gigabit Ethernet port",
+        "Built-in Auto-KVM switch controls two PCs with one keyboard and mouse"
+      ],
+      "ComplianceStandards": "VESA DisplayHDR 400, TÜV Hardware Low Blue Light, CE, RoHS",
+      "BaseFactoryCost": 295,
+      "Currency": "USD",
+      "WarrantyMonths": 36,
+      "Revision": "Rev 2026.1"
+    },
+    {
+      "Id": 23,
+      "FactoryId": 3,
+      "SKU": "SAJAYA-GV270",
+      "Name": "Sajaya TechView G27H / G24H / G34H (240Hz Esports & Curved Gaming Monitors)",
+      "Series": "Sajaya TechView Gaming",
+      "Category": "Monitors (Commercial & Gaming)",
+      "Summary": "High-velocity 240Hz 1ms GtG Fast-IPS QHD gaming display (G27H), 24.5\" 240Hz FHD (G24H), and 34\" 165Hz 1500R UltraWide WQHD (G34H) with FreeSync Premium Pro & G-SYNC.",
+      "Specifications": {
+        "Model Codes / SKUs": "G24H (24.5\" FHD 240Hz) | G27H (27\" QHD 240Hz) | G34H (34\" UWQHD 165Hz)",
+        "Resolution (G27H Featured)": "Quad HD 2K (2560 x 1440) 16:9 / 3440 x 1440 (21:9 on G34H)",
+        "Refresh Rate & Response": "240Hz (Overclockable to 260Hz), 1ms GtG / 0.5ms MPRT Fast-IPS",
+        "Color Gamut": "98% DCI-P3 / 100% sRGB / 10-Bit (1.07 Billion Colors)",
+        "Adaptive Sync": "AMD FreeSync Premium Pro & NVIDIA G-SYNC Certified",
+        "HDR": "VESA DisplayHDR 400 (400 cd/m² Peak Brightness)",
+        "Connectivity": "2x DisplayPort 1.4, 2x HDMI 2.1, USB 3.2 Hub, 3.5mm Audio (65W USB-C + KVM on G34H)",
+        "Ergonomic Stand": "Gas-Spring Stand (Height, Pivot, Swivel, Tilt) + Built-in Headset Hanger",
+        "Warranty": "3-Year Zero-Bright-Dot Local Amman Factory Warranty"
+      },
+      "Features": [
+        "240Hz refresh rate and 1ms GtG Fast-IPS transition for zero motion blur",
+        "FreeSync Premium Pro & NVIDIA G-SYNC compatibility",
+        "3-Year Zero-Bright-Dot local Jordan replacement guarantee"
+      ],
+      "ComplianceStandards": "VESA DisplayHDR 400, CE, RoHS",
+      "BaseFactoryCost": 210,
+      "Currency": "USD",
+      "WarrantyMonths": 36,
+      "Revision": "Rev 2026.1"
+    },
+    {
+      "Id": 24,
+      "FactoryId": 3,
+      "SKU": "SAJAYA-I750",
+      "Name": "Sajaya Smart Interactive Touch Screens (I650 65\" / I750 75\" / I860 86\" 4K)",
+      "Series": "Sajaya Smart Interactive",
+      "Category": "Interactive Touch Screens",
+      "Summary": "4K UHD zero-gap optical bonded interactive flat panels (65\", 75\", 86\") with 50-point infrared touch, Dual OS (Android 13 + Intel Core i5/i7 Windows 11 Pro OPS), 48MP AI auto-framing camera, and 8-mic array.",
+      "Specifications": {
+        "Available Sizes / Models": "SAJAYA-I650 (65\") | SAJAYA-I750 (75\") | SAJAYA-I860 / SJ-SMART-86 (86\")",
+        "Display Panel": "4K UHD (3840x2160), 450 cd/m², 7H Mohs Toughened Anti-Glare Zero-Gap Glass",
+        "Touch Technology": "50-Point Multi-Touch Infrared, Palm Rejection, <=1mm Precision, <4ms Latency",
+        "Dual OS Architecture": "Onboard Android 13 (8GB RAM / 128GB ROM) + Modular Intel Core i5/i7 Windows 11 Pro OPS PC",
+        "AI Collaboration Camera": "Integrated 48MP 4K AI Camera with Auto-Speaker Tracking & Group Framing",
+        "Microphone & Audio": "8-Microphone Beamforming Array (10-12m pickup) + 2x 20W Speakers + 15W Subwoofer",
+        "Wireless BYOD Sharing": "Simultaneous 4-to-9 Screen Split Wireless Casting (iOS, macOS, Windows, Android)",
+        "Connectivity": "3x HDMI 2.0 In, 1x HDMI Out, USB Type-C (65W PD), 4x USB 3.0, Gigabit LAN",
+        "Warranty": "3-Year On-Site Factory Warranty across Jordan"
+      },
+      "Features": [
+        "Dual-OS architecture: switch instantly between Android 13 whiteboard and Windows 11 Pro OPS PC",
+        "Integrated 48MP AI camera and 8-array microphone (12m pickup) for hybrid boardrooms & classrooms",
+        "7H Mohs toughened zero-gap optical bonded glass with <4ms writing latency"
+      ],
+      "ComplianceStandards": "CE, RoHS, FCC, ISO 9001, JSMO",
+      "BaseFactoryCost": 1250,
+      "Currency": "USD",
+      "WarrantyMonths": 36,
+      "Revision": "Rev 2026.1"
+    },
+    {
+      "Id": 25,
+      "FactoryId": 2,
+      "SKU": "SAJAYA-HP9336C",
+      "Name": "Sajaya Power HP9xxx 3-Phase Online UPS Series (10kVA–120kVA)",
+      "Series": "Sajaya Power UPS",
+      "Category": "UPS & Power Systems (Sajaya Power)",
+      "Summary": "True Online Double-Conversion 3-Phase In / 3-Phase Out industrial UPS (10kVA to 120kVA) with 3-Level IGBT inverter technology, 96.5% online efficiency, 0ms transfer, and N+X parallel redundancy up to 6 units.",
+      "Specifications": {
+        "Model Series & Power": "SAJAYA HP9xxx / HP9336C Series (10K, 15K, 20K, 30K, 40K, 50K, 60K, 80K, 100K, 120K)",
+        "Topology": "True Online Double-Conversion with 3-Level IGBT Technology & DSP Control",
+        "Phase Configuration": "3-Phase In / 3-Phase Out (380 / 400 / 415 VAC, 4-Wire + Neutral + Ground)",
+        "Input Voltage Window": "228 ~ 478 VAC (Load Dependent) | Generator Acceptance: 40 ~ 70 Hz",
+        "Power Factor & THDi": "Output PF: 0.9–1.0 | Input PFC > 0.99 | Current THDi < 3% at full linear load",
+        "System Efficiency": "Online Double-Conversion: Up to 96.5% | ECO Mode: > 99.1%",
+        "Transfer Time": "0 ms (Continuous Double Conversion)",
+        "Parallel Redundancy": "Up to 6 units in parallel for capacity expansion or N+X redundancy",
+        "Battery & Charger": "Configurable 32–44 battery blocks (±192V ~ ±264VDC) | Up to 40A Heavy Charger",
+        "Overload Capability": "110% for 60 min | 125% for 10 min | 150% for 1 min",
+        "Monitoring & Comms": "MODBUS RTU/TCP, SNMP Slot, RS232, USB, EPO, Programmable Dry Contacts",
+        "Enclosure & Warranty": "IP20 Isolated Thermal Tunnel Cabinet | 3-Year Local Factory Warranty & 24/7 Support"
+      },
+      "Features": [
+        "3-Level IGBT technology achieves 96.5% online efficiency and unity output power factor",
+        "Aerodynamically partitioned IP20 thermal tunnel protects PCBs from dust",
+        "Scalable up to 6 units in parallel for Tier III/IV data centers and healthcare facilities"
+      ],
+      "ComplianceStandards": "CE, ISO 9001, RoHS, TLC, TÜV, IEC 62040-1/2",
+      "BaseFactoryCost": 2850,
+      "Currency": "USD",
+      "WarrantyMonths": 36,
+      "Revision": "Rev 2026.2"
+    },
+    {
+      "Id": 26,
+      "FactoryId": 2,
+      "SKU": "SAJAYA-HP9511CRT",
+      "Name": "Sajaya Power HP9xxx RT Convertible Rack/Tower UPS (1kVA–10kVA)",
+      "Series": "Sajaya Power UPS",
+      "Category": "UPS & Power Systems (Sajaya Power)",
+      "Summary": "Universal 2-in-1 19-inch Rackmount (2U/3U) & Tower Online Double-Conversion UPS (1kVA to 10kVA) with Unity Output Power Factor 1.0 (kW = kVA), 0ms transfer, and rotatable LCD.",
+      "Specifications": {
+        "Model Series & Capacity": "SAJAYA HP9511CRT / HP9xxx RT: 1KT (1kVA/1kW), 2KT, 3KT, 6KT, 10KT (10kVA/10kW)",
+        "Form Factor & Mounting": "Convertible 19-inch 2U/3U Rackmount & Standalone Tower (Rack ears & stands included)",
+        "Topology": "True Online Double-Conversion with DSP All-Digital Control",
+        "Phase & Voltage": "220/230/240 VAC 1Ph (115~300 VAC window) | 380 VAC 3Ph option on 6k/10k",
+        "Output Power Factor": "0.9 – 1.0 Unity Power Factor (kW = kVA)",
+        "Transfer Time & Waveform": "Mains to Battery: 0 ms | Inverter to Bypass: < 4 ms | Pure Sinewave THDv < 3%",
+        "Battery Bus": "24V / 48V / 72V / 192V / 240V DC (Supports External Battery Packs for Long-Run XL)",
+        "Display & Interface": "Rotatable Blue Graphic LCD + RS-232, USB, EPO, Intelligent SNMP/Dry Contact Slot",
+        "Dimensions & Weight": "Standard 2U height: 440 x 430/572 x 86.5 mm | 13.2 kg (1KT) to 28.5 kg (10KT)",
+        "Warranty": "3-Year Local Factory Replacement Warranty in Jordan"
+      },
+      "Features": [
+        "2-in-1 convertible 19\" rackmount and tower chassis with rotatable LCD screen",
+        "Unity Power Factor 1.0 delivers 100% active watt capacity for modern server racks",
+        "Cold-start DC capability powers up racks directly from battery without AC utility"
+      ],
+      "ComplianceStandards": "CE, ISO 9001, RoHS, TLC, TÜV, IEC 62040-1/2, GB 4943",
+      "BaseFactoryCost": 380,
+      "Currency": "USD",
+      "WarrantyMonths": 36,
+      "Revision": "Rev 2026.1"
+    },
+    {
+      "Id": 27,
+      "FactoryId": 2,
+      "SKU": "SAJAYA-HP9511D",
+      "Name": "Sajaya Power HP9511D / HP9531D Online Tower UPS (1kVA–20kVA)",
+      "Series": "Sajaya Power UPS",
+      "Category": "UPS & Power Systems (Sajaya Power)",
+      "Summary": "Compact high-frequency Floor Tower Online Double-Conversion UPS (1kVA–10kVA 1Ph and 10kVA–20kVA 3Ph In/1Ph Out) with Dual DSP control, 0ms transfer, and wide 115–300VAC input window.",
+      "Specifications": {
+        "Model Series & Range": "HP9511D (1kVA–10kVA 1Ph/1Ph) & HP9531D (10kVA–20kVA 3Ph In / 1Ph Out)",
+        "Topology": "True Online Double Conversion with Dual DSP Microprocessor Control",
+        "Input Voltage & Freq": "115 ~ 300 VAC Ultra-Wide Window | 46 ~ 64 Hz Generator Compatible",
+        "Output Power Factor": "0.9 / 1.0 High-Density Pure Sinewave Output",
+        "Transfer Time": "0 ms Zero-Transfer Architecture",
+        "Battery Bus & Charging": "36V / 72V / 192V / 240V DC Adaptive 3-Stage Charging (Standard & Long-Run XL)",
+        "Management Interface": "Backlit Interactive LCD + RS232, USB, EPO, Intelligent SNMP/AS400 Slot",
+        "Dimensions": "Starting at 145 x 355 x 220 mm (1KT) to 248 x 500 x 616 mm",
+        "Warranty": "3-Year Factory Warranty with Same-Day Local Maintenance in Jordan"
+      },
+      "Features": [
+        "Dual DSP microprocessor control ensures ultra-fast transient response",
+        "Ultra-wide 115~300VAC input window avoids unnecessary battery discharge during brownouts",
+        "Seamless generator pairing (46~64Hz) and adaptive 3-stage battery life extension"
+      ],
+      "ComplianceStandards": "CE, ISO 9001, RoHS, TÜV, IEC 62040-2, GB 4943",
+      "BaseFactoryCost": 310,
+      "Currency": "USD",
+      "WarrantyMonths": 36,
+      "Revision": "Rev 2026.1"
+    },
+    {
+      "Id": 28,
+      "FactoryId": 4,
+      "SKU": "SAJAYA-CCTV-VISION",
+      "Name": "Sajaya Vision AI IP Cameras (B400 4MP / D500 5MP / D80 4K 8MP)",
+      "Series": "Sajaya Vision Surveillance",
+      "Category": "CCTV & NVR Surveillance",
+      "Summary": "All-metal IP67/IK10 AI network surveillance cameras featuring Starlight & ColorNight vision, onboard neural human/vehicle/face analytics, Ultra H.265+ compression, and PoE power.",
+      "Specifications": {
+        "Camera Models": "SAJAYA-B400 (4MP Bullet) | SAJAYA-D500 (5MP IK10 Dome) | SJ-VIS-D80 (4K 8MP Varifocal Dome)",
+        "Image Sensor & Resolution": "4MP (2560x1440), 5MP (2880x1620), or 4K 8MP (3840x2160) @ 30fps Progressive CMOS",
+        "Lens Options": "2.8mm Fixed Wide Angle (106°-112° FOV) or 2.8-12mm Motorized Varifocal Autofocus (D80)",
+        "Night Vision": "40m IR + 30m Full-Color Warm Light / Smart EXIR 2.0 (0.003 Lux Starlight)",
+        "AI Edge Analytics": "Human & Vehicle Classification, Face Detection, License Plate Recognition (LPR), Line Crossing",
+        "Video Compression": "Smart Ultra H.265+ / H.265 / H.264 (Reduces storage bandwidth by up to 70%)",
+        "Audio & Edge Storage": "Built-in Noise-Cancelling Mic / Two-Way Audio + MicroSD Slot (Up to 256GB / 512GB)",
+        "Housing & Protection": "IP67 Weatherproof, IK10 Vandal-Proof Cast Aluminum, 4KV Surge Protection",
+        "Power & Connectivity": "PoE (IEEE 802.3af) or 12V DC",
+        "Warranty": "3-Year Local Factory Replacement Warranty in Jordan"
+      },
+      "Features": [
+        "99.2% accurate onboard AI human/vehicle target classification eliminates false alarms",
+        "Solid cast aluminum IP67 weatherproof and IK10 vandal-resistant armor",
+        "Smart Ultra H.265+ reduces NVR hard drive storage requirements by up to 75%"
+      ],
+      "ComplianceStandards": "CE, FCC, RoHS, IP67, IK10, ONVIF Profile S/G/T",
+      "BaseFactoryCost": 48,
+      "Currency": "USD",
+      "WarrantyMonths": 36,
+      "Revision": "Rev 2026.1"
+    },
+    {
+      "Id": 29,
+      "FactoryId": 4,
+      "SKU": "SAJAYA-NVR32E",
+      "Name": "Sajaya Vision Enterprise 4K NVR Stations (NVR08P 8-Ch PoE / NVR32E 32-Ch)",
+      "Series": "Sajaya Vision Surveillance",
+      "Category": "CCTV & NVR Surveillance",
+      "Summary": "Enterprise 4K/12MP Network Video Recorders available in 8-Channel PoE (1U) and 32-Channel RAID 0/1/5/6/10 (2U 19\" Rackmount) with 16-channel AI deep learning analytics.",
+      "Specifications": {
+        "Available Models": "SAJAYA-NVR08P (8-Ch 75W PoE 1U) | SAJAYA-NVR32E (32-Ch Enterprise 2U Rackmount)",
+        "Decoding Capacity": "Up to 12MP Camera Input per Channel, Real-Time 4K HDMI Output",
+        "Bandwidth Throughput": "80 Mbps In/Out (NVR08P) | 320 Mbps Incoming / 256 Mbps Outgoing (NVR32E)",
+        "Video Outputs": "Dual HDMI (HDMI 1 4K @ 60Hz + HDMI 2 4K) + Independent 1080p VGA",
+        "AI Video Analytics": "16-Channel AI Deep Learning Search, Human/Vehicle Filter, 10,000 Face Library",
+        "Storage & RAID": "1x SATA up to 16TB (NVR08P) | 4x SATA up to 64TB + Hardware RAID 0/1/5/6/10 (NVR32E)",
+        "Network Interfaces": "8x Independent PoE Ports (NVR08P) | Dual Gigabit RJ-45 Failover Ports (NVR32E)",
+        "Chassis": "Galvanized Steel 1U Desktop / 2U 19\" Industrial Rackmount with Redundant Fans",
+        "Warranty": "3-Year 24/7 Factory SLA Warranty with Priority Replacement"
+      },
+      "Features": [
+        "Supports up to 64TB storage across 4 SATA bays with RAID 0/1/5/6/10 redundancy",
+        "Onboard AI face recognition library (10,000 faces) and smart human/vehicle playback search",
+        "Dual HDMI 4K outputs for security command centers"
+      ],
+      "ComplianceStandards": "CE, FCC, RoHS, ONVIF, ISO 9001",
+      "BaseFactoryCost": 220,
+      "Currency": "USD",
+      "WarrantyMonths": 36,
+      "Revision": "Rev 2026.1"
+    },
+    {
+      "Id": 30,
+      "FactoryId": 4,
+      "SKU": "CHGCT36USBCPD-2E",
+      "Name": "Sajaya TechGears Charge Cart 36 (36-Bay 65W USB-C PD Smart Mobile Cart)",
+      "Series": "Sajaya TechGears Enterprise",
+      "Category": "Charge Carts & IT Accessories",
+      "Summary": "36-Bay intelligent USB-C Power Delivery mobile charging cart providing self-adaptive 65W PD fast charging per port, 3-zone dynamic <10A circuit protection, and 18-gauge steel security.",
+      "Specifications": {
+        "Model Code / SKU": "CHGCT36USBCPD-2E",
+        "Device Capacity": "36 Numbered Bays for Laptops/Tablets up to 15.6\" (Slot: 34 x 395 x 265 mm)",
+        "USB-C Power Output": "DC 5V-20V, up to 3.5A (Max 65W Adaptive USB-C PD per individual port)",
+        "AC Power Input": "220 - 240VAC, 15A, 50/60Hz",
+        "Smart Load Management": "Automatic 3-Zone Dynamic Cycling keeps total current under 10A ceiling",
+        "Status Indicators": "36 Individual 2-Color LEDs on Front Panel (Red: Charging / Green: Charged)",
+        "Chassis & Security": "18-Gauge Cold Rolled Steel, Dual Front/Rear Keyed Cam Locks + Padlock Loop",
+        "Casters & Dimensions": "4x 5\" Industrial Mute Casters (2 Braking) | 620 x 500 x 1147 mm (72 kg Net)"
+      },
+      "Features": [
+        "Charges 36 laptops or tablets via pre-wired USB-C 65W PD without bulky power bricks",
+        "Intelligent 3-zone load cycling prevents tripping standard classroom/office breakers (<10A)",
+        "36 external front LED indicators show per-device charge status while doors remain locked"
+      ],
+      "ComplianceStandards": "CE, RoHS, ISO 9001, USB-IF Power Delivery 3.0",
+      "BaseFactoryCost": 640,
+      "Currency": "USD",
+      "WarrantyMonths": 36,
+      "Revision": "Rev 2026.1"
+    },
+    {
+      "Id": 31,
+      "FactoryId": 4,
+      "SKU": "SJ-DK-12P",
+      "Name": "Sajaya TechGears Dock 12P (12-in-1 Dual 4K & 100W PD Aluminum Dock) & Dual Arm D2",
+      "Series": "Sajaya TechGears Enterprise",
+      "Category": "Charge Carts & IT Accessories",
+      "Summary": "Enterprise desk expansion bundle: SJ-DK-12P 12-port USB-C/Thunderbolt dock (Dual 4K@60Hz, 100W PD, Gigabit LAN with PXE Boot) and SJ-ARM-D2 dual 32\" gas-spring monitor arm.",
+      "Specifications": {
+        "Dock Model Code": "SJ-DK-12P (12-Port Universal USB-C / Thunderbolt 4 Dock)",
+        "Video Outputs": "Single 8K @ 30Hz or Dual 4K UHD @ 60Hz (HDMI 2.1 + DisplayPort 1.4)",
+        "Power Delivery": "Up to 100W USB-C PD 3.0 Fast Pass-Through Charging",
+        "Data & Network Ports": "2x USB-C 10Gbps, 2x USB-A 10Gbps, 1x USB 2.0, Gigabit RJ-45 (PXE Boot), SD/TF, 3.5mm Audio",
+        "Monitor Arm Model": "SJ-ARM-D2 (Aerospace Aluminum Gas-Spring Dual Monitor Arm)",
+        "Supported Monitors (D2)": "Two 17\" to 32\" Flat/Curved Monitors (2–9 kg per arm, VESA 75x75 & 100x100)",
+        "Arm Articulation": "330mm Gas-Spring Lift, ±90° Tilt, ±90° Swivel, 360° Rotation, Hidden Cable Channels"
+      },
+      "Features": [
+        "Single braided USB-C cable transforms any laptop into a dual-4K desktop workstation",
+        "Supports enterprise PXE network boot and MAC address pass-through",
+        "SJ-ARM-D2 counterbalanced gas-spring arm frees desk space for dual 32\" monitors"
+      ],
+      "ComplianceStandards": "CE, FCC, RoHS",
+      "BaseFactoryCost": 58,
+      "Currency": "USD",
+      "WarrantyMonths": 24,
+      "Revision": "Rev 2026.1"
+    },
+    {
+      "Id": 32,
+      "FactoryId": 1,
+      "SKU": "SAJAYA-G700",
+      "Name": "Sajaya TechSpace Gaming PCs (G500 / G700 / G900 / B850 RTX 5070 / G60L-A)",
+      "Series": "Sajaya TechSpace Gaming",
+      "Category": "Gaming PCs & Peripherals",
+      "Summary": "Custom hand-built gaming and simulation rigs engineered in Amman with 24-hour OCCT & 3DMark thermal stress certification, spanning RTX 4060, RTX 5070 12GB, RTX 4080 Super, and RTX 4090.",
+      "Specifications": {
+        "Available Models": "SAJAYA-G500 (G20S-I) | SAJAYA-G700 (G20L-A) | SJ-GAMING-B850 | SJ-GAMING-BEAST (G60L-A) | SAJAYA-G900 (G70E-I)",
+        "Processors": "AMD Ryzen 7 9800X3D / 7800X3D | Intel Core i5-14400F / i7-14700F / i9-14900KF",
+        "Graphics Cards": "NVIDIA RTX 4060 8GB | RTX 5070 12GB GDDR7 | RTX 4070 Ti Super | RTX 4080 Super 16GB | RTX 4090 24GB",
+        "Memory (RAM)": "16GB / 32GB / 64GB Dual-Channel DDR5 6000MHz–6400MHz CL30",
+        "Storage": "1TB / 2TB PCIe 4.0 & PCIe 5.0 NVMe SSD (Up to 12,000 MB/s)",
+        "Cooling System": "360mm Closed-Loop ARGB Liquid AIO Cooler / High-Airflow Dual-Tower Air",
+        "Power Supply": "650W Bronze / 850W 80+ Gold ATX 3.0 PCIe 5.0 / 1200W 80+ Platinum",
+        "Chassis": "High-Airflow Dual-Chamber Panoramic Tempered Glass Showcase Case",
+        "Factory Certification": "Signed 24-Hour OCCT & 3DMark Thermal Stress Test + 3-Year Local Jordan Warranty"
+      },
+      "Features": [
+        "Hand-built in Jordan with positive-pressure airflow and hand-sleeved cable routing",
+        "Every unit ships with a signed 24-hour OCCT & 3DMark burn-in test certificate",
+        "3-year local Amman warranty with express replacement spares"
+      ],
+      "ComplianceStandards": "ISO 9001, CE, RoHS",
+      "BaseFactoryCost": 1350,
+      "Currency": "USD",
+      "WarrantyMonths": 36,
+      "Revision": "Rev 2026.1"
+    },
+    {
+      "Id": 33,
+      "FactoryId": 4,
+      "SKU": "SAJAYA-TECHGEARS-GX",
+      "Name": "Sajaya TechGears Esports Peripherals (M101/M201 Mice, H301/H401 Headsets, P401/P901 Pads)",
+      "Series": "Sajaya TechGears Gaming",
+      "Category": "Gaming PCs & Peripherals",
+      "Summary": "Complete Sajaya TechGears peripheral suite: M101 (59g 26K DPI 8000Hz Mouse), M201 (85g Ergonomic Mouse), H301 (7.1 Spatial Wireless Headset), H401 (Planar Magnetic Dual-Wireless Headset), and P401/P901 Cordura Desk Pads.",
+      "Specifications": {
+        "Gaming Mice": "M101 (SAJAYA-GX-M100: 59g, PAW3395 26,000 DPI, 8,000Hz, Tri-Mode 90h) | M201 (SAJAYA-GX-M200: 85g, 19,000 DPI, 8 Macro Buttons)",
+        "Gaming Headsets": "H301 (SAJAYA-GX-H300: 50mm Bio-Cellulose, 7.1 Spatial, 2.4GHz <15ms, 50h) | H401 (SAJAYA-GX-H500: Planar Magnetic, Simultaneous 2.4GHz+BT, 65h)",
+        "Gaming Surfaces": "P401 (SAJAYA-GX-P400: 450x400x4mm Cordura Micro-Weave) | P901 (SAJAYA-GX-P900: 900x400x4mm Extended Full-Desk Mat)",
+        "Switch Durability": "Optical Micro-Switches rated for 100 Million Clicks (M101)",
+        "Wireless Protocol": "Sub-1ms 2.4GHz Lossless Wireless + Bluetooth 5.3 + Paracord USB-C",
+        "Warranty": "2-Year Local Replacement Warranty in Jordan"
+      },
+      "Features": [
+        "PixArt PAW3395 26,000 DPI sensor with 8,000Hz hyper-polling (0.125ms response)",
+        "Dual-chamber planar magnetic headset drivers with AI ENC broadcast microphones",
+        "Spill-proof Cordura micro-weave tournament mousepads with 360° anti-fray stitching"
+      ],
+      "ComplianceStandards": "CE, FCC, RoHS",
+      "BaseFactoryCost": 35,
+      "Currency": "USD",
+      "WarrantyMonths": 24,
+      "Revision": "Rev 2026.1"
+    }
+  ],
+  "datasheets": [
+    {
+      "Id": 1,
+      "ProductId": 1,
+      "DocumentCode": "DS-SJ-B1Q-2026-001",
+      "Version": "Rev 2026.1",
+      "TemplateStyle": "Corporate Navy",
+      "CustomProjectName": "Ministry of Digital Economy Desktop Fleet Tender",
+      "CustomClientName": "Government Tenders Department (Jordan)",
+      "GeneratedBy": "Mohammed",
+      "GeneratedAt": "2026-10-28T14:20:00Z"
+    },
+    {
+      "Id": 2,
+      "ProductId": 25,
+      "DocumentCode": "DS-SJ-HP9336C-002",
+      "Version": "Rev 2026.2",
+      "TemplateStyle": "Corporate Navy",
+      "CustomProjectName": "Hospital Data Center 80kVA 3-Phase UPS Submittal",
+      "CustomClientName": "Royal Medical Services",
+      "GeneratedBy": "Mohammed",
+      "GeneratedAt": "2026-10-28T16:10:00Z"
+    }
+  ],
+  "tenders": [
+    {
+      "Id": 1,
+      "ReferenceNumber": "TND-GOV-2026-409",
+      "Title": "Supply of 450 Enterprise Desktop PCs (Q-Chipset), 450 IPS Monitors, 15 Interactive 75\" Screens & 40kVA Online 3-Phase UPS",
+      "ClientName": "Ministry of Education & Higher Research",
+      "Country": "Jordan",
+      "FileName": "RFP_409_IT_And_Power_Infrastructure.pdf",
+      "SubmissionDeadline": "2026-11-20T14:00:00Z",
+      "Status": "Analyzing",
+      "Currency": "USD",
+      "TotalEstimatedValue": 385000,
+      "Extractions": [
+        {
+          "Id": 101,
+          "Category": "Technical Spec (PC)",
+          "RequirementTitle": "Intel 14th Gen Core i7, Q-Series Chipset & Hardware TPM 2.0",
+          "ExtractedDetail": "All 450 desktop PCs must feature Intel 14th Gen Core i5/i7 processors on an enterprise Intel Q670/Q870 chipset motherboard, minimum 16GB DDR5 RAM, 512GB NVMe SSD, hardware TPM 2.0, and 3-year local on-site warranty.",
+          "PageReference": "Section 3.1 (Item 1 - Desktops), Page 18",
+          "AIConfidence": 99,
+          "ImportanceFlag": "Important",
+          "UserFeedbackNote": "Direct match for our SajayaTech B1Q (SAJAYA-B1Q) / S500 (B20T-I) desktop line.",
+          "VerifiedByUser": true
+        },
+        {
+          "Id": 102,
+          "Category": "Technical Spec (UPS)",
+          "RequirementTitle": "40kVA 3-Phase Online Double-Conversion UPS (3-Level IGBT)",
+          "ExtractedDetail": "UPS must be True Online Double-Conversion 3-Phase In / 3-Phase Out, Unity Output PF 1.0, online efficiency >= 96%, 0ms transfer time, with SNMP network card and external battery bank for 30-minute backup.",
+          "PageReference": "Section 5.4 (Power Systems), Page 42",
+          "AIConfidence": 98,
+          "ImportanceFlag": "Important",
+          "UserFeedbackNote": "Direct match for our SAJAYA HP9336C (HP9xxx 3-Phase 40kVA) UPS.",
+          "VerifiedByUser": true
+        },
+        {
+          "Id": 103,
+          "Category": "Technical Spec (Interactive Screen)",
+          "RequirementTitle": "75-Inch 4K Interactive Touch Board with Dual OS (Android 13 + OPS i7)",
+          "ExtractedDetail": "Interactive displays must be 75-inch 4K UHD with 7H anti-glare zero-gap bonded glass, 50-point IR touch, built-in 48MP AI camera, 8-mic array, and plug-in Intel Core i7 Windows 11 Pro OPS module.",
+          "PageReference": "Section 4.2 (Smart Classroom), Page 31",
+          "AIConfidence": 97,
+          "ImportanceFlag": "Important",
+          "UserFeedbackNote": "Matches Sajaya I750 (SAJAYA-I750) 100%.",
+          "VerifiedByUser": true
+        },
+        {
+          "Id": 104,
+          "Category": "Penalty / Commercial",
+          "RequirementTitle": "Bid Bond 5%, Performance Guarantee 10% & 3-Year Local SLA",
+          "ExtractedDetail": "Bidders must submit a 5% bank bid bond and 10% performance bond. Local Jordan factory/service center authorization letter is mandatory. Delay penalty is 0.1% per day up to 10%.",
+          "PageReference": "Section 1.9 (Commercial Terms), Page 9",
+          "AIConfidence": 96,
+          "ImportanceFlag": "Important",
+          "UserFeedbackNote": "Include Sajaya OEM Authorization Letter & 3-year SLA in technical envelope.",
+          "VerifiedByUser": true
+        },
+        {
+          "Id": 105,
+          "Category": "General Boilerplate",
+          "RequirementTitle": "Delivery Truck Gate Pass Hours & Packaging Cardboard Recycling",
+          "ExtractedDetail": "Delivery vehicles must enter through Gate 3 between 09:00 and 13:00 and stack empty cardboard boxes in the designated warehouse recycling corner.",
+          "PageReference": "Annex C, Page 88",
+          "AIConfidence": 91,
+          "ImportanceFlag": "NotNeeded",
+          "UserFeedbackNote": "Routine logistics boilerplate — does not impact BOM or pricing.",
+          "VerifiedByUser": true
+        }
+      ]
+    }
+  ],
+  "aiFeedbackRules": [
+    {
+      "Id": 1,
+      "PatternOrTopic": "Processor Generation (13th/14th Gen), Chipset (Q670/B760), DDR5 RAM, NVMe SSD & TPM 2.0",
+      "Category": "Technical Spec (PC)",
+      "LearnedAction": "FlagImportant",
+      "Reason": "Determines exact SajayaTech PC/Workstation/Laptop SKU and BOM cost.",
+      "TimesApplied": 28,
+      "CreatedByUserName": "Mohammed",
+      "CreatedAt": "2026-10-15T10:00:00Z"
+    },
+    {
+      "Id": 2,
+      "PatternOrTopic": "UPS kVA Rating, Phase Config (3Ph/1Ph), Battery Runtime Minutes & SNMP Card",
+      "Category": "Technical Spec (UPS)",
+      "LearnedAction": "FlagImportant",
+      "Reason": "Battery bank blocks (32-44 blocks) and kVA capacity drive 40%+ of UPS bid price.",
+      "TimesApplied": 19,
+      "CreatedByUserName": "Mohammed",
+      "CreatedAt": "2026-10-16T11:30:00Z"
+    },
+    {
+      "Id": 3,
+      "PatternOrTopic": "Interactive Screen OPS Windows Module, AI Camera & Monitor Ergonomic Stand / USB-C PD",
+      "Category": "Technical Spec (Display)",
+      "LearnedAction": "FlagImportant",
+      "Reason": "OPS PC module and USB-C docking change unit cost significantly.",
+      "TimesApplied": 15,
+      "CreatedByUserName": "Rania Haddad",
+      "CreatedAt": "2026-10-18T09:15:00Z"
+    },
+    {
+      "Id": 4,
+      "PatternOrTopic": "Gate Pass Hours, Visitor Parking & Generic Packaging/Stationery Boilerplate",
+      "Category": "General Boilerplate",
+      "LearnedAction": "FlagNotNeeded",
+      "Reason": "Non-technical administrative clauses that do not affect product compliance or pricing.",
+      "TimesApplied": 24,
+      "CreatedByUserName": "Mohammed",
+      "CreatedAt": "2026-10-19T16:40:00Z"
+    }
+  ],
+  "competitorPrices": [
+    {
+      "Id": 1,
+      "TenderReference": "TND-2025-118 (University Computer Labs - 300 Units)",
+      "TenderClient": "University of Jordan",
+      "ItemCategory": "Personal Computers (Desktops)",
+      "ItemDescription": "Core i5-14500 / i7-14700, Q-Chipset, 16GB DDR5, 512GB NVMe, TPM 2.0 (B1Q / S500 Equiv.)",
+      "NormalizedSpecs": "i5/i7 14th Gen, Q670/B760, 16GB DDR5, 512GB SSD, 3Yr Warranty",
+      "CompetitorName": "HP ProDesk / Dell OptiPlex Distributor",
+      "FactoryOrigin": "International Brand",
+      "QuotedUnitPrice": 645,
+      "OurQuotedUnitPrice": 575,
+      "Currency": "USD",
+      "WasWinningBid": false,
+      "BidDate": "2025-09-12"
+    },
+    {
+      "Id": 2,
+      "TenderReference": "TND-2026-042 (Ministry Administrative Fleet - 500 Units)",
+      "TenderClient": "Ministry of Finance",
+      "ItemCategory": "Personal Computers (Desktops)",
+      "ItemDescription": "Commercial Desktop Core i5 14th Gen, 16GB DDR5, 512GB SSD, Win 11 Pro",
+      "NormalizedSpecs": "i5-14500, 16GB DDR5, 512GB NVMe, TPM 2.0, Win11 Pro",
+      "CompetitorName": "Lenovo ThinkCentre Partner",
+      "FactoryOrigin": "China",
+      "QuotedUnitPrice": 610,
+      "OurQuotedUnitPrice": 590,
+      "Currency": "USD",
+      "WasWinningBid": false,
+      "BidDate": "2026-03-18"
+    },
+    {
+      "Id": 3,
+      "TenderReference": "TND-2025-884 (Smart Schools Initiative - 80 Boards)",
+      "TenderClient": "Ministry of Education",
+      "ItemCategory": "Interactive Touch Screens",
+      "ItemDescription": "75\" 4K Interactive Flat Panel c/w Android 13 + Core i7 OPS Windows Module & 48MP Camera",
+      "NormalizedSpecs": "75\" 4K Zero-Gap, 50-pt Touch, 48MP AI Cam, i7 OPS PC",
+      "CompetitorName": "Promethean / ViewSonic Distributor",
+      "FactoryOrigin": "China",
+      "QuotedUnitPrice": 1890,
+      "OurQuotedUnitPrice": 1720,
+      "Currency": "USD",
+      "WasWinningBid": false,
+      "BidDate": "2025-11-05"
+    },
+    {
+      "Id": 4,
+      "TenderReference": "TND-2026-109 (Hospital Data Center Power Backup)",
+      "TenderClient": "Ministry of Health",
+      "ItemCategory": "UPS & Power Systems (Sajaya Power)",
+      "ItemDescription": "40kVA 3-Phase Online Double-Conversion UPS (HP9336C Equiv.) + Battery Bank",
+      "NormalizedSpecs": "40kVA 3Ph/3Ph, PF 1.0, 96.5% Eff, 3-Level IGBT, SNMP",
+      "CompetitorName": "APC / Eaton Local Partner",
+      "FactoryOrigin": "Europe / Asia",
+      "QuotedUnitPrice": 4650,
+      "OurQuotedUnitPrice": 3950,
+      "Currency": "USD",
+      "WasWinningBid": false,
+      "BidDate": "2026-02-22"
+    },
+    {
+      "Id": 5,
+      "TenderReference": "TND-2026-215 (Banking Headquarters Display Upgrade)",
+      "TenderClient": "Commercial Bank HQ",
+      "ItemCategory": "Monitors (Commercial & Gaming)",
+      "ItemDescription": "27\" QHD 100Hz IPS Monitor with 65W USB-C PD & Height Adjustable Stand (B27S Equiv.)",
+      "NormalizedSpecs": "27\" 2560x1440 IPS, 100Hz, 65W USB-C, Ergonomic Stand",
+      "CompetitorName": "Dell UltraSharp / HP E-Series Reseller",
+      "FactoryOrigin": "China",
+      "QuotedUnitPrice": 265,
+      "OurQuotedUnitPrice": 225,
+      "Currency": "USD",
+      "WasWinningBid": false,
+      "BidDate": "2026-05-10"
+    },
+    {
+      "Id": 6,
+      "TenderReference": "TND-2025-712 (Engineering Faculty CAD Lab - 60 Units)",
+      "TenderClient": "German Jordanian University",
+      "ItemCategory": "Workstations",
+      "ItemDescription": "Tower Workstation Core i9-14900K / Xeon, 64GB DDR5, RTX 4070 / Ada, 2TB NVMe (W700 Equiv.)",
+      "NormalizedSpecs": "i9/Xeon, 64GB DDR5, RTX Ada/4070, 2TB SSD, 1200W PSU",
+      "CompetitorName": "Dell Precision / HP Z-Series Partner",
+      "FactoryOrigin": "International",
+      "QuotedUnitPrice": 2680,
+      "OurQuotedUnitPrice": 2390,
+      "Currency": "USD",
+      "WasWinningBid": false,
+      "BidDate": "2025-12-01"
+    }
+  ],
+  "marketFactors": [
+    {
+      "Id": 1,
+      "FactorCode": "INFLATION_ANNUAL",
+      "FactorName": "Annual Tech & Component Inflation Index",
+      "Category": "Inflation",
+      "PercentageRate": 3.5,
+      "Description": "Annual inflation adjustment applied to historical tender bids."
+    },
+    {
+      "Id": 2,
+      "FactorCode": "SHIPPING_FREIGHT_AQABA",
+      "FactorName": "Sea/Air Freight, Aqaba Clearance & Inland Transport",
+      "Category": "Shipping",
+      "PercentageRate": 5.5,
+      "Description": "Freight, insurance, and port handling to Amman warehouse."
+    },
+    {
+      "Id": 3,
+      "FactorCode": "CUSTOMS_AND_TAX",
+      "FactorName": "Customs Tariff, Stamp Duty (0.6%) & Local Levies",
+      "Category": "Tax_Customs",
+      "PercentageRate": 4.0,
+      "Description": "Applicable tender stamp fees, customs handling, and local levies."
+    },
+    {
+      "Id": 4,
+      "FactorCode": "NAND_DDR5_INDEX",
+      "FactorName": "Global DRAM (DDR5) & NAND Flash SSD Price Index",
+      "Category": "Material_Index",
+      "PercentageRate": 6.0,
+      "Description": "Market price fluctuation for DDR5 RAM modules, NVMe SSDs, and GPUs."
+    }
+  ],
+  "dbConfig": {
+    "server": "localhost\\SQLEXPRESS",
+    "database": "MatrixFactoryDB",
+    "authType": "Windows Authentication (Trusted Connection)",
+    "user": "sa",
+    "password": "",
+    "port": 1433,
+    "encrypt": false,
+    "trustServerCertificate": true
+  },
+  "aiConfig": {
+    "provider": "Placeholder AI Engine (Ready for Gemini / OpenAI API Key)",
+    "apiKey": "",
+    "model": "gemini-2.5-pro"
+  }
+}

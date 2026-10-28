@@ -1,0 +1,34 @@
+services:
+  matrix-sales-software:
+    build: .
+    container_name: matrix-sales-software
+    restart: unless-stopped
+    ports:
+      - "3850:3850"
+    environment:
+      - PORT=3850
+      - DB_SERVER=matrix-mssql
+      - DB_PORT=1433
+      - DB_NAME=MatrixFactoryDB
+      - DB_USER=sa
+      - DB_PASSWORD=${MSSQL_SA_PASSWORD:-MatrixSql!2026Strong}
+    volumes:
+      - ./database:/app/database
+    depends_on:
+      - matrix-mssql
+
+  matrix-mssql:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: matrix-mssql
+    restart: unless-stopped
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=${MSSQL_SA_PASSWORD:-MatrixSql!2026Strong}
+      - MSSQL_PID=Express
+    ports:
+      - "1433:1433"
+    volumes:
+      - mssql_data:/var/opt/mssql
+
+volumes:
+  mssql_data:
