@@ -911,14 +911,27 @@ table.data-table tbody tr:hover th {
 .ds-spec-table th {
   background-color: #f1f5f9;
   color: #1e293b;
-  width: 38%;
+  width: 28%;
   font-weight: 600;
   line-height: 1.4;
 }
 
 .ds-spec-table td {
-  width: 62%;
+  width: 72%;
   line-height: 1.5;
+  background-color: #ffffff;
+}
+
+.ds-spec-table thead th:first-child {
+  width: 28%;
+  background-color: #eef2f6;
+  font-weight: 700;
+}
+
+.ds-spec-table thead th:last-child {
+  width: 72%;
+  background-color: #eef2f6;
+  font-weight: 700;
 }
 
 /* Subtabs for Datasheet Controls */
@@ -971,25 +984,45 @@ table.data-table tbody tr:hover th {
 
 /* Interactive Spec Table on Datasheet Paper (Pure, Elegant Preview) */
 .ds-spec-table tbody tr {
-  cursor: pointer;
-  transition: background-color 0.15s ease;
+  cursor: text;
 }
 .ds-spec-table tbody tr:hover {
-  background-color: #f1f5f9;
+  background-color: transparent;
 }
 .ds-spec-table tbody tr:hover th {
-  color: #1e40af;
+  color: #1e293b;
 }
 
-/* Pulse animation when jumping to field from datasheet */
-@keyframes dsPulseHighlight {
-  0% { background-color: #dbeafe; outline: 2px solid #2563eb; }
-  100% { background-color: var(--bg-surface); outline: none; }
+/* Zero box highlight on focus or edit - pure native text editing */
+.datasheet-paper [contenteditable="true"],
+.ds-spec-table th,
+.ds-spec-table td,
+.ds-highlight-val,
+.ds-title-banner h2,
+.ds-title-banner div {
+  outline: none !important;
+  box-shadow: none !important;
+  -webkit-tap-highlight-color: transparent !important;
+  user-select: text;
 }
 
-.ds-highlight-pulse {
-  animation: dsPulseHighlight 1.8s ease-out;
+.datasheet-paper [contenteditable="true"]:focus,
+.datasheet-paper [contenteditable="true"]:focus-visible,
+.datasheet-paper [contenteditable="true"]:active,
+.ds-spec-table th:focus,
+.ds-spec-table td:focus,
+.ds-spec-table th:focus-visible,
+.ds-spec-table td:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
 }
+
+.ds-spec-table tbody th:focus {
+  background-color: #f1f5f9 !important;
+}
+
+.ds-spec-table tbody td:focus {
+  background-color: #ffffff !important;
 }
 
 .ds-footer {

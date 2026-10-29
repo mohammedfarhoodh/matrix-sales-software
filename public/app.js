@@ -570,9 +570,9 @@ function renderProductUniqueLayout(product) {
 
 function renderSpecTable(specs) {
   const rows = Object.entries(specs).map(([k, v]) => `
-    <tr data-spec-key="${escapeAttr(k)}" title="Click to view & edit in specifications panel">
-      <th>${escapeHtml(k)}</th>
-      <td class="mono">${escapeHtml(v)}</td>
+    <tr data-spec-key="${escapeAttr(k)}">
+      <th contenteditable="true" spellcheck="false" data-orig-key="${escapeAttr(k)}" data-col="key">${escapeHtml(k)}</th>
+      <td contenteditable="true" spellcheck="false" data-orig-key="${escapeAttr(k)}" data-col="val" class="mono">${escapeHtml(v)}</td>
     </tr>
   `).join('');
 
@@ -580,11 +580,11 @@ function renderSpecTable(specs) {
     <table class="ds-spec-table">
       <thead>
         <tr>
-          <th>Characteristic / Parameter</th>
-          <th>Guaranteed Factory Value</th>
+          <th style="width:28%;">Characteristic / Parameter</th>
+          <th style="width:72%;">Guaranteed Factory Value</th>
         </tr>
       </thead>
-      <tbody>${rows || '<tr><th>Standard Rating</th><td class="mono">Per Factory Technical Schedule</td></tr>'}</tbody>
+      <tbody>${rows || '<tr><th contenteditable="true" spellcheck="false" data-col="key">Standard Rating</th><td contenteditable="true" spellcheck="false" data-col="val" class="mono">Per Factory Technical Schedule</td></tr>'}</tbody>
     </table>
   `;
 }
@@ -868,37 +868,164 @@ async function revertProductEdits() {
   }
 }
 
-// Interactive row jump: clicking a row on the clean preview smoothly jumps to that spec in the editor
+// Direct seamless in-place text editing on the datasheet paper without box highlights
 function bindDatasheetInPlaceEvents() {
   const dsPaper = document.getElementById('printableDatasheet');
-  if (!dsPaper || dsPaper.dataset.eventsBound) return;
-  dsPaper.dataset.eventsBound = 'true';
+  if (!dsPaper || dsPaper.dataset.directEventsBound) return;
+  dsPaper.dataset.directEventsBound = 'true';
 
-  dsPaper.addEventListener('click', (e) => {
-    const row = e.target.closest('tr[data-spec-key]');
-    if (!row) return;
+  // Live input handler across all directly editable text elements
+  dsPaper.addEventListener('input', (e) => {
+    const target = e.target;
 
-    const specKey = row.dataset.specKey;
-    if (!specKey) return;
+    // 1. Table Value cell (td)
+    const td = target.closest('td[data-col="val"]');
+    if (td) {
+      const origKey = td.dataset.origKey;
+      const product = getSelectedProduct();
+      if (product && product.Specifications && origKey) {
+        product.Specifications[origKey] = td.innerText;
 
-    // Switch Left Panel to "Edit Fields & Specs" tab if not active
-    const btnFields = document.getElementById('btnDsTabFields');
-    if (btnFields && !btnFields.classList.contains('active')) {
-      btnFields.click();
+        // Sync to left panel input in background without shifting focus or adding boxes
+        const leftInput = document.querySelector(`.ds-spec-edit-row[data-orig-key="${CSS.escape(origKey)}"] .ds-input-val`);
+        if (leftInput && document.activeElement !== leftInput) {
+          leftInput.value = td.innerText;
+        }
+
+        // Sync highlight card if matching
+        const hl = document.querySelector(`.ds-highlight-val[data-spec-highlight="${CSS.escape(origKey)}"]`);
+        if (hl && hl !== td) {
+          hl.innerText = td.innerText;
+        }
+      }
+      return;
     }
 
-    // Scroll to & highlight the corresponding input row in the left panel
-    setTimeout(() => {
-      const panelRow = document.querySelector(`.ds-spec-edit-row[data-orig-key="${CSS.escape(specKey)}"]`);
-      if (panelRow) {
-        panelRow.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-        panelRow.classList.remove('ds-highlight-pulse');
-        void panelRow.offsetWidth; // trigger reflow
-        panelRow.classList.add('ds-highlight-pulse');
-        const valInput = panelRow.querySelector('.ds-input-val');
-        if (valInput) valInput.focus();
+    // 2. Table Key cell (th) - handled on blur to allow natural typing
+    if (target.closest('th[data-col="key"]')) {
+      return;
+    }
+
+    // 3. Highlight Cards
+    const hlCard = target.closest('.ds-highlight-val[data-spec-highlight]');
+    if (hlCard) {
+      const specKey = hlCard.dataset.specHighlight;
+      const product = getSelectedProduct();
+      if (product && product.Specifications && specKey) {
+        product.Specifications[specKey] = hlCard.innerText;
+        const matchingTd = document.querySelector(`.ds-spec-table td[data-orig-key="${CSS.escape(specKey)}"]`);
+        if (matchingTd && matchingTd !== hlCard) matchingTd.innerText = hlCard.innerText;
+        const leftInput = document.querySelector(`.ds-spec-edit-row[data-orig-key="${CSS.escape(specKey)}"] .ds-input-val`);
+        if (leftInput && document.activeElement !== leftInput) leftInput.value = hlCard.innerText;
       }
-    }, 50);
+      return;
+    }
+
+    // 4. Product Commercial Name
+    if (target.id === 'previewProductName') {
+      const product = getSelectedProduct();
+      if (product) {
+        product.Name = target.innerText;
+        const nameInput = document.getElementById('dsEditName');
+        if (nameInput && document.activeElement !== nameInput) nameInput.value = product.Name;
+        const opt = document.querySelector(`#dsProductSelect option[value="${product.Id}"]`);
+        if (opt) opt.textContent = product.Name;
+      }
+      return;
+    }
+
+    // 5. Product Technical Summary
+    if (target.id === 'previewSummary') {
+      const product = getSelectedProduct();
+      if (product) {
+        product.Summary = target.innerText;
+        const sumInput = document.getElementById('dsEditSummary');
+        if (sumInput && document.activeElement !== sumInput) sumInput.value = product.Summary;
+      }
+      return;
+    }
+
+    // 6. Document Tracking Code
+    if (target.id === 'previewDocCode') {
+      const el = document.getElementById('dsDocCode');
+      if (el) el.value = target.innerText;
+      return;
+    }
+
+    // 7. Model SKU Code
+    if (target.id === 'previewSKU') {
+      const product = getSelectedProduct();
+      if (product) {
+        product.SKU = target.innerText;
+        const el = document.getElementById('dsEditSKU');
+        if (el) el.value = product.SKU;
+      }
+      return;
+    }
+
+    // 8. Revision Version
+    if (target.id === 'previewRev') {
+      const product = getSelectedProduct();
+      if (product) {
+        product.Revision = target.innerText;
+        const el = document.getElementById('dsEditRevision');
+        if (el) el.value = product.Revision;
+      }
+      return;
+    }
+
+    // 9. Submittal Authority
+    if (target.id === 'previewAuthority') {
+      const el = document.getElementById('dsCustomClient');
+      if (el) el.value = target.innerText;
+      return;
+    }
+
+    // 10. Submittal Issuer
+    if (target.id === 'previewIssuedBy') {
+      const el = document.getElementById('dsIssuedBy');
+      if (el) el.value = target.innerText;
+      return;
+    }
+
+    // 11. Applicable Standards
+    if (target.id === 'previewCompliance') {
+      const product = getSelectedProduct();
+      if (product) {
+        product.ComplianceStandards = target.innerText;
+        const el = document.getElementById('dsEditCompliance');
+        if (el) el.value = product.ComplianceStandards;
+      }
+      return;
+    }
+  });
+
+  // Parameter Name (th) update when user finishes typing and leaves the cell
+  dsPaper.addEventListener('focusout', (e) => {
+    const th = e.target.closest('th[data-col="key"]');
+    if (!th) return;
+
+    const oldKey = th.dataset.origKey;
+    const newKey = th.innerText.trim();
+    if (!newKey || oldKey === newKey) return;
+
+    const product = getSelectedProduct();
+    if (product && product.Specifications) {
+      const val = product.Specifications[oldKey];
+      delete product.Specifications[oldKey];
+      product.Specifications[newKey] = val;
+
+      th.dataset.origKey = newKey;
+      const tr = th.closest('tr');
+      if (tr) {
+        tr.dataset.specKey = newKey;
+        const td = tr.querySelector('td[data-col="val"]');
+        if (td) td.dataset.origKey = newKey;
+      }
+
+      // Update left editor in background
+      renderPreExistingFieldsEditor();
+    }
   });
 }
 
