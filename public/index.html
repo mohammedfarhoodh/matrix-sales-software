@@ -42,6 +42,14 @@
           </button>
         </li>
         <li>
+          <li>
+          <button class="nav-btn" data-tab="tab-tender-tracker" type="button">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/><path d="m9 14 2 2 4-4"/></svg>
+            <span>Tender Tracker</span>
+            <span class="nav-badge" id="nav-count-tenders">5</span>
+          </button>
+        </li>
+        <li>
           <button class="nav-btn" data-tab="tab-tenders" type="button">
             <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
             <span>Tender Spec Analyzer</span>
@@ -115,72 +123,76 @@
             <!-- Left Control Panel -->
             <div class="card datasheet-controls" style="display:flex; flex-direction:column; gap:0.9rem;">
               <div class="card-title">
-                <span>Submittal Parameters</span>
-                <span class="badge badge-blue">A4 Document</span>
+                <span>Datasheet Settings</span>
+                <span class="badge badge-blue">A4 Submittal</span>
               </div>
 
               <div>
-                <label class="field-label" for="dsCategoryFilter">Filter by SajayaTech Product Line</label>
+                <label class="field-label" for="dsCategoryFilter">Product Type</label>
                 <select id="dsCategoryFilter">
-                  <option value="ALL">All SajayaTech Product Lines (33 Models)</option>
-                  <option value="Personal Computers (Desktops)">Personal Computers — TechDesk Towers (B1Q, S300, S500, S700)</option>
-                  <option value="Small Form Factor (SFF) Desktops">Small Form Factor (SFF) — TechDesk SFF (C20S, B20S, B70S)</option>
-                  <option value="Mini PCs">Mini PCs — TechDesk Mini (C20M, B20M, B70M / W20M)</option>
-                  <option value="Workstations">Workstations — TechDesk (W20T, W50T/W70T, W90T Threadripper)</option>
-                  <option value="Laptops (TechBook)">Laptops — Sajaya TechBook (L300, L500, W70H/L700)</option>
-                  <option value="All-in-One PCs">All-in-One PCs — TechDesk (A240, A270/Horizon, A300 4K)</option>
-                  <option value="Monitors (Commercial & Gaming)">Monitors — Sajaya TechView (B24S, B27S, B32H, 240Hz Gaming)</option>
-                  <option value="Interactive Touch Screens">Interactive Screens — Sajaya Smart (I650 65", I750 75", I860 86")</option>
-                  <option value="UPS & Power Systems (Sajaya Power)">Online UPS Systems — Sajaya Power (HP9336C 3Ph, HP9511CRT, HP9511D)</option>
-                  <option value="CCTV & NVR Surveillance">CCTV & NVR — Sajaya Vision (B400, D500, D80 4K, NVR08P/32E)</option>
-                  <option value="Charge Carts & IT Accessories">Charge Carts & Docks — TechGears (36-Bay USB-C Cart, Dock 12P, Arm D2)</option>
-                  <option value="Gaming PCs & Peripherals">Gaming PCs & Peripherals — TechSpace & TechGears (G500-G900, B850, Mice/Headsets)</option>
+                  <option value="ALL">All Products (33 Models)</option>
+                  <option value="Personal Computers">Personal Computers</option>
+                  <option value="SFF Desktops">SFF Desktops</option>
+                  <option value="Mini PCs">Mini PCs</option>
+                  <option value="Workstations">Workstations</option>
+                  <option value="Laptops">Laptops</option>
+                  <option value="All-in-One PCs">All-in-One PCs</option>
+                  <option value="Monitors">Monitors</option>
+                  <option value="Interactive Touch Screens">Interactive Touch Screens</option>
+                  <option value="UPS & Power Systems">UPS & Power Systems</option>
+                  <option value="CCTV & Surveillance">CCTV & Surveillance</option>
+                  <option value="Charge Carts & Accessories">Charge Carts & Accessories</option>
+                  <option value="Gaming PCs & Peripherals">Gaming PCs & Peripherals</option>
                 </select>
               </div>
 
               <div>
-                <label class="field-label" for="dsProductSelect">Select SajayaTech Model / SKU</label>
+                <label class="field-label" for="dsProductSelect">Product Model</label>
                 <select id="dsProductSelect"></select>
               </div>
 
-              <div class="form-grid">
-                <div>
-                  <label class="field-label" for="dsCustomClient">Client / Issuing Authority</label>
-                  <input type="text" id="dsCustomClient" placeholder="e.g., Ministry of Digital Economy" value="Ministry of Education & Higher Research" />
-                </div>
-                <div>
-                  <label class="field-label" for="dsCustomProject">Project / Tender Reference</label>
-                  <input type="text" id="dsCustomProject" placeholder="e.g., TND-GOV-2026-409" value="TND-GOV-2026-409 (IT & Power Pkg)" />
+              <!-- Product Image Section (Upload File or Paste URL) -->
+              <div style="border: 1px dashed var(--border-color); border-radius: var(--radius-sm); padding: 0.75rem; background: var(--bg-subtle);">
+                <label class="field-label" style="display:flex; justify-content:space-between; align-items:center;">
+                  <strong>Product Image</strong>
+                  <span id="imageStatusBadge" class="badge badge-blue" style="font-size:0.65rem;">Top Placement</span>
+                </label>
+                <div style="display:flex; flex-direction:column; gap:0.45rem; margin-top:0.35rem;">
+                  <input type="file" id="dsImageFileInput" accept="image/*" style="display:none;" />
+                  <div style="display:flex; gap:0.4rem;">
+                    <button class="btn btn-sm" type="button" id="btnUploadImage" style="flex:1;">
+                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                      Browse Image
+                    </button>
+                    <button class="btn btn-sm btn-danger" type="button" id="btnRemoveImage" style="display:none;">Remove</button>
+                  </div>
+                  <div style="display:flex; gap:0.4rem;">
+                    <input type="text" id="dsImageUrlInput" placeholder="Or paste image URL (https://...)" style="font-size:0.75rem;" />
+                    <button class="btn btn-sm" type="button" id="btnApplyImageUrl">Apply</button>
+                  </div>
+                  <div id="imageStatusText" style="font-size:0.7rem; color:var(--text-secondary);">No image selected</div>
                 </div>
               </div>
 
-              <div class="form-grid">
-                <div>
-                  <label class="field-label" for="dsDocCode">Document Control No.</label>
-                  <input type="text" id="dsDocCode" class="mono" value="DS-MTX-2026-001" />
-                </div>
-                <div>
-                  <label class="field-label" for="dsAccentColor">Document Header Theme</label>
-                  <select id="dsAccentColor">
-                    <option value="#1e3a8a">Corporate Navy (#1e3a8a)</option>
-                    <option value="#0f172a">Industrial Charcoal (#0f172a)</option>
-                    <option value="#0f766e">Engineering Teal (#0f766e)</option>
-                    <option value="#1e293b">Standard Slate (#1e293b)</option>
-                  </select>
-                </div>
+              <div>
+                <label class="field-label" for="dsDocCode">
+                  Document Control No.
+                  <span style="font-weight:400; color:var(--text-muted); font-size:0.7rem;">(Submittal tracking code)</span>
+                </label>
+                <input type="text" id="dsDocCode" class="mono" value="DS-MTX-2026-001" placeholder="e.g. DS-MTX-2026-001" />
               </div>
 
               <div style="border-top: 1px solid var(--border-subtle); padding-top: 0.75rem;">
                 <label class="field-label">Append / Override Technical Specification Row</label>
                 <div style="display:grid; grid-template-columns: 1fr 1fr auto; gap:0.4rem;">
-                  <input type="text" id="newSpecKey" placeholder="Parameter (e.g. Altitude)" />
-                  <input type="text" id="newSpecVal" placeholder="Value (e.g. 1000m ASL)" />
+                  <input type="text" id="newSpecKey" placeholder="Parameter (e.g. Operating Temp)" />
+                  <input type="text" id="newSpecVal" placeholder="Value (e.g. 0°C to 50°C)" />
                   <button class="btn btn-primary btn-sm" type="button" id="btnAddSpecRow">Add Row</button>
                 </div>
               </div>
 
               <div style="border-top: 1px solid var(--border-subtle); padding-top: 0.75rem;">
-                <div class="field-label">Submittal Generation Log</div>
+                <div class="field-label">Submittal History</div>
                 <div id="datasheetHistoryList" style="font-size:0.76rem; color:var(--text-secondary); display:flex; flex-direction:column; gap:0.35rem;"></div>
               </div>
             </div>
@@ -192,58 +204,50 @@
                   <div class="ds-brand-mark" id="dsBrandMark">M</div>
                   <div>
                     <div style="font-size:1.1rem; font-weight:800; letter-spacing:0.01em; color:#0f172a;" id="dsFactoryHeaderName">MATRIX MAIN INDUSTRIAL PLANT</div>
-                    <div style="font-size:0.75rem; color:#475569;" id="dsFactoryHeaderSub">ISO 9001 • IEC Type-Tested Manufacturing Facility • Riyadh, KSA</div>
+                    <div style="font-size:0.75rem; color:#475569;" id="dsFactoryHeaderSub">ISO 9001 • IEC Type-Tested Manufacturing Facility • Amman, Jordan</div>
                   </div>
                 </div>
                 <div class="ds-doc-meta">
                   <div style="font-weight:700; color:#1e3a8a; font-size:0.82rem; letter-spacing:0.04em;">TECHNICAL DATA SHEET</div>
                   <div><strong>DOC NO:</strong> <span id="previewDocCode">DS-MTX-2026-001</span></div>
-                  <div><strong>MODEL SKU:</strong> <span id="previewSKU">MTX-SWG-4000A</span></div>
-                  <div><strong>REV:</strong> <span id="previewRev">Rev 3.2</span> | <strong>DATE:</strong> <span id="previewDate">2026-10-29</span></div>
+                  <div><strong>MODEL SKU:</strong> <span id="previewSKU">SAJAYA-B1Q</span></div>
+                  <div><strong>REV:</strong> <span id="previewRev">Rev 2026.1</span> | <strong>DATE:</strong> <span id="previewDate">2026-10-29</span></div>
                 </div>
               </div>
 
+              <!-- Top Product Image Placement (Req #8) -->
+              <div class="ds-top-image-container" id="dsTopImageContainer">
+                <div class="ds-top-image-placeholder" id="dsImagePlaceholder">
+                  <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                  <div style="font-size:0.76rem; font-weight:600; color:#64748b; margin-top:0.2rem;">Product Image (Top Placement)</div>
+                  <div style="font-size:0.68rem; color:#94a3b8;">Click 'Browse Image' on the left to add a hardware photo</div>
+                </div>
+                <img id="dsTopImage" alt="Product Image" style="display:none;" />
+              </div>
+
+              <!-- Product Title Banner -->
               <div class="ds-title-banner" id="dsTitleBanner">
-                <div style="font-size:0.7rem; font-weight:700; text-transform:uppercase; color:#1e3a8a; letter-spacing:0.05em;" id="previewCategory">LV Switchgear & MCC</div>
-                <h2 id="previewProductName">Matrix PowerCore 4000A Low Voltage Main Distribution Switchgear</h2>
-                <div style="font-size:0.8rem; color:#334155; margin-top:0.25rem;" id="previewSummary"></div>
+                <div style="font-size:0.7rem; font-weight:700; text-transform:uppercase; color:#1e3a8a; letter-spacing:0.05em;" id="previewCategory">Personal Computers</div>
+                <h2 id="previewProductName" style="margin:0.2rem 0; font-size:1.15rem; color:#0f172a;">B1Q Commercial Desktop</h2>
+                <div style="font-size:0.78rem; color:#334155; margin-top:0.25rem;" id="previewSummary"></div>
               </div>
 
-              <div style="display:grid; grid-template-columns: 1fr 1fr; gap:0.5rem 1rem; background:#f8fafc; border:1px solid #cbd5e1; padding:0.65rem 0.85rem; margin-bottom:1rem; font-size:0.76rem;">
-                <div><strong>CLIENT / AUTHORITY:</strong> <span id="previewClientName">National Water & Infrastructure Authority</span></div>
-                <div><strong>TENDER / PROJECT REF:</strong> <span id="previewProjectName" class="mono">TND-SEC-2026-8841</span></div>
-                <div><strong>MANUFACTURING PLANT:</strong> <span id="previewFactoryOrigin">Matrix Main Industrial Plant (Saudi Arabia)</span></div>
-                <div><strong>WARRANTY PERIOD:</strong> <span id="previewWarranty">36 Months Official Factory Warranty</span></div>
+              <!-- Manufacturing & Warranty Info Strip -->
+              <div class="ds-meta-strip" style="display:grid; grid-template-columns: 1fr 1fr; gap:0.5rem 1rem; background:#f8fafc; border:1px solid #cbd5e1; padding:0.55rem 0.85rem; margin-bottom:1rem; font-size:0.75rem;">
+                <div><strong>MANUFACTURING PLANT:</strong> <span id="previewFactoryOrigin">Matrix Main Assembly & Testing Plant</span></div>
+                <div><strong>WARRANTY PERIOD:</strong> <span id="previewWarranty">36 Months Factory Warranty</span></div>
               </div>
 
-              <div style="margin-bottom:1rem;">
-                <h3 style="font-size:0.8rem; text-transform:uppercase; letter-spacing:0.05em; color:#0f172a; border-bottom:1px solid #94a3b8; padding-bottom:0.25rem; margin-bottom:0.5rem;">
-                  1. Design & Engineering Features
-                </h3>
-                <ul id="previewFeaturesList" style="padding-left:1.15rem; font-size:0.79rem; color:#1e293b; display:grid; grid-template-columns:1fr 1fr; gap:0.3rem 1.25rem;"></ul>
-              </div>
+              <!-- Unique Dynamic Category-Tailored Layout Area (Req #1) -->
+              <div id="previewUniqueLayout"></div>
 
-              <div>
-                <h3 style="font-size:0.8rem; text-transform:uppercase; letter-spacing:0.05em; color:#0f172a; border-bottom:1px solid #94a3b8; padding-bottom:0.25rem;">
-                  2. Technical Schedule & Guaranteed Ratings
-                </h3>
-                <table class="ds-spec-table">
-                  <thead>
-                    <tr>
-                      <th>Characteristic / Parameter</th>
-                      <th>Guaranteed Factory Value</th>
-                    </tr>
-                  </thead>
-                  <tbody id="previewSpecsBody"></tbody>
-                </table>
-              </div>
-
-              <div style="margin-top:1rem; padding:0.55rem 0.85rem; background:#f1f5f9; border:1px solid #cbd5e1; font-size:0.76rem; color:#1e293b;">
-                <strong>APPLICABLE STANDARDS & CERTIFICATIONS:</strong> <span id="previewCompliance">IEC 61439-2, IEC 61641, SASO, ISO 9001</span>
+              <!-- Standards & Certifications -->
+              <div style="margin-top:0.85rem; padding:0.55rem 0.85rem; background:#f1f5f9; border:1px solid #cbd5e1; font-size:0.75rem; color:#1e293b;">
+                <strong>APPLICABLE STANDARDS & COMPLIANCE:</strong> <span id="previewCompliance">ISO 9001, CE, RoHS, JSMO</span>
               </div>
 
               <div class="ds-footer">
-                <div>Generated by Matrix Sales Software • Official Factory Technical Submittal</div>
+                <div>Generated by Matrix Sales Software • Official Technical Submittal</div>
                 <div>Form QF-ENG-042 • Page 1 of 1</div>
               </div>
             </div>
@@ -327,6 +331,99 @@
         </section>
 
         <!-- =============================================================== -->
+        <!-- =============================================================== -->
+        <!-- MODULE: TENDER TRACKER & PIPELINE                               -->
+        <!-- =============================================================== -->
+        <section id="tab-tender-tracker" class="tab-panel">
+          <div class="section-header">
+            <div>
+              <h1>Tender Pipeline & Bidding Tracker</h1>
+              <p>Track active government and enterprise tenders, submission deadlines, bid bonds, stages, and won/lost contract records.</p>
+            </div>
+            <div class="action-row">
+              <button class="btn btn-primary" type="button" id="btnOpenNewTenderModal">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                Track New Tender
+              </button>
+              <button class="btn" type="button" id="btnExportTendersCSV">Export CSV</button>
+            </div>
+          </div>
+
+          <!-- KPI Analytics Bar -->
+          <div class="kpi-grid">
+            <div class="kpi-card">
+              <div class="kpi-label">Tracked Tenders</div>
+              <div class="kpi-value" id="kpiTotalTenders">0</div>
+              <div class="kpi-sub">Total bidding packages</div>
+            </div>
+            <div class="kpi-card">
+              <div class="kpi-label">Active Pipeline Value</div>
+              <div class="kpi-value" id="kpiActivePipelineVal">$0</div>
+              <div class="kpi-sub">In drafting, pricing & analysis</div>
+            </div>
+            <div class="kpi-card">
+              <div class="kpi-label">Submitted / Under Evaluation</div>
+              <div class="kpi-value" id="kpiSubmittedTenders">0</div>
+              <div class="kpi-sub">Awaiting client decision</div>
+            </div>
+            <div class="kpi-card">
+              <div class="kpi-label">Contracts Won</div>
+              <div class="kpi-value" id="kpiWonContractsVal" style="color:#15803d;">$0</div>
+              <div class="kpi-sub" id="kpiWinRateText">Win Rate: 0%</div>
+            </div>
+          </div>
+
+          <!-- Filter & Controls Toolbar -->
+          <div class="card" style="margin-top: 1rem; margin-bottom: 1rem;">
+            <div style="display:grid; grid-template-columns: 2fr 1fr 1fr; gap:0.75rem; align-items:center;">
+              <div>
+                <label class="field-label" for="tenderSearchInput">Search Tenders</label>
+                <input type="search" id="tenderSearchInput" placeholder="Filter by reference, project title, issuing client, or lead..." />
+              </div>
+              <div>
+                <label class="field-label" for="tenderStatusFilter">Filter by Stage</label>
+                <select id="tenderStatusFilter">
+                  <option value="ALL">All Stages (Pipeline Overview)</option>
+                  <option value="ACTIVE">Active (Drafting / Pricing / Analyzing)</option>
+                  <option value="Drafting">Drafting Spec / BOQ</option>
+                  <option value="Analyzing">Analyzing Specs</option>
+                  <option value="Under Pricing">Under Pricing & BOM</option>
+                  <option value="Submitted">Submitted (Under Evaluation)</option>
+                  <option value="Won">Awarded / Won</option>
+                  <option value="Lost">Lost / Cancelled</option>
+                </select>
+              </div>
+              <div>
+                <label class="field-label" for="tenderClientFilter">Client Filter</label>
+                <select id="tenderClientFilter">
+                  <option value="ALL">All Clients / Authorities</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tenders Table -->
+          <div class="table-wrapper">
+            <caption id="tendersTableCaption">Active Tender Pipeline & Submission Deadlines</caption>
+            <table class="data-table" aria-labelledby="tendersTableCaption">
+              <thead>
+                <tr>
+                  <th scope="col" style="width: 30%;">Tender Reference & Scope</th>
+                  <th scope="col" style="width: 18%;">Issuing Client</th>
+                  <th scope="col" style="width: 14%;">Est. Value</th>
+                  <th scope="col" style="width: 14%;">Submission Deadline</th>
+                  <th scope="col" style="width: 12%;">Stage / Status</th>
+                  <th scope="col" style="width: 12%;">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="tenderTrackerTableBody">
+                <!-- Dynamically populated -->
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- =============================================================== -->
         <!-- MODULE 3: AI TENDER DOCUMENT ANALYZER & LEARNING LOOP           -->
         <!-- =============================================================== -->
         <section id="tab-tenders" class="tab-panel">
@@ -377,6 +474,20 @@
                     <button class="btn btn-primary" type="submit">Run Specification Analysis</button>
                   </div>
                 </form>
+              </div>
+
+              <!-- Competitor Brand Equivalence Cross-Reference Card -->
+              <div class="card" id="competitorEquivalentsCard" style="display:none;">
+                <div class="card-title">
+                  <span>Competitor Brand Equivalent Models Cross-Reference</span>
+                  <div class="action-row">
+                    <button class="btn btn-sm" type="button" id="btnExportEquivalentsCSV">Export Equivalents CSV</button>
+                  </div>
+                </div>
+                <div style="font-size:0.75rem; color:var(--text-secondary); margin-bottom:0.75rem;">
+                  Cross-referenced tender specifications with requested competitor product lines and matching Matrix / SajayaTech models.
+                </div>
+                <div id="competitorEquivalentsContainer" style="display:flex; flex-direction:column; gap:0.85rem;"></div>
               </div>
 
               <!-- Extracted Tender Items List -->
@@ -644,6 +755,75 @@
   <!-- ===================================================================== -->
 
   <!-- 1. Phone Contacts (.vcf / .csv) Import & Staging Modal -->
+  <dialog id="dialogNewTender" class="app-dialog" closedby="any" aria-labelledby="dialogNewTenderTitle">
+    <div class="dialog-header">
+      <h3 id="dialogNewTenderTitle" style="font-size: 1.05rem; font-weight: 700;">Track New Tender Opportunity</h3>
+      <button class="btn btn-sm" type="button" onclick="document.getElementById('dialogNewTender').close()">✕</button>
+    </div>
+    <form id="formNewTender" method="dialog" style="display:flex; flex-direction:column; gap:0.75rem;">
+      <input type="hidden" id="editTenderId" value="" />
+      <div class="form-grid">
+        <div>
+          <label class="field-label" for="newTenderRef">Tender Reference No. *</label>
+          <input type="text" id="newTenderRef" class="mono" required placeholder="e.g. TND-GOV-2026-409" />
+        </div>
+        <div>
+          <label class="field-label" for="newTenderClient">Issuing Client / Authority *</label>
+          <input type="text" id="newTenderClient" required placeholder="e.g. Ministry of Education" />
+        </div>
+      </div>
+      <div>
+        <label class="field-label" for="newTenderTitle">Project Title / Scope of Supply *</label>
+        <input type="text" id="newTenderTitle" required placeholder="e.g. Supply of 500 Desktop PCs & 40kVA Online UPS" />
+      </div>
+      <div class="form-grid">
+        <div>
+          <label class="field-label" for="newTenderValue">Estimated Total Value (USD) *</label>
+          <input type="number" id="newTenderValue" min="0" step="1000" placeholder="e.g. 150000" />
+        </div>
+        <div>
+          <label class="field-label" for="newTenderDeadline">Submission Deadline *</label>
+          <input type="date" id="newTenderDeadline" required />
+        </div>
+      </div>
+      <div class="form-grid">
+        <div>
+          <label class="field-label" for="newTenderBidBond">Bid Bond / Guarantee Terms</label>
+          <input type="text" id="newTenderBidBond" placeholder="e.g. 5% Bank Guarantee ($7,500)" />
+        </div>
+        <div>
+          <label class="field-label" for="newTenderStage">Initial Stage / Status</label>
+          <select id="newTenderStage">
+            <option value="Drafting">Drafting Spec / BOQ</option>
+            <option value="Analyzing">Analyzing Specs</option>
+            <option value="Under Pricing">Under Pricing & BOM</option>
+            <option value="Submitted">Submitted (Under Evaluation)</option>
+            <option value="Won">Awarded / Won</option>
+            <option value="Lost">Lost / Cancelled</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-grid">
+        <div>
+          <label class="field-label" for="newTenderLead">Assigned Sales Engineer / Lead</label>
+          <input type="text" id="newTenderLead" placeholder="e.g. Eng. Zaid Al-Khasawneh" />
+        </div>
+        <div>
+          <label class="field-label" for="newTenderCountry">Country</label>
+          <input type="text" id="newTenderCountry" value="Jordan" />
+        </div>
+      </div>
+      <div>
+        <label class="field-label" for="newTenderNotes">Tender Notes & Key Specs</label>
+        <textarea id="newTenderNotes" rows="2" placeholder="Key RFP requirements, mandatory certifications, delivery terms..."></textarea>
+      </div>
+      <div style="display:flex; justify-content:flex-end; gap:0.5rem; margin-top:0.5rem;">
+        <button class="btn" type="button" onclick="document.getElementById('dialogNewTender').close()">Cancel</button>
+        <button class="btn btn-primary" type="submit" id="btnSubmitNewTender">Save Tender</button>
+      </div>
+    </form>
+  </dialog>
+
   <dialog id="dialogPhoneImport" class="app-dialog" closedby="any" aria-labelledby="dialogPhoneImportTitle">
     <div class="dialog-header">
       <h2 id="dialogPhoneImportTitle" style="font-size:0.98rem;">Import Mobile Contacts (.vcf vCard / .csv)</h2>

@@ -1,0 +1,322 @@
+{
+  "Personal Computers": {
+    "ourModel": {
+      "sku": "SAJAYA-B1Q",
+      "name": "B1Q Commercial Desktop",
+      "specs": "Intel Core i7-14700 / i5-14500, Intel Q670 Enterprise Chipset, 16GB DDR5, 512GB NVMe Gen4, TPM 2.0, 3-Yr Jordan Warranty",
+      "baseCost": 420
+    },
+    "brands": {
+      "hp": {
+        "brand": "HP",
+        "modelName": "HP EliteDesk 800 G9 Tower / ProDesk 600 G9",
+        "matchedSpecs": "Intel Core i7-14700, Intel Q670 Chipset, 16GB DDR5, 512GB NVMe, TPM 2.0, 260W Active PFC",
+        "matchRating": "100% Full Equivalent",
+        "marketPriceEst": "$650 - $720 USD",
+        "competitiveEdge": "Matrix B1Q provides identical Intel Q670 enterprise chipset & TPM 2.0 with local Amman 24h burn-in testing and ~18% lower tender price."
+      },
+      "dell": {
+        "brand": "Dell",
+        "modelName": "Dell OptiPlex 7020 Tower / OptiPlex Plus 7010",
+        "matchedSpecs": "Intel Core i7-14700, Intel Q670 Chipset, 16GB DDR5, 512GB NVMe, TPM 2.0, Tool-less Chassis",
+        "matchRating": "100% Full Equivalent",
+        "marketPriceEst": "$640 - $710 USD",
+        "competitiveEdge": "Matrix B1Q features identical Q670 management with local spare parts inventory in Amman and faster delivery lead time."
+      },
+      "lenovo": {
+        "brand": "Lenovo",
+        "modelName": "Lenovo ThinkCentre M90t Gen 4 / M70t Gen 4",
+        "matchedSpecs": "Intel Core i7-14700, Intel Q670 Chipset, 16GB DDR5, 512GB NVMe, TPM 2.0, ThinkShield",
+        "matchRating": "100% Full Equivalent",
+        "marketPriceEst": "$620 - $690 USD",
+        "competitiveEdge": "Matrix B1Q includes customized ministry BIOS boot logo lock and local Jordan warranty without overseas RMA delays."
+      },
+      "acer": {
+        "brand": "Acer",
+        "modelName": "Acer Veriton M6690G / X6690G Desktop",
+        "matchedSpecs": "Intel Core i7-14700, Intel Q670 Chipset, 16GB DDR5, 512GB SSD, TPM 2.0",
+        "matchRating": "100% Full Equivalent",
+        "marketPriceEst": "$590 - $640 USD",
+        "competitiveEdge": "Matrix B1Q provides higher wattage 80 PLUS power supply and certified local Jordanian assembly."
+      },
+      "asus": {
+        "brand": "ASUS",
+        "modelName": "ASUS ExpertCenter D900 Tower (D900TDR)",
+        "matchedSpecs": "Intel Core i7-14700, Intel Q670 Chipset, 16GB DDR5, 512GB SSD, TPM 2.0, MIL-STD 810H",
+        "matchRating": "100% Full Equivalent",
+        "marketPriceEst": "$630 - $680 USD",
+        "competitiveEdge": "Matrix B1Q matches military durability with local pre-sales submittal compliance support."
+      }
+    }
+  },
+  "Workstations": {
+    "ourModel": {
+      "sku": "SAJAYA-W700",
+      "name": "TechDesk W70T-I Workstation",
+      "specs": "Intel Core i9-14900K / Xeon W-2400, NVIDIA RTX 4000 Ada / RTX A2000, 32GB-64GB DDR5 ECC, 1TB Gen4 NVMe, 850W Gold PSU",
+      "baseCost": 1250
+    },
+    "brands": {
+      "hp": {
+        "brand": "HP",
+        "modelName": "HP Z2 G9 Workstation / Z4 G5 Tower",
+        "matchedSpecs": "Intel Core i9-14900K / Xeon W, NVIDIA RTX 4000, 32GB DDR5 ECC, 1TB NVMe, Z-Cooling",
+        "matchRating": "100% Full Equivalent",
+        "marketPriceEst": "$1,650 - $2,250 USD",
+        "competitiveEdge": "TechDesk W70T-I offers liquid/multi-fan cooling rated for 45°C ambient with ~22% lower hardware acquisition cost."
+      },
+      "dell": {
+        "brand": "Dell",
+        "modelName": "Dell Precision 3660 / Precision 5860 Tower",
+        "matchedSpecs": "Intel Core i9-14900 / Xeon W-2400, NVIDIA RTX 4000 Ada, 32GB DDR5, 1TB NVMe",
+        "matchRating": "100% Full Equivalent",
+        "marketPriceEst": "$1,680 - $2,300 USD",
+        "competitiveEdge": "Matrix Workstations allow modular component upgrades and off-the-shelf standard PCIe replacements."
+      },
+      "lenovo": {
+        "brand": "Lenovo",
+        "modelName": "Lenovo ThinkStation P3 Tower / P5 Tower",
+        "matchedSpecs": "Intel Core i9-14900 / Xeon W, NVIDIA RTX 4000, 32GB DDR5, ISV Certified",
+        "matchRating": "100% Full Equivalent",
+        "marketPriceEst": "$1,600 - $2,200 USD",
+        "competitiveEdge": "TechDesk W70T-I provides faster local Jordanian staging and customized thermal profiles for 3D/CAD workflows."
+      }
+    }
+  },
+  "Laptops": {
+    "ourModel": {
+      "sku": "SAJAYA-L300",
+      "name": "TechBook B20U-I Laptop (14-Inch)",
+      "specs": "Intel Core i7-1355U / Core Ultra 5, 16GB DDR5, 512GB PCIe NVMe, 14-Inch FHD IPS Anti-Glare, 57Wh Battery, 1.38kg, TPM 2.0",
+      "baseCost": 540
+    },
+    "brands": {
+      "hp": {
+        "brand": "HP",
+        "modelName": "HP ProBook 440 G10 (14-Inch) / EliteBook 840 G10",
+        "matchedSpecs": "Intel Core i7-1355U / Core Ultra 5, 16GB DDR5, 512GB SSD, 14-Inch FHD IPS, Wi-Fi 6E, TPM 2.0",
+        "matchRating": "100% Full Equivalent",
+        "marketPriceEst": "$790 - $960 USD",
+        "competitiveEdge": "TechBook B20U-I matches exact government tender mobility specs at ~25% lower tender price with local battery/screen warranty."
+      },
+      "dell": {
+        "brand": "Dell",
+        "modelName": "Dell Latitude 5440 (14-Inch) / Latitude 3440",
+        "matchedSpecs": "Intel Core i7-1355U, 16GB DDR5, 512GB SSD, 14-Inch FHD IPS, ExpressCharge, TPM 2.0",
+        "matchRating": "100% Full Equivalent",
+        "marketPriceEst": "$810 - $980 USD",
+        "competitiveEdge": "TechBook B20U-I offers aluminum alloy top chassis and includes USB-C 65W fast charger with UK/Jordan plug standard."
+      },
+      "lenovo": {
+        "brand": "Lenovo",
+        "modelName": "Lenovo ThinkPad T14 Gen 4 / ThinkPad E14 Gen 5",
+        "matchedSpecs": "Intel Core i7-1355U, 16GB DDR5, 512GB SSD, 14-Inch WUXGA IPS, 57Wh, TPM 2.0",
+        "matchRating": "100% Full Equivalent",
+        "marketPriceEst": "$800 - $950 USD",
+        "competitiveEdge": "TechBook B20U-I provides backlit keyboard and Arabic/English laser-engraved keycaps at significantly lower fleet cost."
+      }
+    }
+  },
+  "Monitors": {
+    "ourModel": {
+      "sku": "SAJAYA-V270",
+      "name": "TechView B27S Monitor (27-Inch QHD USB-C)",
+      "specs": "27-Inch QHD (2560x1440) IPS Panel, 100Hz, 65W USB-C PD Hub, 99% sRGB, 4-Way Ergonomic Stand (Height/Tilt/Pivot)",
+      "baseCost": 175
+    },
+    "brands": {
+      "dell": {
+        "brand": "Dell",
+        "modelName": "Dell UltraSharp U2724DE / P2724DE (27-Inch QHD USB-C)",
+        "matchedSpecs": "27-Inch QHD 2560x1440 IPS, 90W USB-C PD, RJ-45 LAN, Height/Tilt/Swivel/Pivot Stand",
+        "matchRating": "100% Full Equivalent",
+        "marketPriceEst": "$290 - $350 USD",
+        "competitiveEdge": "TechView B27S delivers crisp 100Hz refresh rate (vs Dell 60Hz standard) with 65W PD at ~35% lower cost."
+      },
+      "hp": {
+        "brand": "HP",
+        "modelName": "HP E27u G5 QHD USB-C Monitor (6N4D3AA)",
+        "matchedSpecs": "27-Inch QHD IPS, 65W USB-C PD, 4-way ergonomic stand, HP Eye Ease, RJ-45",
+        "matchRating": "100% Full Equivalent",
+        "marketPriceEst": "$280 - $340 USD",
+        "competitiveEdge": "TechView B27S features Zero-Bright-Dot warranty guarantee and TÜV Low Blue Light certification."
+      },
+      "lenovo": {
+        "brand": "Lenovo",
+        "modelName": "Lenovo ThinkVision T27h-30 (27-Inch QHD USB-C Dock)",
+        "matchedSpecs": "27-Inch QHD 2560x1440 IPS, 90W USB-C, Ethernet, 99% sRGB, Height/Tilt stand",
+        "matchRating": "100% Full Equivalent",
+        "marketPriceEst": "$275 - $330 USD",
+        "competitiveEdge": "TechView B27S offers identical color accuracy (Delta E < 1) with local buffer stock in Jordan."
+      },
+      "viewsonic": {
+        "brand": "ViewSonic",
+        "modelName": "ViewSonic VG2756-2K (27-Inch QHD USB-C Docking Monitor)",
+        "matchedSpecs": "27-Inch QHD IPS, 90W USB-C PD, Ethernet, Ergonomic stand with carry handle",
+        "matchRating": "100% Full Equivalent",
+        "marketPriceEst": "$260 - $315 USD",
+        "competitiveEdge": "TechView B27S provides 100Hz fluid scrolling and dual HDMI 2.0 + DP 1.4 video inputs."
+      }
+    }
+  },
+  "Interactive Touch Screens": {
+    "ourModel": {
+      "sku": "SAJAYA-I750",
+      "name": "Sajaya Smart Interactive Screen (I750 75-Inch)",
+      "specs": "75-Inch 4K UHD Zero-Gap Optical Bonding, 40-Point Touch, 4mm 7H Toughened Glass, Dual OS (Android 13 + OPS i7 Slot), 48MP AI Auto-framing Camera, 8-Mic Array",
+      "baseCost": 1420
+    },
+    "brands": {
+      "promethean": {
+        "brand": "Promethean",
+        "modelName": "Promethean ActivPanel 9 Premium 75-Inch (AP9-B75)",
+        "matchedSpecs": "75-Inch 4K UHD, Vellum Touch (40 points), Zero-Gap Glass, Android 11, OPS Slot, 2x18W + Subwoofer",
+        "matchRating": "100% Full Equivalent",
+        "marketPriceEst": "$2,100 - $2,500 USD",
+        "competitiveEdge": "Sajaya Smart I750 includes integrated 48MP AI Camera & 8-Mic array standard (which Promethean sells as an expensive separate add-on)."
+      },
+      "smart": {
+        "brand": "SMART Technologies",
+        "modelName": "SMART Board GX175-V3 / MX275 75-Inch Interactive Display",
+        "matchedSpecs": "75-Inch 4K UHD, 40-Point Touch, Android 13, Object Awareness, OPS PC Slot, 2x20W speakers",
+        "matchRating": "100% Full Equivalent",
+        "marketPriceEst": "$2,050 - $2,450 USD",
+        "competitiveEdge": "Sajaya Smart I750 offers higher brightness (450 nits) and zero-gap optical bonding for clearer viewing from classroom angles."
+      },
+      "viewsonic": {
+        "brand": "ViewSonic",
+        "modelName": "ViewSonic ViewBoard IFP7550-5 75-Inch 4K Interactive Flat Panel",
+        "matchedSpecs": "75-Inch 4K UHD, Ultra Fine Touch 40-point, Android 13, OPS slot, Type-C 65W PD, 2x16W speakers",
+        "matchRating": "100% Full Equivalent",
+        "marketPriceEst": "$1,950 - $2,350 USD",
+        "competitiveEdge": "Sajaya Smart I750 provides Android 13 with 8GB RAM + 128GB ROM and lifetime firmware updates with local technical training."
+      },
+      "newline": {
+        "brand": "Newline Interactive",
+        "modelName": "Newline Lyra Pro 75-Inch (TT-7523Q)",
+        "matchedSpecs": "75-Inch 4K UHD, Android 13 EDLA, 40-Point Touch, Optical Bonding, Wi-Fi 6, 65W Type-C",
+        "matchRating": "100% Full Equivalent",
+        "marketPriceEst": "$2,000 - $2,380 USD",
+        "competitiveEdge": "Sajaya Smart I750 matches exact Ministry of Education smart board specs with on-site Jordanian installation and training."
+      }
+    }
+  },
+  "UPS & Power Systems": {
+    "ourModel": {
+      "sku": "SAJAYA-HP9336C",
+      "name": "Sajaya Power HP9336C 3-Phase UPS (10kVA - 120kVA)",
+      "specs": "40kVA/40kW 3-Phase In / 3-Phase Out, True Online Double-Conversion (VFI), Unity PF 1.0, 3-Level IGBT, 96% Efficiency, 0 ms Transfer Time, SNMP/Modbus",
+      "baseCost": 2850
+    },
+    "brands": {
+      "schneider": {
+        "brand": "Schneider Electric / APC",
+        "modelName": "APC Easy UPS 3S 40kVA (E3SUPS40KHB) / Galaxy VS 40kVA",
+        "matchedSpecs": "40kVA/40kW, 3:3 400V, Unity PF 1.0, Online Double Conversion, 96% Eff, SNMP Card, Parallel Capable",
+        "matchRating": "100% Full Equivalent",
+        "marketPriceEst": "$4,600 - $5,400 USD",
+        "competitiveEdge": "Sajaya Power HP9336C features identical 3-Level IGBT topology with wide input voltage window (110-300V) and local Jordan battery bank sizing at ~25% lower cost."
+      },
+      "apc": {
+        "brand": "APC by Schneider Electric",
+        "modelName": "APC Easy UPS 3S 40kVA (E3SUPS40KHB)",
+        "matchedSpecs": "40kVA / 40kW, 3-Phase In/Out, PF 1.0, Online Double Conversion, SNMP Web Card",
+        "matchRating": "100% Full Equivalent",
+        "marketPriceEst": "$4,600 - $5,300 USD",
+        "competitiveEdge": "Sajaya Power offers local Amman battery assembly, start-up commissioning, and 3-year factory warranty included."
+      },
+      "vertiv": {
+        "brand": "Vertiv / Liebert",
+        "modelName": "Liebert EXS 40kVA 3-Phase Integrated UPS (or Liebert APM)",
+        "matchedSpecs": "40kVA / 40kW, 3:3 400V, PF 1.0, Double-Conversion VFI, Integrated or External Battery, SNMP/Modbus",
+        "matchRating": "100% Full Equivalent",
+        "marketPriceEst": "$4,500 - $5,200 USD",
+        "competitiveEdge": "Sajaya Power HP9336C delivers 0 ms transfer time with ultra-low input THDi < 3% to ensure generator compatibility."
+      },
+      "eaton": {
+        "brand": "Eaton",
+        "modelName": "Eaton 93PM 40kVA (93PM-40) / Eaton 93E 40kVA",
+        "matchedSpecs": "40kVA / 40kW, 3-Phase Online Double-Conversion, 96.5% Efficiency, Web/SNMP Card, Dual Input",
+        "matchRating": "100% Full Equivalent",
+        "marketPriceEst": "$4,700 - $5,500 USD",
+        "competitiveEdge": "Sajaya Power HP9336C includes intelligent 3-stage temperature-compensated charger that extends VRLA battery lifecycle."
+      },
+      "riello": {
+        "brand": "Riello",
+        "modelName": "Riello Multi Sentry MST 40 (40kVA 3:3)",
+        "matchedSpecs": "40kVA / 40kW, On-Line Double Conversion, 3-Level IGBT, Zero Impact Source, Dual Input",
+        "matchRating": "100% Full Equivalent",
+        "marketPriceEst": "$4,200 - $4,800 USD",
+        "competitiveEdge": "Sajaya Power provides local 24/7 on-call engineering dispatch across hospitals and data centers in Jordan."
+      }
+    }
+  },
+  "CCTV & Surveillance": {
+    "ourModel": {
+      "sku": "SAJAYA-CCTV-VISION",
+      "name": "Sajaya Vision AI IP Cameras (B400 / D500)",
+      "specs": "4MP / 5MP 1/2.8-Inch CMOS Sensor, Smart Dual-Illumination Night Vision (IR + Warm White 40m), AI Human/Vehicle Target Classification, H.265+, IP67 Weatherproof, IK10",
+      "baseCost": 55
+    },
+    "brands": {
+      "hikvision": {
+        "brand": "Hikvision",
+        "modelName": "Hikvision AcuSense DS-2CD2047G2-LU (4MP Bullet) / DS-2CD2147G2 (4MP Dome)",
+        "matchedSpecs": "4MP 1/1.8-Inch CMOS, ColorVu + AcuSense (Human & Vehicle Classification), 120dB WDR, H.265+, IP67",
+        "matchRating": "100% Full Equivalent",
+        "marketPriceEst": "$120 - $155 USD",
+        "competitiveEdge": "Sajaya Vision cameras deliver NDAA-compliant chipset firmware options and 100% seamless ONVIF Profile S/G/T compliance."
+      },
+      "dahua": {
+        "brand": "Dahua",
+        "modelName": "Dahua WizSense IPC-HFW3441E-AS (4MP) / IPC-HDBW3541E (5MP)",
+        "matchedSpecs": "4MP/5MP 1/2.7-Inch CMOS, Smart Dual Illuminators, SMD 4.0 AI Classification, Starlight, IP67/IK10, H.265+",
+        "matchRating": "100% Full Equivalent",
+        "marketPriceEst": "$115 - $145 USD",
+        "competitiveEdge": "Sajaya Vision offers enterprise 32-Ch NVR integration with local Jordan technical warranty and spare replacement."
+      },
+      "uniview": {
+        "brand": "Uniview (UNV)",
+        "modelName": "Uniview LightHunter Tri-Guard IPC2124SB-ADF40KMC (4MP)",
+        "matchedSpecs": "4MP LightHunter, Smart Intrusion Prevention (SIP), 120dB True WDR, Dual Mic, IP67/IK10, PoE",
+        "matchRating": "100% Full Equivalent",
+        "marketPriceEst": "$110 - $140 USD",
+        "competitiveEdge": "Sajaya Vision offers competitive project registration margin protection for bidding partners."
+      }
+    }
+  },
+  "Charge Carts & Accessories": {
+    "ourModel": {
+      "sku": "CHGCT36USBCPD-2E",
+      "name": "TechGears Charge Cart 36 (36-Bay 65W USB-C PD)",
+      "specs": "36 Devices Capacity, Intelligent USB-C PD Charging (up to 65W per port), Cold-Rolled SPCC Steel, 3-Point Master Key Door Lock, 5-inch Heavy-Duty Locking Casters",
+      "baseCost": 780
+    },
+    "brands": {
+      "aver": {
+        "brand": "AVer Information",
+        "modelName": "AVer C36i+ / E32c+ Intelligent 36-Device Charging Cart",
+        "matchedSpecs": "36 Devices, Smart Cycle Charging, Steel Housing, 5-inch Casters, Cable Management",
+        "matchRating": "100% Full Equivalent",
+        "marketPriceEst": "$1,450 - $1,800 USD",
+        "competitiveEdge": "TechGears Charge Cart 36 provides direct 65W USB-C PD on every slot without needing separate bulky power bricks, at ~35% lower cost."
+      },
+      "bretford": {
+        "brand": "Bretford",
+        "modelName": "Bretford PureCharge Cart 36 for USB-C Devices",
+        "matchedSpecs": "36 USB-C PD slots, laser-cut steel, directional locking casters, UL 60950 certified",
+        "matchRating": "100% Full Equivalent",
+        "marketPriceEst": "$1,700 - $2,200 USD",
+        "competitiveEdge": "TechGears Charge Cart includes dual UK/Jordan standard electrical safety certifications and heavy-duty corner bumpers."
+      },
+      "ergotron": {
+        "brand": "Ergotron",
+        "modelName": "Ergotron Zip40 / Zip36 Desktop & Tablet Charging Cart",
+        "matchedSpecs": "36-40 Device slots, PowerShuttle smart load sensing, heavy steel chassis, 5-inch casters",
+        "matchRating": "100% Full Equivalent",
+        "marketPriceEst": "$1,600 - $2,000 USD",
+        "competitiveEdge": "TechGears Charge Cart 36 features individual LED charging status indicators (Red=Charging, Green=Full) for every device bay."
+      }
+    }
+  }
+}

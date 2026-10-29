@@ -905,3 +905,261 @@ dialog.app-dialog::backdrop {
     padding: 1rem !important;
   }
 }
+
+/* =============================================================================
+   PRODUCT DATASHEET SPECIFIC UNIQUE LAYOUTS & IMAGE CONTAINER
+   ============================================================================= */
+
+/* Top Product Image Container (Req #8) */
+.ds-top-image-container {
+  margin-bottom: 1rem;
+  border: 1px solid #e2e8f0;
+  border-radius: var(--radius-sm);
+  background: #f8fafc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100px;
+  max-height: 220px;
+  overflow: hidden;
+  position: relative;
+}
+
+.ds-top-image-container img {
+  max-height: 210px;
+  max-width: 100%;
+  object-fit: contain;
+  padding: 0.5rem;
+}
+
+.ds-top-image-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  text-align: center;
+}
+
+/* Unique Category Layouts (Req #1) */
+.ds-section-title {
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #0f172a;
+  border-bottom: 1px solid #cbd5e1;
+  padding-bottom: 0.3rem;
+  margin-top: 1rem;
+  margin-bottom: 0.55rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.ds-highlight-grid-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.5rem;
+  margin-bottom: 0.85rem;
+}
+
+.ds-highlight-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem;
+  margin-bottom: 0.85rem;
+}
+
+.ds-highlight-card {
+  background: #f8fafc;
+  border: 1px solid #cbd5e1;
+  border-left: 3px solid #1e3a8a;
+  border-radius: 3px;
+  padding: 0.5rem 0.65rem;
+}
+
+.ds-highlight-label {
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.ds-highlight-val {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin-top: 0.15rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ds-feature-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-bottom: 0.85rem;
+}
+
+.ds-pill {
+  background: #f1f5f9;
+  border: 1px solid #cbd5e1;
+  border-radius: 3px;
+  padding: 0.2rem 0.55rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #1e293b;
+}
+
+.ds-card-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  margin-bottom: 0.85rem;
+}
+
+.ds-info-box {
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  border-radius: 3px;
+  padding: 0.65rem 0.85rem;
+}
+
+.ds-info-box h4 {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: #1e3a8a;
+  margin-bottom: 0.4rem;
+  border-bottom: 1px dashed #e2e8f0;
+  padding-bottom: 0.25rem;
+}
+
+/* Tender Tracker Stage Badges */
+.badge-drafting { background-color: #f1f5f9; color: #475569; border-color: #cbd5e1; }
+.badge-pricing { background-color: #fef3c7; color: #92400e; border-color: #fde68a; }
+.badge-analyzing { background-color: #f3e8ff; color: #6b21a8; border-color: #e9d5ff; }
+.badge-submitted { background-color: #e0f2fe; color: #0369a1; border-color: #bae6fd; }
+.badge-won { background-color: #dcfce7; color: #15803d; border-color: #bbf7d0; }
+.badge-lost { background-color: #fee2e2; color: #b91c1c; border-color: #fecaca; }
+
+.tender-quick-actions {
+  display: flex;
+  gap: 0.35rem;
+  align-items: center;
+}
+
+/* Competitor Brand Equivalence Cross-Reference Styles */
+.competitor-quick-chips .chip-btn {
+  font-size: 0.72rem;
+  padding: 0.2rem 0.5rem;
+  border-radius: 12px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.competitor-quick-chips .chip-btn:hover {
+  background: var(--bg-subtle);
+  border-color: var(--accent-primary);
+  color: var(--accent-primary);
+}
+
+.competitor-quick-chips .chip-btn.active {
+  background: #eff6ff;
+  border-color: #3b82f6;
+  color: #1d4ed8;
+  font-weight: 700;
+}
+
+.equiv-category-card {
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  background: #ffffff;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+}
+
+.equiv-cat-header {
+  background: #f8fafc;
+  border-bottom: 1px solid #cbd5e1;
+  padding: 0.65rem 0.9rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.equiv-cat-title {
+  font-weight: 700;
+  color: #0f172a;
+  font-size: 0.88rem;
+}
+
+.equiv-our-badge {
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  color: #1e3a8a;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.73rem;
+  font-weight: 600;
+}
+
+.equiv-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 0.75rem;
+  padding: 0.85rem;
+}
+
+.equiv-brand-card {
+  border: 1px solid #e2e8f0;
+  border-radius: 4px;
+  padding: 0.75rem;
+  background: #fbfcfd;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.equiv-brand-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.35rem;
+}
+
+.equiv-brand-name {
+  font-weight: 800;
+  font-size: 0.82rem;
+  color: #1e293b;
+}
+
+.equiv-model-name {
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: #0f172a;
+  margin-bottom: 0.3rem;
+}
+
+.equiv-specs-text {
+  font-size: 0.74rem;
+  color: #475569;
+  line-height: 1.35;
+  margin-bottom: 0.45rem;
+}
+
+.equiv-edge-box {
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  border-radius: 3px;
+  padding: 0.4rem 0.55rem;
+  font-size: 0.71rem;
+  color: #166534;
+  margin-top: 0.4rem;
+}

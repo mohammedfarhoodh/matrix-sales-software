@@ -339,6 +339,55 @@ app.post('/api/datasheets/log', (req, res) => {
 });
 
 // -----------------------------------------------------------------------------
+// -----------------------------------------------------------------------------
+// 3.5 TENDER TRACKER & PIPELINE CRUD API
+// -----------------------------------------------------------------------------
+app.get('/api/tenders', (req, res) => {
+  const store = loadStore();
+  res.json(store.tenders || []);
+});
+
+app.post('/api/tenders', (req, res) => {
+  const store = loadStore();
+  const newTender = {
+    Id: store.tenders.length ? Math.max(...store.tenders.map(t => t.Id)) + 1 : 1,
+    ReferenceNumber: req.body.ReferenceNumber || `TND-2026-${Math.floor(100 + Math.random() * 900)}`,
+    Title: req.body.Title || 'Untitled Tender',
+    ClientName: req.body.ClientName || 'Unspecified Client',
+    Country: req.body.Country || 'Jordan',
+    FileName: req.body.FileName || '',
+    SubmissionDeadline: req.body.SubmissionDeadline || new Date(Date.now() + 14 * 86400000).toISOString().slice(0, 10),
+    Status: req.body.Status || 'Drafting',
+    Currency: req.body.Currency || 'USD',
+    TotalEstimatedValue: Number(req.body.TotalEstimatedValue) || 0,
+    BidBond: req.body.BidBond || '5% Bank Guarantee',
+    AssignedLead: req.body.AssignedLead || 'Mohammed',
+    Notes: req.body.Notes || '',
+    Extractions: []
+  };
+  store.tenders.unshift(newTender);
+  saveStore(store);
+  res.json(newTender);
+});
+
+app.put('/api/tenders/:id', (req, res) => {
+  const store = loadStore();
+  const id = Number(req.params.id);
+  const idx = store.tenders.findIndex(t => t.Id === id);
+  if (idx === -1) return res.status(404).json({ error: 'Tender not found' });
+  store.tenders[idx] = { ...store.tenders[idx], ...req.body, Id: id };
+  saveStore(store);
+  res.json(store.tenders[idx]);
+});
+
+app.delete('/api/tenders/:id', (req, res) => {
+  const store = loadStore();
+  const id = Number(req.params.id);
+  store.tenders = store.tenders.filter(t => t.Id !== id);
+  saveStore(store);
+  res.json({ success: true });
+});
+
 // 4. AI TENDER ANALYZER & FEEDBACK LEARNING ENGINE (Placeholder + Rule Learner)
 // -----------------------------------------------------------------------------
 app.post('/api/tenders/analyze', (req, res) => {
@@ -453,6 +502,125 @@ app.post('/api/tenders/analyze', (req, res) => {
   store.tenders.unshift(newTender);
   saveStore(store);
   res.json(newTender);
+});
+
+// -----------------------------------------------------------------------------
+// 4.5 COMPETITOR & OEM BRAND EQUIVALENT MATCHER API
+// -----------------------------------------------------------------------------
+app.post('/api/tenders/find-equivalents', (req, res) => {
+  const store = loadStore();
+  const { tenderId, rawText, companies } = req.body;
+
+  let textToAnalyze = rawText || '';
+  if (!textToAnalyze && tenderId) {
+    const t = store.tenders.find(x => x.Id === Number(tenderId));
+    if (t) {
+      textToAnalyze = (t.Title || '') + '\n' + (t.Extractions || []).map(e => e.RequirementTitle + ': ' + e.ExtractedDetail).join('\n');
+    }
+  }
+
+  // Parse requested companies
+  let requestedBrands = [];
+  if (Array.isArray(companies)) {
+    requestedBrands = companies.map(c => c.trim()).filter(Boolean);
+  } else if (typeof companies === 'string' && companies.trim().length > 0) {
+    requestedBrands = companies.split(/[,;&/\n]+/).map(c => c.trim()).filter(Boolean);
+  }
+
+  if (!requestedBrands.length) {
+    requestedBrands = ['HP', 'Dell', 'Lenovo', 'Schneider Electric'];
+  }
+
+  const lowerText = (textToAnalyze || '').toLowerCase();
+  const db = JSON.parse(fs.readFileSync('./database/competitor_equivalents.json', 'utf8'));
+
+  // Detect which equipment categories are mentioned in the tender
+  const detectedCategories = [];
+
+  const hasPC = lowerText.includes('desktop') || lowerText.includes('computer') || lowerText.includes('tower') || lowerText.includes('pc') || lowerText.includes('q-series') || lowerText.includes('sff') || lowerText.includes('optiplex') || lowerText.includes('elitedesk') || lowerText.includes('thinkcentre') || lowerText.includes('core i5') || lowerText.includes('core i7');
+  const hasWorkstation = lowerText.includes('workstation') || lowerText.includes('xeon') || lowerText.includes('threadripper') || lowerText.includes('precision') || lowerText.includes('thinkstation') || lowerText.includes('rtx 4000') || lowerText.includes('rtx a2000');
+  const hasLaptop = lowerText.includes('laptop') || lowerText.includes('notebook') || lowerText.includes('techbook') || lowerText.includes('latitude') || lowerText.includes('probook') || lowerText.includes('elitebook') || lowerText.includes('thinkpad');
+  const hasMonitor = lowerText.includes('monitor') || (lowerText.includes('screen') && (lowerText.includes('ips') || lowerText.includes('qhd') || lowerText.includes('fhd') || lowerText.includes('24') || lowerText.includes('27') || lowerText.includes('32') || lowerText.includes('ultrasharp')));
+  const hasSmartScreen = lowerText.includes('interactive') || lowerText.includes('touch screen') || lowerText.includes('smart board') || lowerText.includes('flat panel') || lowerText.includes('promethean') || lowerText.includes('viewboard') || lowerText.includes('ops') || lowerText.includes('75') || lowerText.includes('86') || lowerText.includes('65');
+  const hasUPS = lowerText.includes('ups') || lowerText.includes('double conversion') || lowerText.includes('online ups') || lowerText.includes('kva') || lowerText.includes('3-phase') || lowerText.includes('power system') || lowerText.includes('apc') || lowerText.includes('schneider') || lowerText.includes('vertiv') || lowerText.includes('eaton');
+  const hasCCTV = lowerText.includes('cctv') || lowerText.includes('camera') || lowerText.includes('surveillance') || lowerText.includes('nvr') || lowerText.includes('hikvision') || lowerText.includes('dahua') || lowerText.includes('ip camera');
+  const hasChargeCart = lowerText.includes('charge cart') || lowerText.includes('charging cart') || lowerText.includes('cart 36') || lowerText.includes('aver') || lowerText.includes('bretford');
+
+  if (hasPC) detectedCategories.push('Personal Computers');
+  if (hasWorkstation) detectedCategories.push('Workstations');
+  if (hasLaptop) detectedCategories.push('Laptops');
+  if (hasMonitor) detectedCategories.push('Monitors');
+  if (hasSmartScreen) detectedCategories.push('Interactive Touch Screens');
+  if (hasUPS) detectedCategories.push('UPS & Power Systems');
+  if (hasCCTV) detectedCategories.push('CCTV & Surveillance');
+  if (hasChargeCart) detectedCategories.push('Charge Carts & Accessories');
+
+  // Fallback: If nothing specific matched, provide top 3 representative categories
+  if (!detectedCategories.length) {
+    detectedCategories.push('Personal Computers', 'UPS & Power Systems', 'Interactive Touch Screens');
+  }
+
+  const results = detectedCategories.map(cat => {
+    const dbEntry = db[cat];
+    if (!dbEntry) return null;
+
+    const brandMatches = requestedBrands.map(inputBrand => {
+      const brandKey = inputBrand.toLowerCase().replace(/[^a-z0-9]/g, '');
+      let found = null;
+
+      for (const [k, v] of Object.entries(dbEntry.brands)) {
+        if (brandKey.includes(k) || k.includes(brandKey)) {
+          found = v;
+          break;
+        }
+      }
+
+      if (!found) {
+        if ((cat === 'UPS & Power Systems' || cat === 'CCTV & Surveillance') && (brandKey.includes('hp') || brandKey.includes('dell') || brandKey.includes('lenovo'))) {
+          return {
+            brand: inputBrand.toUpperCase(),
+            modelName: `No Direct ${cat} Series`,
+            matchedSpecs: `${inputBrand} does not manufacture industrial/enterprise ${cat}. Recommended partner match: ${cat === 'UPS & Power Systems' ? 'Schneider Electric (APC) / Vertiv' : 'Hikvision / Dahua'}.`,
+            matchRating: "No Direct Product Line",
+            marketPriceEst: "N/A",
+            competitiveEdge: `Major bidding win: Competitors bidding ${inputBrand} must 3rd-party outsource this package at high margin markups. Matrix / SajayaTech manufactures this directly.`
+          };
+        } else if (cat === 'Personal Computers' && (brandKey.includes('schneider') || brandKey.includes('apc') || brandKey.includes('vertiv') || brandKey.includes('hikvision') || brandKey.includes('dahua'))) {
+          return {
+            brand: inputBrand.toUpperCase(),
+            modelName: `No PC Product Line`,
+            matchedSpecs: `${inputBrand} specializes in infrastructure/security, not personal computers.`,
+            matchRating: "No Direct Product Line",
+            marketPriceEst: "N/A",
+            competitiveEdge: "Matrix offers comprehensive single-vendor submittal covering both IT compute and power/security infrastructure."
+          };
+        }
+
+        return {
+          brand: inputBrand.toUpperCase(),
+          modelName: `${inputBrand} Commercial Enterprise Series (${cat})`,
+          matchedSpecs: `Standard commercial enterprise equivalent matching tender specification clauses for ${cat}.`,
+          matchRating: "Equivalent Specification",
+          marketPriceEst: `Estimated ${cat === 'Personal Computers' ? '$650 USD' : cat === 'Monitors' ? '$280 USD' : '$1,800 USD'}`,
+          competitiveEdge: `Matrix provides direct local factory backing, Jordan SLA warranty, and significant margin advantage over ${inputBrand}.`
+        };
+      }
+
+      return found;
+    });
+
+    return {
+      category: cat,
+      ourModel: dbEntry.ourModel,
+      competitors: brandMatches
+    };
+  }).filter(Boolean);
+
+  res.json({
+    requestedCompanies: requestedBrands,
+    detectedCategoriesCount: detectedCategories.length,
+    results
+  });
 });
 
 // Flag an extraction as Important or NotNeeded and train the AI rule table

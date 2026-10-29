@@ -1,0 +1,277 @@
+# --- Initial Mappings ---
+I5-8400 CPU -> Intel Core i5-8400
+I5-8500 CPU -> Intel Core i5-8500
+I3-8100 CPU -> Intel Core i3-8100
+I7-7700 CPU -> Intel Core i7-7700
+I5-5700 CPU -> Intel Core i5-7500
+
+# --- Intel Core i3 Changes ---
+i3 -> Intel Core i3
+I3-10100 -> Intel Core i3-10100
+I3-10100CPU -> Intel Core i3-10100
+I3-11100CPU -> Intel Core i3-11100
+I312100 -> Intel Core i3-12100
+i3-12100 CPU -> Intel Core i3-12100
+I3-12100 CPU -> Intel Core i3-12100
+I3-14100 CPU -> Intel Core i3-14100
+I3-7100 CPU -> Intel Core i3-7100
+I3-8100 -> Intel Core i3-8100
+I3-9100 -> Intel Core i3-9100
+
+# --- Intel Core i5 Changes ---
+Core i5-11 Generation -> Intel Core i5-11 Generation
+i5 -> Intel Core i5
+i5 CPU -> Intel Core i5
+I5 CPU -> Intel Core i5
+i5-10210U -> Intel Core i5-10210U
+i5-10400 -> Intel Core i5-10400
+I5-10400 -> Intel Core i5-10400
+I5-10400 CPU -> Intel Core i5-10400
+I5-10400CPU -> Intel Core i5-10400
+i5-10400T -> Intel Core i5-10400T
+i5-10500 -> Intel Core i5-10500
+I5-10500 -> Intel Core i5-10500
+I5-10500 CPU -> Intel Core i5-10500
+I5-10500CPU -> Intel Core i5-10500
+I5-1135 G7 -> Intel Core i5-1135 G7
+i5-1135G7 -> Intel Core i5-1135G7
+I5-1135G7 -> Intel Core i5-1135G7
+i5-1135G7 CPU -> Intel Core i5-1135G7
+I5-11400 -> Intel Core i5-11400
+I5-11400 CPU -> Intel Core i5-11400
+I5-11400CPU -> Intel Core i5-11400
+i5-1235 U CPU -> Intel Core i5-1235 U
+i5-1235u -> Intel Core i5-1235u
+i5-12400 CPU -> Intel Core i5-12400
+I5-12400 CPU -> Intel Core i5-12400
+I5-12500 CPU -> Intel Core i5-12500
+I5-12500CPU -> Intel Core i5-12500
+i5-1335U -> Intel Core i5-1335U
+I5-1335U CPU -> Intel Core i5-1335U
+i5-13400 -> Intel Core i5-13400
+i5-13400 CPU -> Intel Core i5-13400
+I5-13400 CPU -> Intel Core i5-13400
+I5-13400CPU -> Intel Core i5-13400
+i5-13400T -> Intel Core i5-13400T
+i5-13500 CPU -> Intel Core i5-13500
+I5-13500 CPU -> Intel Core i5-13500
+i5-13500T -> Intel Core i5-13500T
+I5-13500T CPU -> Intel Core i5-13500T
+i5-13th -> Intel Core i5-13th
+I5-14500 CPU -> Intel Core i5-14500
+I5-14gen CPU -> Intel Core i5-14gen
+i5-6500 -> Intel Core i5-6500
+I5-7400 CPU -> Intel Core i5-7400
+i5-7440HQ CPU -> Intel Core i5-7440HQ
+i5-8350u CPU -> Intel Core i5-8350u
+i5-8500T -> Intel Core i5-8500T
+i5-8600 -> Intel Core i5-8600
+I5-9400 CPU -> Intel Core i5-9400
+I5-9500 -> Intel Core i5-9500
+I5-9500 CPU -> Intel Core i5-9500
+i5-9600 -> Intel Core i5-9600
+
+# --- Intel Core i7 Changes ---
+I7 -> Intel Core i7
+i7 14gen -> Intel Core i7-14gen
+i7 CPU -> Intel Core i7
+I7 CPU -> Intel Core i7
+i7-10510U -> Intel Core i7-10510U
+i7-10700 -> Intel Core i7-10700
+I7-10700 -> Intel Core i7-10700
+I7-10700 CPU -> Intel Core i7-10700
+i7-1165 CPU -> Intel Core i7-1165
+I7-1165 G7 -> Intel Core i7-1165 G7
+i7-1165CPU -> Intel Core i7-1165
+i7-1165G7 -> Intel Core i7-1165G7
+i7-11700 -> Intel Core i7-11700
+I7-11700 -> Intel Core i7-11700
+I7-11700 CPU -> Intel Core i7-11700
+I7-11700CPU -> Intel Core i7-11700
+I7-12700 CPU -> Intel Core i7-12700
+I7-12700CPU -> Intel Core i7-12700
+i7-12700K -> Intel Core i7-12700K
+I7-1355 CPU -> Intel Core i7-1355
+i7-1355u -> Intel Core i7-1355u
+i7-1355U -> Intel Core i7-1355U
+i7-1355u CPU -> Intel Core i7-1355u
+i7-13700 -> Intel Core i7-13700
+I7-13700 CPU -> Intel Core i7-13700
+i7-14700 -> Intel Core i7-14700
+I7-14700 -> Intel Core i7-14700
+I7-14700 CPU -> Intel Core i7-14700
+I7-6700 CPU -> Intel Core i7-6700
+i7-7600u CPU -> Intel Core i7-7600u
+i7-8565 -> Intel Core i7-8565
+i7-85650u CPU -> Intel Core i7-85650u
+i7-8565U -> Intel Core i7-8565U
+i7-8700 -> Intel Core i7-8700
+I7-8700 -> Intel Core i7-8700
+I7-8700 CPU -> Intel Core i7-8700
+i7-8750H CPU -> Intel Core i7-8750H
+i7-9700 -> Intel Core i7-9700
+I7-9700 -> Intel Core i7-9700
+I7-9700 CPU -> Intel Core i7-9700
+
+# --- Intel Core i9 Changes ---
+i9 -> Intel Core i9
+i9-14900 -> Intel Core i9-14900
+I9-9900K -> Intel Core i9-9900K
+intel i9-7920X -> Intel Core i9-7920X
+
+# ========================================================
+# STORAGE STANDARDIZATION MAPPINGS
+# ========================================================
+
+# --- Single SSD Storage Changes ---
+512 SSD -> 512 GB SSD
+512GB SSD -> 512 GB SSD
+512GB -> 512 GB SSD
+512 -> 512 GB SSD
+512 GB SSD HDD -> 512 GB SSD
+512GB SSD HDD -> 512 GB SSD
+1TB SSD -> 1 TB SSD
+1T SSD -> 1 TB SSD
+1TBGB SSD HDD -> 1 TB SSD
+2tb GB SSD -> 2 TB SSD
+256GB SSD -> 256 GB SSD
+256 SSD -> 256 GB SSD
+250GB SSD -> 250 GB SSD
+480 ssd -> 480 GB SSD
+1T SSD M.2 -> 1 TB M.2 SSD
+1TB PCIe NVMe -> 1 TB PCIe NVMe SSD
+32GB M.2 -> 32 GB M.2 SSD
+
+# --- Single HDD / SATA Storage Changes (Including Typos Fixed) ---
+1TB SATA HDD -> 1 TB SATA HDD
+1T SATA -> 1 TB SATA HDD
+1TB SATA -> 1 TB SATA HDD
+1 TB SATS HDD -> 1 TB SATA HDD (Typo 'SATS' fixed)
+2TB HDDD -> 2 TB SATA HDD (Typo 'HDDD' fixed)
+500GB SATA HDD -> 500 GB SATA HDD
+500 GB HDD -> 500 GB SATA HDD
+500GB SATA HDD500GB SATA HDD -> 500 GB SATA HDD (Duplication fixed)
+
+# --- Dual / Hybrid Storage Changes ---
+256 SSD , 1 TB HDD -> 256 GB SSD + 1 TB HDD
+256 SSD + 1TB HDD -> 256 GB SSD + 1 TB HDD
+256GB SSD+1TB HDD -> 256 GB SSD + 1 TB HDD
+SSD 256 + 1TB HDD -> 256 GB SSD + 1 TB HDD
+256SSd+ 1TB HDD -> 256 GB SSD + 1 TB HDD
+1 TB SATA HDD , 256 SSD -> 256 GB SSD + 1 TB SATA HDD
+1TB ssd + 2TB sata -> 1 TB SSD + 2 TB SATA HDD
+1TB sata + 128 GB SSD -> 128 GB SSD + 1 TB SATA HDD
+512GB+1TB   SSD -> 512 GB + 1 TB SSD
+512 + 1tb -> 512 GB SSD + 1 TB HDD
+512+2TB GB SSD -> 512 GB + 2 TB SSD
+240 + 1TB -> 240 GB SSD + 1 TB HDD
+240 + 512 -> 240 GB + 512 GB SSD
+2*2T ssd + 3*1TB sata -> 2x 2 TB SSD + 3x 1 TB SATA HDD
+1 T 7200 hard disk and 512GB M.2 -> 512 GB M.2 SSD + 1 TB HDD
+
+# --- Preserved Categories (Untouched) ---
+# Empty / Blank storage cells: Preserved as blank (38 rows)
+# Misplaced Power Supply data: Preserved as-is (Two AC Hot-plug, 500 watt, 500 Watt PS, 2PS, Other Watt PS, 800Watt PS)
+
+# ========================================================
+# ITEM DESCRIPTIONS & PRODUCT NAMES (COLUMNS Q, R, S)
+# STORAGE STANDARDIZATION MAPPINGS
+# ========================================================
+512SSD, 512 SSD, 512GB SSD -> 512 GB SSD
+256 SSD, 256GB SSD -> 256 GB SSD
+128SD, 128SSD -> 128 GB SSD
+1TB SSD, 1Tb SSD, 1T SSD, ssd 1tb -> 1 TB SSD
+512 SSD M.2, 512SSD M.2, 512GB SSD M.2, 512G SSD M.2 -> 512 GB M.2 SSD
+256 M.2 GB SSD, SSd256 m2 -> 256 GB M.2 SSD
+1TB M.2, 1TB M.2 SSD -> 1 TB M.2 SSD
+1024G*1 SSD, 1024G M.2 SSD -> 1 TB SSD / 1 TB M.2 SSD
+2000G*1 SSD -> 2 TB SSD
+1T HDD, 1TB HDD -> 1 TB HDD
+500 HDD, 500 SATA -> 500 GB HDD / 500 GB SATA HDD
+128SD/1TB -> 128 GB SSD/1 TB HDD
+1TB+128SSD -> 1 TB HDD + 128 GB SSD
+
+# ========================================================
+# RAM STANDARDIZATION MAPPINGS
+# ========================================================
+# Rule Applied:
+# - Below 13th Gen Intel Core (6th to 12th Gen) -> DDR4 RAM (<Capacity> GB DDR4 RAM)
+# - 13th Gen & above (13th, 14th Gen, Intel Core Ultra, Xeon W) -> DDR5 RAM (<Capacity> GB DDR5 RAM)
+
+# --- Standardized DDR4 RAM (Below 13th Gen) ---
+4GB, 4GB RAM, 4 GB DDR RAM, 4GB DDR RAM -> 4 GB DDR4 RAM
+8GB, 8gb, 8Gb RAM, 8 GB RAM, 8GB DDR RAM, 8 GB DDR RAM -> 8 GB DDR4 RAM
+8 GB DDR R8 GB DDR RAMAM -> 8 GB DDR4 RAM (Typo duplication fixed)
+12 GB -> 12 GB DDR4 RAM
+16GB, 16 GB, 16GB RAM, 16 GB RAM, 16GB DDR RAM, 16 GB DDR RAM, 16GB Ram DDR4, 16GB (1x16GB -> 16 GB DDR4 RAM
+32GB, 32 gb, 32 gb ram, 32 GB DDR RAM -> 32 GB DDR4 RAM
+
+# --- Standardized DDR5 RAM (13th Gen and Above) ---
+8GB, 8 GB DDR RAM, 8GB DDR5 -> 8 GB DDR5 RAM
+16GB, 16 GB DDR RAM, 16 GB DDR5 RAM -> 16 GB DDR5 RAM
+32GB, 32 GB DDR RAM, 8 x 32GB Ram -> 32 GB DDR5 RAM
+64 GB DDR RAM -> 64 GB DDR5 RAM
+128GB DDR RAM -> 128 GB DDR5 RAM
+
+# --- Preserved Categories (Untouched) ---
+# Empty / Blank RAM cells: Preserved as blank (32 rows)
+# Misplaced Server SAS hard drive data in RAM column: Preserved as-is (6 * 600 gb 15K, 2X600GB SAS, 3* 600gb 15.K, 4*2.4TB, etc.)
+
+# ========================================================
+# INTEL CORE ULTRA CPU STANDARDIZATION MAPPINGS
+# ========================================================
+U5-225 -> Intel Core Ultra 5 225
+U5-235 -> Intel Core Ultra 5 235
+U7-265 -> Intel Core Ultra 7 265
+U7-155U CPU -> Intel Core Ultra 7 155U
+ultra 7 155h -> Intel Core Ultra 7 155H
+ultra 7 14gen -> Intel Core Ultra 7 155U
+
+
+# ========================================================
+# AMD CPU STANDARDIZATION MAPPINGS
+# ========================================================
+# Rules & Model Resolutions from Descriptions:
+# - Prefixed with official vendor 'AMD'
+# - Model numbers extracted from product descriptions where column W was truncated/generic
+2100 -> AMD 2100
+Ryzen -> AMD Ryzen
+Ryzen Embedded V1756B -> AMD Ryzen Embedded V1756B
+Ryzen 7-4750G, Ryzen 7-4750G CPU -> AMD Ryzen 7 PRO 4750G
+Ryzen 5 -> AMD Ryzen 5
+Ryzen 7 -> AMD Ryzen 7 5800U (extracted from ThinkPad L15 Gen2 description)
+Ryzen 7 7730U, Ryzen 7-7730U CPU -> AMD Ryzen 7 7730U
+AMD Ryzen 3 3200U -> Already standard
+
+
+# ========================================================
+# SPECIFIC CPU ANOMALY FIXES
+# ========================================================
+# Resolved from verified product descriptions (Columns Q, R):
+# Row 373: v530 -> Intel Core i5-9400 (HP Desktop Pro G3 MT i5-9400)
+# Row 766: core 7 240H -> Intel Core Ultra 7 155U (HP ProBook 460 G11 U7-155U)
+# Rows 782 & 783: U7 -> Intel Core i7-13700 (Acer VS2720G Ci7-13700; RAM also updated to 8 GB DDR5 RAM per description)
+
+
+# ========================================================
+# INTEL XEON & SERVER CPU STANDARDIZATION MAPPINGS
+# ========================================================
+# Workstations (HP Z-Series):
+W5-2465X -> Intel Xeon W5-2465X
+W5-2545 -> Intel Xeon W5-2545
+xeon w5-2565 CPU -> Intel Xeon W5-2565X
+W7-2495x -> Intel Xeon W7-2495X
+Xeon W-2275 -> Intel Xeon W-2275
+Intel Xeon (Rows 792 & 793) -> Intel Xeon W5-2445 (RAM updated to 32 GB DDR5 RAM)
+Intel Xeon (Rows 182-184) -> Intel Xeon Silver 4114 (HP Z6 G4)
+Gold 6226R * 2 -> 2x Intel Xeon Gold 6226R
+
+# Rack & Tower Servers (HPE ProLiant):
+Gold 3106 CPU -> Intel Xeon Bronze 3106
+Xeon-Gold 6130 -> Intel Xeon Gold 6130
+Other CPU (Rows 273 & 274) -> Intel Xeon Gold 5118 (HPE DL380 Gen10 5118)
+xeon 4216 -> Intel Xeon Silver 4216
+Gold  6226 -> Intel Xeon Gold 6226
+silver 4208 -> Intel Xeon Silver 4208
+8 core silver 4208, 8 core silver -> Intel Xeon Silver 4208
+silver 8 core 4208, silver 8 core -> Intel Xeon Silver 4208
