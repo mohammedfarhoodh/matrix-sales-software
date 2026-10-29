@@ -320,20 +320,20 @@
                     <span style="font-size:0.68rem; color:var(--text-muted);">Syncs live to preview</span>
                   </div>
 
-                  <input type="search" id="dsSpecSearchInput" placeholder="🔍 Quick filter parameter (e.g. Processor, RAM, Storage)..." style="font-size:0.75rem; margin-bottom:0.4rem;" />
+                  <input type="search" id="dsSpecSearchInput" placeholder="🔍 Quick filter parameter (e.g. Processor, RAM, Storage)..." style="font-size:0.78rem; margin-bottom:0.45rem; padding:0.45rem 0.65rem;" />
 
-                  <div id="dsSpecsEditorList" style="display:flex; flex-direction:column; gap:0.4rem; max-height:360px; overflow-y:auto; padding-right:0.25rem;">
+                  <div id="dsSpecsEditorList" style="display:flex; flex-direction:column; gap:0.45rem;">
                     <!-- Dynamically populated rows for every pre-existing spec -->
                   </div>
                 </div>
 
                 <!-- Add New Parameter Row -->
-                <div style="border-top: 1px solid var(--border-subtle); padding-top: 0.65rem;">
-                  <label class="field-label" style="font-weight:600;">Add New Specification Parameter</label>
-                  <div style="display:grid; grid-template-columns: 1fr 1.2fr auto; gap:0.35rem;">
-                    <input type="text" id="newSpecKey" placeholder="Parameter (e.g. Thermal Design)" style="font-size:0.75rem;" />
-                    <input type="text" id="newSpecVal" placeholder="Value (e.g. 65W TDP Air Cooler)" style="font-size:0.75rem;" />
-                    <button class="btn btn-primary btn-sm" type="button" id="btnAddSpecRow">Add</button>
+                <div style="border-top: 1px solid var(--border-subtle); padding-top: 0.75rem;">
+                  <label class="field-label" style="font-weight:600; margin-bottom:0.4rem;">Add New Specification Parameter</label>
+                  <div style="display:grid; grid-template-columns: 140px minmax(0, 1fr) auto; gap:0.4rem;">
+                    <input type="text" id="newSpecKey" placeholder="Parameter (e.g. Thermal Design)" style="font-size:0.77rem; padding:0.35rem 0.5rem;" />
+                    <input type="text" id="newSpecVal" placeholder="Value (e.g. 65W TDP Air Cooler)" style="font-size:0.77rem; padding:0.35rem 0.5rem;" />
+                    <button class="btn btn-primary btn-sm" type="button" id="btnAddSpecRow" style="padding:0.35rem 0.75rem;">Add</button>
                   </div>
                 </div>
               </div>
