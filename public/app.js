@@ -15,8 +15,17 @@ let appState = {
   competitorPrices: [],
   marketFactors: [],
   stagedPhoneContacts: [],
-  productImages: {}
+  productImages: {},
+  originalProducts: []
 };
+
+function escapeAttr(str) {
+  return String(str ?? '').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+}
+
+function escapeHtml(str) {
+  return String(str ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
 
 // Mandatory Fallback for <dialog closedby="any"> per modern-web-guidance
 function setupDialogLightDismissFallbacks() {
@@ -65,6 +74,7 @@ async function initApp() {
   appState.factories = data.factories || [];
   appState.contacts = data.contacts || [];
   appState.products = data.products || [];
+  appState.originalProducts = JSON.parse(JSON.stringify(data.products || []));
   appState.datasheets = data.datasheets || [];
   appState.tenders = data.tenders || [];
   appState.aiFeedbackRules = data.aiFeedbackRules || [];
@@ -75,6 +85,8 @@ async function initApp() {
   renderAllCounts();
   populateFactoryDropdowns();
   renderDatasheetModule();
+  renderDatasheetHistory();
+  renderPreviousDatasheetsTable();
   renderTenderTrackerModule();
   renderContactsModule();
   renderTendersModule();
@@ -91,6 +103,14 @@ function renderAllCounts() {
   document.getElementById('nav-count-factories').textContent = appState.factories.length;
   const countTendersEl = document.getElementById('nav-count-tenders');
   if (countTendersEl) countTendersEl.textContent = appState.tenders.length;
+
+  const countHistory = appState.datasheets.length;
+  const countHistoryEl = document.getElementById('nav-count-history');
+  if (countHistoryEl) countHistoryEl.textContent = countHistory;
+  const headerHistoryBadge = document.getElementById('headerHistoryBadge');
+  if (headerHistoryBadge) headerHistoryBadge.textContent = countHistory;
+  const quickHistoryCount = document.getElementById('quickHistoryCount');
+  if (quickHistoryCount) quickHistoryCount.textContent = countHistory;
 }
 
 // =============================================================================
@@ -187,7 +207,7 @@ function getSelectedProduct() {
   return appState.products.find(p => p.Id === prodId) || appState.products[0];
 }
 
-function updateDatasheetPreview() {
+function updateDatasheetPreview(syncEditor = true) {
   const product = getSelectedProduct();
   if (!product) return;
 
@@ -200,10 +220,15 @@ function updateDatasheetPreview() {
     : 'ISO 9001 • Certified Industrial Manufacturing Facility • Amman, Jordan';
 
   // Submittal Meta
-  document.getElementById('previewDocCode').textContent = document.getElementById('dsDocCode').value || 'DS-MTX-2026-001';
+  document.getElementById('previewDocCode').textContent = document.getElementById('dsDocCode')?.value || 'DS-MTX-2026-001';
   document.getElementById('previewSKU').textContent = product.SKU;
   document.getElementById('previewRev').textContent = product.Revision || 'Rev 2026.1';
-  document.getElementById('previewDate').textContent = new Date().toISOString().slice(0, 10);
+
+  const issueDateInput = document.getElementById('dsIssueDate');
+  if (issueDateInput && !issueDateInput.value) {
+    issueDateInput.value = new Date().toISOString().slice(0, 10);
+  }
+  document.getElementById('previewDate').textContent = issueDateInput?.value || new Date().toISOString().slice(0, 10);
 
   // Title Banner
   document.getElementById('previewCategory').textContent = product.Category;
@@ -214,6 +239,16 @@ function updateDatasheetPreview() {
   document.getElementById('previewFactoryOrigin').textContent = factory ? `${factory.Name} (${factory.Country})` : 'Matrix Main Plant';
   document.getElementById('previewWarranty').textContent = `${product.WarrantyMonths || 36} Months Factory Warranty`;
   document.getElementById('previewCompliance').textContent = product.ComplianceStandards || 'ISO 9001, CE, RoHS, JSMO';
+
+  const previewAuth = document.getElementById('previewAuthority');
+  if (previewAuth) {
+    previewAuth.textContent = document.getElementById('dsCustomClient')?.value || 'Ministry of Digital Economy & Entrepreneurship';
+  }
+
+  const previewIssued = document.getElementById('previewIssuedBy');
+  if (previewIssued) {
+    previewIssued.textContent = document.getElementById('dsIssuedBy')?.value || (appState.activeUser ? appState.activeUser.FullName : 'Eng. Mohammed Al-Mansoor');
+  }
 
   // Product Image (Req #8)
   const imgEl = document.getElementById('dsTopImage');
@@ -238,6 +273,14 @@ function updateDatasheetPreview() {
 
   // Render Unique Category-Tailored Layout (Req #1)
   renderProductUniqueLayout(product);
+
+  // Sync Left Panel Editor if requested
+  if (syncEditor) {
+    renderPreExistingFieldsEditor();
+  }
+
+  // Bind live in-place editing listeners
+  bindDatasheetInPlaceEvents();
 }
 
 // Unique Layout Renderer for Each Product Type
@@ -527,9 +570,9 @@ function renderProductUniqueLayout(product) {
 
 function renderSpecTable(specs) {
   const rows = Object.entries(specs).map(([k, v]) => `
-    <tr>
-      <th>${k}</th>
-      <td class="mono">${v}</td>
+    <tr data-spec-key="${escapeAttr(k)}" title="Click to view & edit in specifications panel">
+      <th>${escapeHtml(k)}</th>
+      <td class="mono">${escapeHtml(v)}</td>
     </tr>
   `).join('');
 
@@ -541,26 +584,703 @@ function renderSpecTable(specs) {
           <th>Guaranteed Factory Value</th>
         </tr>
       </thead>
-      <tbody>${rows || '<tr><th>Standard Rating</th><td>Per Factory Technical Schedule</td></tr>'}</tbody>
+      <tbody>${rows || '<tr><th>Standard Rating</th><td class="mono">Per Factory Technical Schedule</td></tr>'}</tbody>
     </table>
   `;
+}
+
+// -----------------------------------------------------------------------------
+// PRE-EXISTING FIELDS & SPECIFICATIONS EDITOR
+// -----------------------------------------------------------------------------
+function renderPreExistingFieldsEditor(filterQuery = '') {
+  const product = getSelectedProduct();
+  if (!product) return;
+
+  // Metadata inputs in left panel
+  const nameInput = document.getElementById('dsEditName');
+  const skuInput = document.getElementById('dsEditSKU');
+  const revInput = document.getElementById('dsEditRevision');
+  const summaryInput = document.getElementById('dsEditSummary');
+  const warrantyInput = document.getElementById('dsEditWarranty');
+  const complianceInput = document.getElementById('dsEditCompliance');
+
+  if (nameInput) nameInput.value = product.Name || '';
+  if (skuInput) skuInput.value = product.SKU || '';
+  if (revInput) revInput.value = product.Revision || 'Rev 2026.1';
+  if (summaryInput) summaryInput.value = product.Summary || '';
+  if (warrantyInput) warrantyInput.value = product.WarrantyMonths || 36;
+  if (complianceInput) complianceInput.value = product.ComplianceStandards || 'ISO 9001, CE, RoHS, JSMO';
+
+  // Pre-existing Specification rows in left panel
+  const listEl = document.getElementById('dsSpecsEditorList');
+  if (!listEl) return;
+
+  const specs = product.Specifications || {};
+  let entries = Object.entries(specs);
+  const countBadge = document.getElementById('dsFieldsCountBadge');
+  if (countBadge) countBadge.textContent = entries.length;
+
+  const q = (filterQuery || document.getElementById('dsSpecSearchInput')?.value || '').toLowerCase().trim();
+  if (q) {
+    entries = entries.filter(([k, v]) => k.toLowerCase().includes(q) || String(v).toLowerCase().includes(q));
+  }
+
+  if (entries.length === 0) {
+    listEl.innerHTML = `<div style="font-size:0.75rem; color:var(--text-muted); padding:0.6rem 0; text-align:center;">${q ? 'No parameters match "' + escapeHtml(q) + '"' : 'No technical specifications defined. Add one below.'}</div>`;
+    return;
+  }
+
+  listEl.innerHTML = entries.map(([k, v]) => `
+    <div class="ds-spec-edit-row" data-orig-key="${escapeAttr(k)}">
+      <input type="text" class="ds-input-key" data-orig-key="${escapeAttr(k)}" value="${escapeAttr(k)}" title="Parameter Name" />
+      <input type="text" class="ds-input-val mono" data-orig-key="${escapeAttr(k)}" value="${escapeAttr(v)}" title="Parameter Value" />
+      <button type="button" class="btn-del-spec" data-del-key="${escapeAttr(k)}" title="Delete parameter">✕</button>
+    </div>
+  `).join('');
+
+  // Live input sync from left panel inputs to preview
+  listEl.querySelectorAll('.ds-input-val').forEach(input => {
+    input.addEventListener('input', (e) => {
+      const origKey = e.target.dataset.origKey;
+      const prod = getSelectedProduct();
+      if (!prod || !prod.Specifications) return;
+      prod.Specifications[origKey] = e.target.value;
+
+      // Update cell in preview table
+      const tr = document.querySelector(`.ds-spec-table tr[data-spec-key="${CSS.escape(origKey)}"]`);
+      if (tr) {
+        const td = tr.querySelector('td');
+        if (td) td.textContent = e.target.value;
+      }
+
+      // Update highlight card if matching
+      const hl = document.querySelector(`.ds-highlight-val[data-spec-highlight="${CSS.escape(origKey)}"]`);
+      if (hl) hl.textContent = e.target.value;
+    });
+  });
+
+  listEl.querySelectorAll('.ds-input-key').forEach(input => {
+    input.addEventListener('change', (e) => {
+      const oldKey = e.target.dataset.origKey;
+      const newKey = e.target.value.trim();
+      if (!newKey || oldKey === newKey) return;
+      const prod = getSelectedProduct();
+      if (!prod || !prod.Specifications) return;
+
+      const val = prod.Specifications[oldKey];
+      delete prod.Specifications[oldKey];
+      prod.Specifications[newKey] = val;
+
+      updateDatasheetPreview(false);
+      renderPreExistingFieldsEditor();
+    });
+  });
+
+  listEl.querySelectorAll('.btn-del-spec').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const delKey = e.target.dataset.delKey;
+      const prod = getSelectedProduct();
+      if (!prod || !prod.Specifications) return;
+      delete prod.Specifications[delKey];
+      updateDatasheetPreview(false);
+      renderPreExistingFieldsEditor();
+    });
+  });
+}
+
+// -----------------------------------------------------------------------------
+// FULL MODAL SPECIFICATIONS CUSTOMIZER
+// -----------------------------------------------------------------------------
+function openProductSpecsModal() {
+  const product = getSelectedProduct();
+  if (!product) return;
+
+  const subtitle = document.getElementById('dialogSpecsSubtitle');
+  if (subtitle) subtitle.textContent = `Customizing specifications for ${product.Name} (${product.SKU})`;
+
+  renderModalSpecsTable();
+  const modal = document.getElementById('dialogProductSpecsEditor');
+  if (modal) modal.showModal();
+}
+
+function renderModalSpecsTable() {
+  const product = getSelectedProduct();
+  if (!product) return;
+
+  const tbody = document.getElementById('modalSpecsTableBody');
+  if (!tbody) return;
+
+  const q = (document.getElementById('modalSpecSearchInput')?.value || '').toLowerCase().trim();
+  const specs = product.Specifications || {};
+  let entries = Object.entries(specs);
+
+  const countBadge = document.getElementById('modalSpecCountBadge');
+  if (countBadge) countBadge.textContent = `${entries.length} Parameters`;
+
+  if (q) {
+    entries = entries.filter(([k, v]) => k.toLowerCase().includes(q) || String(v).toLowerCase().includes(q));
+  }
+
+  if (!entries.length) {
+    tbody.innerHTML = `<tr><td colspan="3" style="text-align:center; padding:1.25rem; color:var(--text-muted);">${q ? 'No parameters match "' + escapeHtml(q) + '".' : 'No specifications defined.'}</td></tr>`;
+    return;
+  }
+
+  tbody.innerHTML = entries.map(([k, v]) => `
+    <tr style="border-bottom:1px solid var(--border-subtle);">
+      <td style="padding:0.4rem 0.65rem;">
+        <input type="text" class="modal-input-key" data-orig-key="${escapeAttr(k)}" value="${escapeAttr(k)}" style="width:100%; font-size:0.78rem;" />
+      </td>
+      <td style="padding:0.4rem 0.65rem;">
+        <input type="text" class="modal-input-val mono" data-orig-key="${escapeAttr(k)}" value="${escapeAttr(v)}" style="width:100%; font-size:0.78rem;" />
+      </td>
+      <td style="padding:0.4rem; text-align:center;">
+        <button type="button" class="btn btn-sm btn-danger modal-del-spec" data-del-key="${escapeAttr(k)}" style="padding:0.2rem 0.45rem; font-size:0.75rem;" title="Delete parameter">✕</button>
+      </td>
+    </tr>
+  `).join('');
+
+  tbody.querySelectorAll('.modal-input-val').forEach(input => {
+    input.addEventListener('input', (e) => {
+      const origKey = e.target.dataset.origKey;
+      product.Specifications[origKey] = e.target.value;
+      updateDatasheetPreview(false);
+      renderPreExistingFieldsEditor();
+    });
+  });
+
+  tbody.querySelectorAll('.modal-input-key').forEach(input => {
+    input.addEventListener('change', (e) => {
+      const oldKey = e.target.dataset.origKey;
+      const newKey = e.target.value.trim();
+      if (!newKey || oldKey === newKey) return;
+      const val = product.Specifications[oldKey];
+      delete product.Specifications[oldKey];
+      product.Specifications[newKey] = val;
+      updateDatasheetPreview(false);
+      renderPreExistingFieldsEditor();
+      renderModalSpecsTable();
+    });
+  });
+
+  tbody.querySelectorAll('.modal-del-spec').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const delKey = e.target.dataset.delKey;
+      delete product.Specifications[delKey];
+      updateDatasheetPreview(false);
+      renderPreExistingFieldsEditor();
+      renderModalSpecsTable();
+    });
+  });
+}
+
+async function saveProductEdits() {
+  const product = getSelectedProduct();
+  if (!product) return;
+
+  const statusEl = document.getElementById('dsEditSaveStatus');
+  if (statusEl) {
+    statusEl.style.display = 'block';
+    statusEl.style.background = '#eff6ff';
+    statusEl.style.color = '#1e40af';
+    statusEl.textContent = 'Saving changes to catalog database...';
+  }
+
+  try {
+    const payload = {
+      Name: product.Name,
+      SKU: product.SKU,
+      Revision: product.Revision || 'Rev 2026.1',
+      Summary: product.Summary || '',
+      WarrantyMonths: Number(product.WarrantyMonths) || 36,
+      ComplianceStandards: product.ComplianceStandards || 'ISO 9001, CE, RoHS, JSMO',
+      Specifications: product.Specifications || {}
+    };
+
+    const res = await fetch(`/api/products/${product.Id}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+
+    if (!res.ok) throw new Error('Database returned ' + res.status);
+    const updated = await res.json();
+    Object.assign(product, updated);
+
+    if (Array.isArray(appState.originalProducts)) {
+      const origIdx = appState.originalProducts.findIndex(p => p.Id === product.Id);
+      if (origIdx !== -1) {
+        appState.originalProducts[origIdx] = JSON.parse(JSON.stringify(updated));
+      }
+    }
+
+    if (statusEl) {
+      statusEl.style.background = '#dcfce7';
+      statusEl.style.color = '#15803d';
+      statusEl.textContent = '✓ Saved to Catalog SKU database!';
+      setTimeout(() => { if (statusEl) statusEl.style.display = 'none'; }, 3000);
+    }
+
+    const opt = document.querySelector(`#dsProductSelect option[value="${product.Id}"]`);
+    if (opt) opt.textContent = product.Name;
+  } catch (err) {
+    console.error('Save product error:', err);
+    if (statusEl) {
+      statusEl.style.background = '#fee2e2';
+      statusEl.style.color = '#b91c1c';
+      statusEl.textContent = 'Error saving changes: ' + err.message;
+    }
+  }
+}
+
+async function revertProductEdits() {
+  const product = getSelectedProduct();
+  if (!product) return;
+
+  const orig = (appState.originalProducts || []).find(p => p.Id === product.Id);
+  if (!orig) {
+    alert('No original catalog baseline found for this SKU.');
+    return;
+  }
+
+  if (!confirm(`Restore original factory specifications for "${orig.Name}"? All custom edits to this SKU will be reset.`)) {
+    return;
+  }
+
+  product.Name = orig.Name;
+  product.SKU = orig.SKU;
+  product.Revision = orig.Revision;
+  product.Summary = orig.Summary;
+  product.WarrantyMonths = orig.WarrantyMonths;
+  product.ComplianceStandards = orig.ComplianceStandards;
+  product.Specifications = JSON.parse(JSON.stringify(orig.Specifications || {}));
+
+  updateDatasheetPreview(true);
+  await saveProductEdits();
+
+  const statusEl = document.getElementById('dsEditSaveStatus');
+  if (statusEl) {
+    statusEl.style.display = 'block';
+    statusEl.style.background = '#eff6ff';
+    statusEl.style.color = '#1e40af';
+    statusEl.textContent = '↺ Restored original catalog specifications!';
+    setTimeout(() => { if (statusEl) statusEl.style.display = 'none'; }, 3000);
+  }
+}
+
+// Interactive row jump: clicking a row on the clean preview smoothly jumps to that spec in the editor
+function bindDatasheetInPlaceEvents() {
+  const dsPaper = document.getElementById('printableDatasheet');
+  if (!dsPaper || dsPaper.dataset.eventsBound) return;
+  dsPaper.dataset.eventsBound = 'true';
+
+  dsPaper.addEventListener('click', (e) => {
+    const row = e.target.closest('tr[data-spec-key]');
+    if (!row) return;
+
+    const specKey = row.dataset.specKey;
+    if (!specKey) return;
+
+    // Switch Left Panel to "Edit Fields & Specs" tab if not active
+    const btnFields = document.getElementById('btnDsTabFields');
+    if (btnFields && !btnFields.classList.contains('active')) {
+      btnFields.click();
+    }
+
+    // Scroll to & highlight the corresponding input row in the left panel
+    setTimeout(() => {
+      const panelRow = document.querySelector(`.ds-spec-edit-row[data-orig-key="${CSS.escape(specKey)}"]`);
+      if (panelRow) {
+        panelRow.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        panelRow.classList.remove('ds-highlight-pulse');
+        void panelRow.offsetWidth; // trigger reflow
+        panelRow.classList.add('ds-highlight-pulse');
+        const valInput = panelRow.querySelector('.ds-input-val');
+        if (valInput) valInput.focus();
+      }
+    }, 50);
+  });
+}
+
+function bindDatasheetSubtabs() {
+  const btnSettings = document.getElementById('btnDsTabSettings');
+  const btnFields = document.getElementById('btnDsTabFields');
+  const panelSettings = document.getElementById('dsPanelSettings');
+  const panelFields = document.getElementById('dsPanelFields');
+
+  if (btnSettings && btnFields) {
+    btnSettings.addEventListener('click', () => {
+      btnSettings.classList.add('active');
+      btnFields.classList.remove('active');
+      if (panelSettings) panelSettings.style.display = 'flex';
+      if (panelFields) panelFields.style.display = 'none';
+    });
+
+    btnFields.addEventListener('click', () => {
+      btnFields.classList.add('active');
+      btnSettings.classList.remove('active');
+      if (panelFields) panelFields.style.display = 'flex';
+      if (panelSettings) panelSettings.style.display = 'none';
+      renderPreExistingFieldsEditor();
+    });
+  }
+}
+
+function bindLeftPanelFieldListeners() {
+  const nameInput = document.getElementById('dsEditName');
+  if (nameInput) {
+    nameInput.addEventListener('input', (e) => {
+      const product = getSelectedProduct();
+      if (!product) return;
+      product.Name = e.target.value;
+      const el = document.getElementById('previewProductName');
+      if (el) el.textContent = product.Name;
+      const opt = document.querySelector(`#dsProductSelect option[value="${product.Id}"]`);
+      if (opt) opt.textContent = product.Name;
+    });
+  }
+
+  const skuInput = document.getElementById('dsEditSKU');
+  if (skuInput) {
+    skuInput.addEventListener('input', (e) => {
+      const product = getSelectedProduct();
+      if (!product) return;
+      product.SKU = e.target.value;
+      const el = document.getElementById('previewSKU');
+      if (el) el.textContent = product.SKU;
+    });
+  }
+
+  const revInput = document.getElementById('dsEditRevision');
+  if (revInput) {
+    revInput.addEventListener('input', (e) => {
+      const product = getSelectedProduct();
+      if (!product) return;
+      product.Revision = e.target.value;
+      const el = document.getElementById('previewRev');
+      if (el) el.textContent = product.Revision;
+    });
+  }
+
+  const sumInput = document.getElementById('dsEditSummary');
+  if (sumInput) {
+    sumInput.addEventListener('input', (e) => {
+      const product = getSelectedProduct();
+      if (!product) return;
+      product.Summary = e.target.value;
+      const el = document.getElementById('previewSummary');
+      if (el) el.textContent = product.Summary;
+    });
+  }
+
+  const wInput = document.getElementById('dsEditWarranty');
+  if (wInput) {
+    wInput.addEventListener('input', (e) => {
+      const product = getSelectedProduct();
+      if (!product) return;
+      product.WarrantyMonths = Number(e.target.value) || 36;
+      const el = document.getElementById('previewWarranty');
+      if (el) el.textContent = `${product.WarrantyMonths} Months Factory Warranty`;
+    });
+  }
+
+  const compInput = document.getElementById('dsEditCompliance');
+  if (compInput) {
+    compInput.addEventListener('input', (e) => {
+      const product = getSelectedProduct();
+      if (!product) return;
+      product.ComplianceStandards = e.target.value;
+      const el = document.getElementById('previewCompliance');
+      if (el) el.textContent = product.ComplianceStandards;
+    });
+  }
 }
 
 function renderDatasheetHistory() {
   const box = document.getElementById('datasheetHistoryList');
   if (!box) return;
   if (!appState.datasheets.length) {
-    box.innerHTML = `<div style="color:var(--text-muted);">No submittals logged.</div>`;
+    box.innerHTML = `<div style="color:var(--text-muted); font-size:0.75rem;">No submittals logged.</div>`;
     return;
   }
-  box.innerHTML = appState.datasheets.slice(0, 5).map(d => {
+  box.innerHTML = appState.datasheets.slice(0, 4).map(d => {
     const p = appState.products.find(x => x.Id === d.ProductId);
-    return `<div style="display:flex; justify-content:space-between; padding:0.35rem 0.55rem; background:var(--bg-subtle); border:1px solid var(--border-subtle); border-radius:4px;">
-      <span class="mono"><strong>${d.DocumentCode}</strong> (${p ? p.Name : 'Product'})</span>
-      <span style="color:var(--text-secondary);">${d.GeneratedAt ? d.GeneratedAt.slice(0, 10) : 'Submittal'}</span>
-    </div>`;
+    return `
+      <div style="display:flex; justify-content:space-between; align-items:center; padding:0.35rem 0.55rem; background:var(--bg-subtle); border:1px solid var(--border-subtle); border-radius:4px; cursor:pointer; transition:background-color 0.15s ease;" title="Click to load this submittal" onclick="window.loadPreviousDatasheet(${d.Id})">
+        <span class="mono" style="font-size:0.75rem;"><strong>${escapeHtml(d.DocumentCode)}</strong> (${p ? escapeHtml(p.Name.slice(0, 18)) : 'Device'})</span>
+        <span style="color:var(--text-secondary); font-size:0.7rem;">${d.GeneratedAt ? d.GeneratedAt.slice(0, 10) : 'Submittal'}</span>
+      </div>
+    `;
   }).join('');
 }
+
+// -----------------------------------------------------------------------------
+// PREVIOUS DATASHEETS ARCHIVE & VIEW SWITCHER
+// -----------------------------------------------------------------------------
+function switchDsView(mode) {
+  // mode: 'creator' or 'history'
+  const workspaceEl = document.querySelector('.datasheet-workspace');
+  const historyViewEl = document.getElementById('dsViewHistory');
+  const btnModeCreator = document.getElementById('btnDsModeCreator');
+  const btnModeHistory = document.getElementById('btnDsModeHistory');
+  const btnNavCreateDs = document.getElementById('btnNavCreateDs');
+  const btnNavHistoryDs = document.getElementById('btnNavHistoryDs');
+  const creatorActions = document.getElementById('dsCreatorActionRow');
+  const historyActions = document.getElementById('dsHistoryActionRow');
+  const heading = document.getElementById('dsModuleHeading');
+  const subheading = document.getElementById('dsModuleSubheading');
+
+  switchTab('tab-datasheets');
+
+  if (mode === 'history') {
+    if (workspaceEl) workspaceEl.style.display = 'none';
+    if (historyViewEl) historyViewEl.style.display = 'flex';
+
+    if (btnModeCreator) {
+      btnModeCreator.classList.remove('active');
+      btnModeCreator.setAttribute('aria-selected', 'false');
+    }
+    if (btnModeHistory) {
+      btnModeHistory.classList.add('active');
+      btnModeHistory.setAttribute('aria-selected', 'true');
+    }
+
+    if (btnNavCreateDs) btnNavCreateDs.classList.remove('active');
+    if (btnNavHistoryDs) btnNavHistoryDs.classList.add('active');
+
+    if (creatorActions) creatorActions.style.display = 'none';
+    if (historyActions) historyActions.style.display = 'flex';
+
+    if (heading) heading.textContent = 'Issued Technical Datasheets Archive';
+    if (subheading) subheading.textContent = 'Review, reload, or reprint previously generated official submittals with device names, issued authorities, and dates.';
+
+    renderPreviousDatasheetsTable();
+  } else {
+    if (workspaceEl) workspaceEl.style.display = 'grid';
+    if (historyViewEl) historyViewEl.style.display = 'none';
+
+    if (btnModeCreator) {
+      btnModeCreator.classList.add('active');
+      btnModeCreator.setAttribute('aria-selected', 'true');
+    }
+    if (btnModeHistory) {
+      btnModeHistory.classList.remove('active');
+      btnModeHistory.setAttribute('aria-selected', 'false');
+    }
+
+    if (btnNavCreateDs) btnNavCreateDs.classList.add('active');
+    if (btnNavHistoryDs) btnNavHistoryDs.classList.remove('active');
+
+    if (creatorActions) creatorActions.style.display = 'flex';
+    if (historyActions) historyActions.style.display = 'none';
+
+    if (heading) heading.textContent = 'Product Technical Datasheet Generator';
+    if (subheading) subheading.textContent = 'Configure product parameters, project submittal metadata, and export print-ready technical datasheets.';
+  }
+}
+
+function renderPreviousDatasheetsTable() {
+  const tbody = document.getElementById('dsHistoryTableBody');
+  if (!tbody) return;
+
+  const search = (document.getElementById('dsHistorySearch')?.value || '').toLowerCase().trim();
+  const authFilter = document.getElementById('dsHistoryAuthorityFilter')?.value || 'ALL';
+
+  // Populate authority filter dropdown options dynamically
+  const authSelect = document.getElementById('dsHistoryAuthorityFilter');
+  if (authSelect) {
+    const authorities = [...new Set(appState.datasheets.map(d => d.CustomClientName).filter(Boolean))].sort();
+    const currentVal = authSelect.value;
+    authSelect.innerHTML = '<option value="ALL">All Authorities / Clients</option>' +
+      authorities.map(a => `<option value="${escapeAttr(a)}">${escapeHtml(a)}</option>`).join('');
+    if (authorities.includes(currentVal)) {
+      authSelect.value = currentVal;
+    }
+  }
+
+  // Calculate KPIs
+  const totalSubmittals = appState.datasheets.length;
+  const uniqueProductIds = new Set(appState.datasheets.map(d => d.ProductId));
+  const uniqueAuthorities = new Set(appState.datasheets.map(d => d.CustomClientName).filter(Boolean));
+  const latestEntry = appState.datasheets[0];
+
+  const kpiTotalEl = document.getElementById('kpiHistoryTotal');
+  if (kpiTotalEl) kpiTotalEl.textContent = totalSubmittals;
+  const kpiDevicesEl = document.getElementById('kpiHistoryDevices');
+  if (kpiDevicesEl) kpiDevicesEl.textContent = uniqueProductIds.size;
+  const kpiAuthEl = document.getElementById('kpiHistoryAuthorities');
+  if (kpiAuthEl) kpiAuthEl.textContent = uniqueAuthorities.size;
+  const kpiLatestDateEl = document.getElementById('kpiHistoryLatestDate');
+  if (kpiLatestDateEl) {
+    kpiLatestDateEl.textContent = latestEntry && latestEntry.GeneratedAt ? latestEntry.GeneratedAt.slice(0, 10) : 'None';
+  }
+  const kpiLatestIssuerEl = document.getElementById('kpiHistoryLatestIssuer');
+  if (kpiLatestIssuerEl) {
+    kpiLatestIssuerEl.textContent = latestEntry ? (latestEntry.GeneratedBy || 'Engineering Team') : '-';
+  }
+
+  // Filter datasheets
+  const filtered = appState.datasheets.filter(d => {
+    const p = appState.products.find(x => x.Id === d.ProductId);
+    const prodName = p ? p.Name : '';
+    const prodSku = p ? p.SKU : '';
+    const prodCat = p ? p.Category : '';
+    const authority = d.CustomClientName || '';
+    const project = d.CustomProjectName || '';
+    const issuer = d.GeneratedBy || '';
+    const docCode = d.DocumentCode || '';
+
+    const matchesSearch = !search ||
+      prodName.toLowerCase().includes(search) ||
+      prodSku.toLowerCase().includes(search) ||
+      prodCat.toLowerCase().includes(search) ||
+      authority.toLowerCase().includes(search) ||
+      project.toLowerCase().includes(search) ||
+      issuer.toLowerCase().includes(search) ||
+      docCode.toLowerCase().includes(search);
+
+    const matchesAuth = authFilter === 'ALL' || authority === authFilter;
+
+    return matchesSearch && matchesAuth;
+  });
+
+  const countBadge = document.getElementById('dsHistoryFilteredCount');
+  if (countBadge) countBadge.textContent = filtered.length;
+
+  if (!filtered.length) {
+    tbody.innerHTML = `
+      <tr>
+        <td colspan="5" style="text-align:center; padding:2rem 1rem; color:var(--text-muted);">
+          <div style="font-size:0.9rem; font-weight:600; margin-bottom:0.35rem;">No previous datasheets found</div>
+          <div style="font-size:0.78rem;">${search ? 'Try adjusting your search or authority filter.' : 'Generate your first product datasheet using the creator workspace.'}</div>
+          <button type="button" class="btn btn-sm btn-primary" onclick="switchDsView('creator')" style="margin-top:0.75rem;">
+            ➕ Go to Datasheet Creator
+          </button>
+        </td>
+      </tr>
+    `;
+    return;
+  }
+
+  tbody.innerHTML = filtered.map(d => {
+    const p = appState.products.find(x => x.Id === d.ProductId);
+    const devName = p ? p.Name : `Device Model #${d.ProductId}`;
+    const devSku = p ? p.SKU : '';
+    const devCat = p ? p.Category : 'Hardware';
+    const authority = d.CustomClientName || 'Direct Official Submittal';
+    const issuer = d.GeneratedBy || 'Engineering Team';
+    const initial = issuer.trim().charAt(0).toUpperCase() || 'E';
+    const dateStr = d.GeneratedAt ? d.GeneratedAt.slice(0, 10) : '2026-10-29';
+
+    return `
+      <tr>
+        <td>
+          <div style="font-weight:700; color:var(--text-primary); font-size:0.88rem;">${escapeHtml(devName)}</div>
+          <div style="display:flex; align-items:center; gap:0.4rem; margin-top:0.25rem; flex-wrap:wrap;">
+            <span class="badge badge-blue" style="font-size:0.66rem;">${escapeHtml(devCat)}</span>
+            ${devSku ? `<span class="mono" style="font-size:0.72rem; color:var(--text-muted);">${escapeHtml(devSku)}</span>` : ''}
+            <span class="mono badge" style="font-size:0.66rem; background:#f1f5f9; color:#0369a1; border-color:#cbd5e1;">${escapeHtml(d.DocumentCode)}</span>
+          </div>
+        </td>
+        <td>
+          <div style="font-weight:600; color:var(--text-primary); font-size:0.83rem;">${escapeHtml(authority)}</div>
+          ${d.CustomProjectName ? `<div style="font-size:0.74rem; color:var(--text-secondary); margin-top:0.15rem;">${escapeHtml(d.CustomProjectName)}</div>` : ''}
+        </td>
+        <td>
+          <div style="display:flex; align-items:center; gap:0.45rem;">
+            <span class="user-avatar-chip">${escapeHtml(initial)}</span>
+            <span style="font-weight:500; font-size:0.82rem; color:var(--text-primary);">${escapeHtml(issuer)}</span>
+          </div>
+        </td>
+        <td>
+          <div class="mono" style="font-size:0.82rem; font-weight:600; color:var(--text-primary);">${escapeHtml(dateStr)}</div>
+          <div style="font-size:0.68rem; color:var(--text-muted);">${escapeHtml(d.Version || 'Rev 2026.1')}</div>
+        </td>
+        <td>
+          <div class="action-row" style="justify-content:flex-end;">
+            <button class="btn btn-sm btn-primary" type="button" title="Open this datasheet in creator" onclick="window.loadPreviousDatasheet(${d.Id})">
+              👁️ View / Load
+            </button>
+            <button class="btn btn-sm" type="button" title="Print this datasheet" onclick="window.printPreviousDatasheet(${d.Id})">
+              🖨️ Print
+            </button>
+            <button class="btn btn-sm btn-danger" type="button" title="Delete archive record" onclick="window.deletePreviousDatasheet(${d.Id})">
+              ✕
+            </button>
+          </div>
+        </td>
+      </tr>
+    `;
+  }).join('');
+}
+
+window.loadPreviousDatasheet = function (id) {
+  const d = appState.datasheets.find(x => x.Id === Number(id));
+  if (!d) return;
+
+  const product = appState.products.find(p => p.Id === d.ProductId);
+  if (product) {
+    const catSelect = document.getElementById('dsCategoryFilter');
+    if (catSelect) {
+      catSelect.value = 'ALL';
+      renderDatasheetModule();
+    }
+    const prodSelect = document.getElementById('dsProductSelect');
+    if (prodSelect) {
+      prodSelect.value = product.Id;
+    }
+  }
+
+  const docCodeInput = document.getElementById('dsDocCode');
+  if (docCodeInput) docCodeInput.value = d.DocumentCode || 'DS-MTX-2026-001';
+
+  const clientInput = document.getElementById('dsCustomClient');
+  if (clientInput) clientInput.value = d.CustomClientName || '';
+
+  const projectInput = document.getElementById('dsCustomProject');
+  if (projectInput) projectInput.value = d.CustomProjectName || '';
+
+  const issuerInput = document.getElementById('dsIssuedBy');
+  if (issuerInput) issuerInput.value = d.GeneratedBy || '';
+
+  const dateInput = document.getElementById('dsIssueDate');
+  if (dateInput) dateInput.value = d.GeneratedAt ? d.GeneratedAt.slice(0, 10) : new Date().toISOString().slice(0, 10);
+
+  updateDatasheetPreview(true);
+  switchDsView('creator');
+
+  // Flash confirmation message
+  const statusEl = document.getElementById('dsEditSaveStatus');
+  if (statusEl) {
+    statusEl.style.display = 'block';
+    statusEl.style.background = '#e0f2fe';
+    statusEl.style.color = '#0369a1';
+    statusEl.textContent = `✓ Loaded submittal "${d.DocumentCode}" for ${product ? product.Name : 'device'}`;
+    setTimeout(() => { if (statusEl) statusEl.style.display = 'none'; }, 4000);
+  }
+};
+
+window.printPreviousDatasheet = function (id) {
+  window.loadPreviousDatasheet(id);
+  setTimeout(() => window.print(), 350);
+};
+
+window.deletePreviousDatasheet = async function (id) {
+  const d = appState.datasheets.find(x => x.Id === Number(id));
+  const docCode = d ? d.DocumentCode : `ID #${id}`;
+  if (!confirm(`Are you sure you want to remove archived submittal "${docCode}"?`)) return;
+
+  try {
+    await fetch(`/api/datasheets/${id}`, { method: 'DELETE' });
+  } catch (err) {
+    console.warn('Backend delete response:', err);
+  }
+
+  appState.datasheets = appState.datasheets.filter(x => x.Id !== Number(id));
+  renderPreviousDatasheetsTable();
+  renderDatasheetHistory();
+  renderAllCounts();
+};
 
 
 // MODULE 2: SHARED CONTACTS & PHONE VCARD (.VCF) IMPORT/EXPORT
@@ -1372,7 +2092,7 @@ function exportEquivalentsCSV() {
   URL.revokeObjectURL(url);
 }
 
-function bindEvents() {
+function bindTenderTrackerAndCoreListeners() {
   // Datasheet Events
   const dsCatFilter = document.getElementById('dsCategoryFilter');
   if (dsCatFilter) {
@@ -2423,54 +3143,290 @@ async function runPricingEstimator() {
 // EVENT LISTENERS & FORM HANDLERS
 // =============================================================================
 function bindEvents() {
+  bindTenderTrackerAndCoreListeners();
+
   const dsCatFilter = document.getElementById('dsCategoryFilter');
   if (dsCatFilter) {
     dsCatFilter.addEventListener('change', renderDatasheetModule);
   }
 
-  ['dsProductSelect', 'dsCustomClient', 'dsCustomProject', 'dsDocCode', 'dsAccentColor'].forEach(id => {
+  const dsProductSelect = document.getElementById('dsProductSelect');
+  if (dsProductSelect) {
+    dsProductSelect.addEventListener('change', () => updateDatasheetPreview(true));
+  }
+
+  ['dsCustomClient', 'dsCustomProject', 'dsDocCode', 'dsIssuedBy', 'dsIssueDate'].forEach(id => {
     const el = document.getElementById(id);
-    if (el) el.addEventListener('input', updateDatasheetPreview);
+    if (el) el.addEventListener('input', () => updateDatasheetPreview(false));
   });
 
-  document.getElementById('btnAddSpecRow').addEventListener('click', async () => {
-    const key = document.getElementById('newSpecKey').value.trim();
-    const val = document.getElementById('newSpecVal').value.trim();
-    if (!key || !val) return;
-    const prod = getSelectedProduct();
-    if (!prod) return;
-    prod.Specifications = { ...(prod.Specifications || {}), [key]: val };
-    await fetch(`/api/products/${prod.Id}`, {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ Specifications: prod.Specifications })
+  // Subtabs & Field Editor Controls
+  bindDatasheetSubtabs();
+  bindLeftPanelFieldListeners();
+
+  const btnToggleFields = document.getElementById('btnToggleFieldsEditor');
+  if (btnToggleFields) {
+    btnToggleFields.addEventListener('click', () => {
+      const btnFields = document.getElementById('btnDsTabFields');
+      const btnSettings = document.getElementById('btnDsTabSettings');
+      if (btnFields && btnFields.classList.contains('active')) {
+        btnSettings.click();
+      } else if (btnFields) {
+        btnFields.click();
+      }
     });
-    document.getElementById('newSpecKey').value = '';
-    document.getElementById('newSpecVal').value = '';
-    updateDatasheetPreview();
-  });
+  }
+
+  const specSearch = document.getElementById('dsSpecSearchInput');
+  if (specSearch) {
+    specSearch.addEventListener('input', (e) => {
+      renderPreExistingFieldsEditor(e.target.value);
+    });
+  }
+
+  const btnOpenModal = document.getElementById('btnOpenSpecsModal');
+  if (btnOpenModal) {
+    btnOpenModal.addEventListener('click', openProductSpecsModal);
+  }
+
+  const modalSearch = document.getElementById('modalSpecSearchInput');
+  if (modalSearch) {
+    modalSearch.addEventListener('input', renderModalSpecsTable);
+  }
+
+  const btnModalAdd = document.getElementById('btnModalAddSpec');
+  if (btnModalAdd) {
+    btnModalAdd.addEventListener('click', () => {
+      const kInput = document.getElementById('modalNewSpecKey');
+      const vInput = document.getElementById('modalNewSpecVal');
+      const k = kInput.value.trim();
+      const v = vInput.value.trim();
+      if (!k || !v) {
+        alert('Please provide both Parameter Name and Value.');
+        return;
+      }
+      const prod = getSelectedProduct();
+      if (!prod) return;
+      prod.Specifications = { ...(prod.Specifications || {}), [k]: v };
+      kInput.value = '';
+      vInput.value = '';
+      updateDatasheetPreview(false);
+      renderPreExistingFieldsEditor();
+      renderModalSpecsTable();
+    });
+  }
+
+  const btnModalSave = document.getElementById('btnModalSaveSpecs');
+  if (btnModalSave) {
+    btnModalSave.addEventListener('click', async () => {
+      await saveProductEdits();
+      document.getElementById('dialogProductSpecsEditor').close();
+    });
+  }
+
+  const btnSaveEdits = document.getElementById('btnSaveProductEdits');
+  if (btnSaveEdits) btnSaveEdits.addEventListener('click', saveProductEdits);
+
+  const btnRevertEdits = document.getElementById('btnRevertProductEdits');
+  if (btnRevertEdits) btnRevertEdits.addEventListener('click', revertProductEdits);
+
+  // Add Spec Row button
+  const btnAddSpec = document.getElementById('btnAddSpecRow');
+  if (btnAddSpec) {
+    btnAddSpec.addEventListener('click', async () => {
+      const keyInput = document.getElementById('newSpecKey');
+      const valInput = document.getElementById('newSpecVal');
+      const key = keyInput.value.trim();
+      const val = valInput.value.trim();
+      if (!key || !val) {
+        alert('Please enter both a Parameter Name and a Value.');
+        return;
+      }
+      const prod = getSelectedProduct();
+      if (!prod) return;
+      prod.Specifications = { ...(prod.Specifications || {}), [key]: val };
+      keyInput.value = '';
+      valInput.value = '';
+      updateDatasheetPreview(true);
+      await saveProductEdits();
+    });
+  }
+
+  // Product Image Controls
+  const fileInput = document.getElementById('dsImageFileInput');
+  const btnUpload = document.getElementById('btnUploadImage');
+  const btnRemove = document.getElementById('btnRemoveImage');
+  const btnApplyUrl = document.getElementById('btnApplyImageUrl');
+  const urlInput = document.getElementById('dsImageUrlInput');
+
+  if (btnUpload && fileInput) {
+    btnUpload.addEventListener('click', () => fileInput.click());
+    fileInput.addEventListener('change', (e) => {
+      const file = e.target.files && e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = (loadEvt) => {
+        const prod = getSelectedProduct();
+        if (prod) {
+          appState.productImages[prod.Id] = loadEvt.target.result;
+          updateDatasheetPreview(false);
+        }
+      };
+      reader.readAsDataURL(file);
+    });
+  }
+
+  if (btnRemove) {
+    btnRemove.addEventListener('click', () => {
+      const prod = getSelectedProduct();
+      if (prod) {
+        delete appState.productImages[prod.Id];
+        updateDatasheetPreview(false);
+      }
+    });
+  }
+
+  if (btnApplyUrl && urlInput) {
+    btnApplyUrl.addEventListener('click', () => {
+      const url = urlInput.value.trim();
+      if (!url) return;
+      const prod = getSelectedProduct();
+      if (prod) {
+        appState.productImages[prod.Id] = url;
+        urlInput.value = '';
+        updateDatasheetPreview(false);
+      }
+    });
+  }
 
   document.getElementById('btnGeneratePDF').addEventListener('click', async () => {
     const prod = getSelectedProduct();
     if (prod) {
-      const res = await fetch('/api/datasheets/log', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          ProductId: prod.Id,
-          DocumentCode: document.getElementById('dsDocCode').value,
-          Version: prod.Revision,
-          CustomProjectName: document.getElementById('dsCustomProject').value,
-          CustomClientName: document.getElementById('dsCustomClient').value,
-          GeneratedBy: appState.activeUser ? appState.activeUser.FullName : 'User'
-        })
-      });
-      const entry = await res.json();
-      appState.datasheets.unshift(entry);
-      renderDatasheetHistory();
+      const docCode = document.getElementById('dsDocCode')?.value || 'DS-MTX-2026-001';
+      const customProject = document.getElementById('dsCustomProject')?.value || 'National IT & Data Infrastructure Submittal';
+      const customClient = document.getElementById('dsCustomClient')?.value || 'Ministry of Digital Economy & Entrepreneurship';
+      const issuedBy = document.getElementById('dsIssuedBy')?.value || (appState.activeUser ? appState.activeUser.FullName : 'Eng. Mohammed Al-Mansoor');
+      const issueDate = document.getElementById('dsIssueDate')?.value || new Date().toISOString().slice(0, 10);
+
+      try {
+        const res = await fetch('/api/datasheets/log', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            ProductId: prod.Id,
+            DocumentCode: docCode,
+            Version: prod.Revision || 'Rev 2026.1',
+            CustomProjectName: customProject,
+            CustomClientName: customClient,
+            GeneratedBy: issuedBy,
+            GeneratedAt: issueDate
+          })
+        });
+        const entry = await res.json();
+        appState.datasheets.unshift(entry);
+        renderDatasheetHistory();
+        renderPreviousDatasheetsTable();
+        renderAllCounts();
+      } catch (err) {
+        console.error('Failed to log datasheet submittal:', err);
+      }
     }
     window.print();
   });
+
+  // Sidebar Datasheet Dropdown Toggle
+  const dsNavWrapper = document.getElementById('dsNavWrapper');
+  const btnDsNavDropdownToggle = document.getElementById('btnDsNavDropdownToggle');
+  const navBtnDatasheets = document.getElementById('navBtnDatasheets');
+
+  if (btnDsNavDropdownToggle && dsNavWrapper) {
+    btnDsNavDropdownToggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      dsNavWrapper.classList.toggle('open');
+      const isOpen = dsNavWrapper.classList.contains('open');
+      btnDsNavDropdownToggle.setAttribute('aria-expanded', String(isOpen));
+    });
+  }
+
+  if (navBtnDatasheets && dsNavWrapper) {
+    navBtnDatasheets.addEventListener('click', (e) => {
+      // If user clicks on the rightmost 50px of the button, toggle the dropdown
+      const rect = navBtnDatasheets.getBoundingClientRect();
+      const clickX = e.clientX - rect.left;
+      if (clickX > rect.width - 50) {
+        e.stopPropagation();
+        dsNavWrapper.classList.toggle('open');
+        const isOpen = dsNavWrapper.classList.contains('open');
+        if (btnDsNavDropdownToggle) btnDsNavDropdownToggle.setAttribute('aria-expanded', String(isOpen));
+        return;
+      }
+      // Otherwise, open the creator view and show dropdown
+      switchDsView('creator');
+      dsNavWrapper.classList.add('open');
+    });
+  }
+
+  // Close dropdown when clicking outside
+  document.addEventListener('click', (e) => {
+    if (dsNavWrapper && !dsNavWrapper.contains(e.target)) {
+      dsNavWrapper.classList.remove('open');
+      if (btnDsNavDropdownToggle) btnDsNavDropdownToggle.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  // Sidebar Submenu items
+  const btnNavCreateDs = document.getElementById('btnNavCreateDs');
+  if (btnNavCreateDs) {
+    btnNavCreateDs.addEventListener('click', (e) => {
+      e.stopPropagation();
+      switchDsView('creator');
+    });
+  }
+
+  const btnNavHistoryDs = document.getElementById('btnNavHistoryDs');
+  if (btnNavHistoryDs) {
+    btnNavHistoryDs.addEventListener('click', (e) => {
+      e.stopPropagation();
+      switchDsView('history');
+    });
+  }
+
+  // Header Segmented Switcher buttons
+  const btnDsModeCreator = document.getElementById('btnDsModeCreator');
+  if (btnDsModeCreator) {
+    btnDsModeCreator.addEventListener('click', () => switchDsView('creator'));
+  }
+
+  const btnDsModeHistory = document.getElementById('btnDsModeHistory');
+  if (btnDsModeHistory) {
+    btnDsModeHistory.addEventListener('click', () => switchDsView('history'));
+  }
+
+  const btnHistorySwitchToCreator = document.getElementById('btnHistorySwitchToCreator');
+  if (btnHistorySwitchToCreator) {
+    btnHistorySwitchToCreator.addEventListener('click', () => switchDsView('creator'));
+  }
+
+  const btnHistoryCreateNewSubmittal = document.getElementById('btnHistoryCreateNewSubmittal');
+  if (btnHistoryCreateNewSubmittal) {
+    btnHistoryCreateNewSubmittal.addEventListener('click', () => switchDsView('creator'));
+  }
+
+  const btnQuickOpenHistoryArchive = document.getElementById('btnQuickOpenHistoryArchive');
+  if (btnQuickOpenHistoryArchive) {
+    btnQuickOpenHistoryArchive.addEventListener('click', () => switchDsView('history'));
+  }
+
+  // Previous Datasheets Search & Filter
+  const dsHistorySearch = document.getElementById('dsHistorySearch');
+  if (dsHistorySearch) {
+    dsHistorySearch.addEventListener('input', () => renderPreviousDatasheetsTable());
+  }
+
+  const dsHistoryAuthorityFilter = document.getElementById('dsHistoryAuthorityFilter');
+  if (dsHistoryAuthorityFilter) {
+    dsHistoryAuthorityFilter.addEventListener('change', () => renderPreviousDatasheetsTable());
+  }
 
   ['contactSearchInput', 'contactFactoryFilter', 'contactVisibilityFilter'].forEach(id => {
     document.getElementById(id).addEventListener('input', renderContactsModule);

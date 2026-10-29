@@ -41,6 +41,7 @@ body {
   display: flex;
   flex-direction: column;
   -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
 }
 
 .mono {
@@ -51,8 +52,9 @@ body {
 /* App Shell */
 .app-layout {
   display: grid;
-  grid-template-columns: 248px 1fr;
+  grid-template-columns: 248px minmax(0, 1fr);
   min-height: 100dvh;
+  min-width: 0;
   container-type: inline-size;
 }
 
@@ -180,6 +182,182 @@ body {
   color: #ffffff;
 }
 
+/* Sidebar Nav Dropdown & Sub-options */
+.nav-dropdown-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.nav-btn-with-arrow {
+  display: flex;
+  align-items: center;
+  position: relative;
+  width: 100%;
+}
+
+.nav-btn-with-arrow .nav-btn {
+  flex: 1;
+  padding-right: 2.4rem;
+}
+
+.nav-arrow-btn {
+  position: absolute;
+  right: 6px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 24px;
+  height: 24px;
+  border-radius: var(--radius-sm);
+  border: none;
+  background: transparent;
+  color: #94a3b8;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease;
+  z-index: 2;
+  padding: 0;
+}
+
+.nav-arrow-btn svg {
+  width: 14px;
+  height: 14px;
+  stroke: currentColor;
+  stroke-width: 2.2;
+  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.nav-arrow-btn:hover {
+  background-color: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+}
+
+.nav-dropdown-wrapper.open .nav-arrow-btn svg {
+  transform: rotate(180deg);
+}
+
+.nav-sub-dropdown {
+  display: none;
+  flex-direction: column;
+  gap: 2px;
+  padding: 0.25rem 0.35rem 0.35rem 1.6rem;
+  margin-top: 1px;
+  margin-bottom: 4px;
+  border-left: 2px solid rgba(56, 189, 248, 0.35);
+  margin-left: 1.25rem;
+  background: rgba(15, 23, 42, 0.35);
+  border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+}
+
+.nav-dropdown-wrapper.open .nav-sub-dropdown {
+  display: flex;
+}
+
+.nav-sub-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.42rem 0.65rem;
+  border-radius: var(--radius-sm);
+  border: none;
+  background: transparent;
+  color: #94a3b8;
+  font-size: 0.77rem;
+  font-weight: 500;
+  cursor: pointer;
+  text-align: left;
+  transition: background-color 0.12s ease, color 0.12s ease;
+  width: 100%;
+}
+
+.nav-sub-btn svg {
+  width: 13px;
+  height: 13px;
+  stroke: currentColor;
+  opacity: 0.8;
+  flex-shrink: 0;
+}
+
+.nav-sub-btn:hover {
+  background-color: var(--bg-sidebar-hover);
+  color: #ffffff;
+}
+
+.nav-sub-btn.active {
+  background-color: #1e293b;
+  color: #38bdf8;
+  font-weight: 600;
+}
+
+.nav-sub-btn.active svg {
+  stroke: #38bdf8;
+  opacity: 1;
+}
+
+/* Datasheet Mode Segmented Switcher */
+.ds-view-switcher {
+  display: inline-flex;
+  align-items: center;
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-color);
+  padding: 3px;
+  border-radius: var(--radius-sm);
+  gap: 3px;
+}
+
+.ds-mode-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.38rem 0.8rem;
+  border-radius: 4px;
+  border: none;
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.ds-mode-btn svg {
+  opacity: 0.75;
+}
+
+.ds-mode-btn:hover {
+  color: var(--text-primary);
+  background: rgba(0, 0, 0, 0.04);
+}
+
+.ds-mode-btn.active {
+  background: var(--bg-surface);
+  color: var(--accent-primary);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.ds-mode-btn.active svg {
+  stroke: var(--accent-primary);
+  opacity: 1;
+}
+
+/* User Avatar Initial Chip */
+.user-avatar-chip {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background-color: #e0f2fe;
+  color: #0369a1;
+  font-weight: 700;
+  font-size: 0.72rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #bae6fd;
+  flex-shrink: 0;
+}
+
 .sidebar-footer {
   border-block-start: 1px solid #1e293b;
   padding: 0.9rem 1rem;
@@ -272,6 +450,8 @@ body {
   max-width: 1560px;
   width: 100%;
   margin: 0 auto;
+  min-width: 0;
+  box-sizing: border-box;
 }
 
 .tab-panel {
@@ -622,9 +802,11 @@ table.data-table tbody tr:hover th {
 /* Datasheet Split Workspace & Print-Ready Technical Sheet */
 .datasheet-workspace {
   display: grid;
-  grid-template-columns: 390px 1fr;
+  grid-template-columns: 390px minmax(0, 1fr);
   gap: 1.25rem;
   align-items: start;
+  min-width: 0;
+  max-width: 100%;
 }
 
 .datasheet-paper {
@@ -635,6 +817,10 @@ table.data-table tbody tr:hover th {
   border-radius: var(--radius-sm);
   padding: 2rem 2.25rem;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  min-width: 0;
+  max-width: 100%;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 .ds-header {
@@ -644,12 +830,14 @@ table.data-table tbody tr:hover th {
   border-bottom: 2px solid #0f172a;
   padding-bottom: 1rem;
   margin-bottom: 1.15rem;
+  min-width: 0;
 }
 
 .ds-brand {
   display: flex;
   align-items: center;
   gap: 0.75rem;
+  min-width: 0;
 }
 
 .ds-brand-mark {
@@ -677,18 +865,35 @@ table.data-table tbody tr:hover th {
   border-left: 4px solid #1e3a8a;
   padding: 0.75rem 1rem;
   margin-bottom: 1rem;
+  min-width: 0;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 .ds-title-banner h2 {
   font-size: 1.15rem;
   color: #0f172a;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  white-space: normal;
+  line-height: 1.35;
+}
+
+#previewSummary {
+  overflow-wrap: break-word;
+  word-break: break-word;
+  white-space: normal;
+  line-height: 1.5;
 }
 
 .ds-spec-table {
   width: 100%;
+  table-layout: fixed;
   border-collapse: collapse;
   margin-top: 0.5rem;
   font-size: 0.8rem;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 .ds-spec-table th,
@@ -696,13 +901,95 @@ table.data-table tbody tr:hover th {
   border: 1px solid #cbd5e1;
   padding: 0.45rem 0.65rem;
   text-align: left;
+  vertical-align: top;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  white-space: normal;
+  hyphens: auto;
 }
 
 .ds-spec-table th {
   background-color: #f1f5f9;
   color: #1e293b;
-  width: 42%;
+  width: 38%;
   font-weight: 600;
+  line-height: 1.4;
+}
+
+.ds-spec-table td {
+  width: 62%;
+  line-height: 1.5;
+}
+
+/* Subtabs for Datasheet Controls */
+.ds-subtab-btn {
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--text-secondary);
+  font-weight: 500;
+  transition: all 0.15s ease;
+}
+.ds-subtab-btn.active {
+  background: var(--bg-surface);
+  color: var(--accent-primary);
+  border-color: var(--border-color);
+  font-weight: 700;
+}
+
+/* Pre-existing Specifications Editor Rows */
+.ds-spec-edit-row {
+  display: grid;
+  grid-template-columns: 1fr 1.25fr auto;
+  gap: 0.35rem;
+  align-items: center;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: 3px;
+  padding: 0.3rem 0.4rem;
+  min-width: 0;
+}
+.ds-spec-edit-row input {
+  font-size: 0.74rem;
+  padding: 0.25rem 0.4rem;
+  min-width: 0;
+  width: 100%;
+}
+.ds-spec-edit-row .btn-del-spec {
+  background: transparent;
+  border: none;
+  color: #ef4444;
+  cursor: pointer;
+  padding: 0.2rem 0.4rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  border-radius: 3px;
+  line-height: 1;
+}
+.ds-spec-edit-row .btn-del-spec:hover {
+  background: #fee2e2;
+}
+
+/* Interactive Spec Table on Datasheet Paper (Pure, Elegant Preview) */
+.ds-spec-table tbody tr {
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+.ds-spec-table tbody tr:hover {
+  background-color: #f1f5f9;
+}
+.ds-spec-table tbody tr:hover th {
+  color: #1e40af;
+}
+
+/* Pulse animation when jumping to field from datasheet */
+@keyframes dsPulseHighlight {
+  0% { background-color: #dbeafe; outline: 2px solid #2563eb; }
+  100% { background-color: var(--bg-surface); outline: none; }
+}
+
+.ds-highlight-pulse {
+  animation: dsPulseHighlight 1.8s ease-out;
+}
 }
 
 .ds-footer {
@@ -904,6 +1191,15 @@ dialog.app-dialog::backdrop {
     width: 100% !important;
     padding: 1rem !important;
   }
+  .ds-editable, .ds-editable:hover, .ds-editable:focus {
+    background-color: transparent !important;
+    outline: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+  }
+  .ds-edit-banner, .ds-row-actions, .ds-row-delete-btn, .btn-del-spec {
+    display: none !important;
+  }
 }
 
 /* =============================================================================
@@ -959,16 +1255,18 @@ dialog.app-dialog::backdrop {
 
 .ds-highlight-grid-4 {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 0.5rem;
   margin-bottom: 0.85rem;
+  min-width: 0;
 }
 
 .ds-highlight-grid-3 {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 0.5rem;
   margin-bottom: 0.85rem;
+  min-width: 0;
 }
 
 .ds-highlight-card {
@@ -977,6 +1275,9 @@ dialog.app-dialog::backdrop {
   border-left: 3px solid #1e3a8a;
   border-radius: 3px;
   padding: 0.5rem 0.65rem;
+  min-width: 0;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 .ds-highlight-label {
@@ -985,6 +1286,8 @@ dialog.app-dialog::backdrop {
   color: #64748b;
   text-transform: uppercase;
   letter-spacing: 0.04em;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 .ds-highlight-val {
@@ -992,9 +1295,10 @@ dialog.app-dialog::backdrop {
   font-weight: 700;
   color: #0f172a;
   margin-top: 0.15rem;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  white-space: normal;
+  line-height: 1.35;
 }
 
 .ds-feature-pills {
@@ -1002,6 +1306,7 @@ dialog.app-dialog::backdrop {
   flex-wrap: wrap;
   gap: 0.4rem;
   margin-bottom: 0.85rem;
+  min-width: 0;
 }
 
 .ds-pill {
@@ -1012,11 +1317,14 @@ dialog.app-dialog::backdrop {
   font-size: 0.72rem;
   font-weight: 600;
   color: #1e293b;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  max-width: 100%;
 }
 
 .ds-card-grid-2 {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: 0.75rem;
   margin-bottom: 0.85rem;
 }

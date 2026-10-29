@@ -331,11 +331,19 @@ app.post('/api/datasheets/log', (req, res) => {
     CustomProjectName: req.body.CustomProjectName || '',
     CustomClientName: req.body.CustomClientName || '',
     GeneratedBy: req.body.GeneratedBy || 'Mohammed Al-Mansoor',
-    GeneratedAt: new Date().toISOString()
+    GeneratedAt: req.body.GeneratedAt || new Date().toISOString()
   };
   store.datasheets.unshift(entry);
   saveStore(store);
   res.json(entry);
+});
+
+app.delete('/api/datasheets/:id', (req, res) => {
+  const store = loadStore();
+  const id = Number(req.params.id);
+  store.datasheets = store.datasheets.filter(d => d.Id !== id);
+  saveStore(store);
+  res.json({ success: true, id });
 });
 
 // -----------------------------------------------------------------------------

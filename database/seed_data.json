@@ -1178,10 +1178,10 @@
       "ProductId": 1,
       "DocumentCode": "DS-SJ-B1Q-2026-001",
       "Version": "Rev 2026.1",
-      "TemplateStyle": "Corporate Navy",
-      "CustomProjectName": "Ministry of Digital Economy Desktop Fleet Tender",
-      "CustomClientName": "Government Tenders Department (Jordan)",
-      "GeneratedBy": "Mohammed",
+      "TemplateStyle": "Matrix Industrial Blue",
+      "CustomProjectName": "Desktop Fleet Tender 2026",
+      "CustomClientName": "Ministry of Digital Economy & Entrepreneurship",
+      "GeneratedBy": "Mohammed Al-Mansoor",
       "GeneratedAt": "2026-10-28T14:20:00Z"
     },
     {
@@ -1189,11 +1189,33 @@
       "ProductId": 25,
       "DocumentCode": "DS-SJ-HP9336C-002",
       "Version": "Rev 2026.2",
-      "TemplateStyle": "Corporate Navy",
-      "CustomProjectName": "Hospital Data Center 80kVA 3-Phase UPS Submittal",
-      "CustomClientName": "Royal Medical Services",
-      "GeneratedBy": "Mohammed",
+      "TemplateStyle": "Matrix Industrial Blue",
+      "CustomProjectName": "Hospital Critical Power Center Submittal",
+      "CustomClientName": "Royal Medical Services (RMS)",
+      "GeneratedBy": "Mohammed Al-Mansoor",
       "GeneratedAt": "2026-10-28T16:10:00Z"
+    },
+    {
+      "Id": 3,
+      "ProductId": 21,
+      "DocumentCode": "DS-SJ-I750-2026-003",
+      "Version": "Rev 2026.1",
+      "TemplateStyle": "Matrix Industrial Blue",
+      "CustomProjectName": "Smart Classrooms & Distance Learning Initiative",
+      "CustomClientName": "Ministry of Education & Scientific Research",
+      "GeneratedBy": "Eng. Tariq Al-Najjar",
+      "GeneratedAt": "2026-10-29T10:15:00Z"
+    },
+    {
+      "Id": 4,
+      "ProductId": 28,
+      "DocumentCode": "DS-SJ-CCTV-2026-004",
+      "Version": "Rev 2026.1",
+      "TemplateStyle": "Matrix Industrial Blue",
+      "CustomProjectName": "Border Control & Logistics Warehouse Security",
+      "CustomClientName": "Jordan Customs Department",
+      "GeneratedBy": "Mohammed Al-Mansoor",
+      "GeneratedAt": "2026-10-29T11:45:00Z"
     }
   ],
   "tenders": [
