@@ -283,7 +283,7 @@ function updateDatasheetPreview(syncEditor = true) {
   bindDatasheetInPlaceEvents();
 }
 
-// Unique Layout Renderer for Each Product Type
+// Unique Layout Renderer for Each Product Type (Sajaya Reference Standard)
 function renderProductUniqueLayout(product) {
   const container = document.getElementById('previewUniqueLayout');
   if (!container) return;
@@ -292,299 +292,124 @@ function renderProductUniqueLayout(product) {
   const specs = product.Specifications || {};
   const features = Array.isArray(product.Features) && product.Features.length
     ? product.Features
-    : ['Manufactured under ISO 9001 quality management', 'Tested for 24h continuous operation', 'Local Jordan SLA & spare parts support'];
+    : [
+        'Intel® & Enterprise Multi-Threaded Processing Architecture',
+        'PCIe Expansion & Industrial Hardware Component Reliability',
+        'Built-in HD Audio & Multi-Display 4K Digital Connectivity',
+        'Hardware TPM 2.0 Security & Windows 11 Enterprise Ready'
+      ];
 
-  let layoutHtml = '';
+  // 1. Dynamic 4-Metric Grid in Hero Showcase (Sajaya 2x2 Grid)
+  const metricsGrid = document.getElementById('dsKeyMetricsGrid');
+  if (metricsGrid) {
+    const m1 = specs['Processor'] || specs['Processors'] || specs['CPU'] || specs['Engine'] || '14th Gen Intel®';
+    const m2 = specs['Memory (RAM)'] || specs['System Memory'] || specs['RAM'] || specs['Memory'] || 'Up to 64GB DDR5';
+    const m3 = specs['Storage Drive'] || specs['Storage'] || specs['Primary Storage'] || specs['Drive'] || '512GB - 2TB NVMe';
+    const m4 = specs['Security'] || specs['Form Factor'] || specs['Form Factor & Chassis'] || specs['Chassis'] || 'TPM 2.0 Cryptographic';
 
-  if (cat === 'Personal Computers' || cat === 'SFF Desktops' || cat === 'Mini PCs') {
-    layoutHtml = `
-      <div class="ds-highlight-grid-4">
-        <div class="ds-highlight-card">
-          <div class="ds-highlight-label">Processor / CPU</div>
-          <div class="ds-highlight-val">${specs['Processor'] || 'Intel Core / AMD'}</div>
-        </div>
-        <div class="ds-highlight-card">
-          <div class="ds-highlight-label">System Memory</div>
-          <div class="ds-highlight-val">${specs['Memory (RAM)'] || 'DDR5 / DDR4 RAM'}</div>
-        </div>
-        <div class="ds-highlight-card">
-          <div class="ds-highlight-label">Storage Drive</div>
-          <div class="ds-highlight-val">${specs['Storage Drive'] || specs['Storage'] || 'M.2 NVMe SSD'}</div>
-        </div>
-        <div class="ds-highlight-card">
-          <div class="ds-highlight-label">Form Factor</div>
-          <div class="ds-highlight-val">${specs['Form Factor'] || specs['Form Factor & Chassis'] || cat}</div>
-        </div>
+    metricsGrid.innerHTML = `
+      <div class="metric-card">
+        <div class="metric-label">Processor Engine</div>
+        <div class="metric-value" contenteditable="true" spellcheck="false" data-spec-highlight="Processor">${escapeHtml(m1)}</div>
+        <div class="metric-sub">Enterprise Architecture</div>
       </div>
-
-      <div class="ds-section-title">
-        <span>Hardware Architecture & Technical Schedule</span>
-        <span style="font-size:0.68rem; font-weight:400; color:#64748b;">Enterprise Specification</span>
+      <div class="metric-card">
+        <div class="metric-label">Memory Architecture</div>
+        <div class="metric-value" contenteditable="true" spellcheck="false" data-spec-highlight="Memory (RAM)">${escapeHtml(m2)}</div>
+        <div class="metric-sub">High-Bandwidth DDR5/4</div>
       </div>
-      ${renderSpecTable(specs)}
-
-      <div class="ds-section-title" style="margin-top:0.75rem;">
-        <span>Key Enterprise Features</span>
+      <div class="metric-card">
+        <div class="metric-label">Storage Capacity</div>
+        <div class="metric-value" contenteditable="true" spellcheck="false" data-spec-highlight="Storage Drive">${escapeHtml(m3)}</div>
+        <div class="metric-sub">PCIe NVMe Solid-State</div>
       </div>
-      <div class="ds-feature-pills">
-        ${features.map(f => `<span class="ds-pill">• ${f}</span>`).join('')}
-      </div>
-    `;
-  } else if (cat === 'Workstations' || cat === 'Gaming PCs & Peripherals') {
-    layoutHtml = `
-      <div class="ds-highlight-grid-3">
-        <div class="ds-highlight-card" style="border-left-color:#7c3aed;">
-          <div class="ds-highlight-label">Performance Processor</div>
-          <div class="ds-highlight-val">${specs['Processor'] || specs['Processors'] || 'Intel Xeon / AMD Threadripper'}</div>
-        </div>
-        <div class="ds-highlight-card" style="border-left-color:#7c3aed;">
-          <div class="ds-highlight-label">Pro Graphics (GPU)</div>
-          <div class="ds-highlight-val">${specs['Graphics'] || specs['Graphics Cards'] || 'NVIDIA RTX / Quadro'}</div>
-        </div>
-        <div class="ds-highlight-card" style="border-left-color:#7c3aed;">
-          <div class="ds-highlight-label">Memory & Storage</div>
-          <div class="ds-highlight-val">${specs['Memory (RAM)'] || 'High-Speed ECC / DDR5'}</div>
-        </div>
-      </div>
-
-      <div class="ds-section-title">
-        <span>Workstation Engineering Ratings</span>
-      </div>
-      ${renderSpecTable(specs)}
-
-      <div class="ds-section-title" style="margin-top:0.75rem;">
-        <span>Reliability & Thermal Standards</span>
-      </div>
-      <div class="ds-feature-pills">
-        ${features.map(f => `<span class="ds-pill">• ${f}</span>`).join('')}
-      </div>
-    `;
-  } else if (cat === 'Laptops') {
-    layoutHtml = `
-      <div class="ds-highlight-grid-4">
-        <div class="ds-highlight-card" style="border-left-color:#0284c7;">
-          <div class="ds-highlight-label">Display Panel</div>
-          <div class="ds-highlight-val">${specs['Display Panel'] || 'IPS Anti-Glare'}</div>
-        </div>
-        <div class="ds-highlight-card" style="border-left-color:#0284c7;">
-          <div class="ds-highlight-label">Core Engine</div>
-          <div class="ds-highlight-val">${specs['Processor'] || 'Intel Core Ultra'}</div>
-        </div>
-        <div class="ds-highlight-card" style="border-left-color:#0284c7;">
-          <div class="ds-highlight-label">Memory & Storage</div>
-          <div class="ds-highlight-val">${specs['Memory (RAM)'] || 'DDR5'} / ${specs['Storage'] || 'NVMe'}</div>
-        </div>
-        <div class="ds-highlight-card" style="border-left-color:#0284c7;">
-          <div class="ds-highlight-label">Battery & Weight</div>
-          <div class="ds-highlight-val">${specs['Weight & Battery'] || 'Long-Life USB-C PD'}</div>
-        </div>
-      </div>
-
-      <div class="ds-section-title">
-        <span>Mobility & Technical Specifications</span>
-      </div>
-      ${renderSpecTable(specs)}
-
-      <div class="ds-section-title" style="margin-top:0.75rem;">
-        <span>Security & Build Highlights</span>
-      </div>
-      <div class="ds-feature-pills">
-        ${features.map(f => `<span class="ds-pill">• ${f}</span>`).join('')}
-      </div>
-    `;
-  } else if (cat === 'Monitors') {
-    layoutHtml = `
-      <div class="ds-highlight-grid-4">
-        <div class="ds-highlight-card" style="border-left-color:#059669;">
-          <div class="ds-highlight-label">Panel Size & Type</div>
-          <div class="ds-highlight-val">${specs['Panel Size & Type'] || 'IPS Panel'}</div>
-        </div>
-        <div class="ds-highlight-card" style="border-left-color:#059669;">
-          <div class="ds-highlight-label">Resolution & Refresh</div>
-          <div class="ds-highlight-val">${specs['Resolution & Refresh'] || '100Hz - 240Hz'}</div>
-        </div>
-        <div class="ds-highlight-card" style="border-left-color:#059669;">
-          <div class="ds-highlight-label">Color Gamut</div>
-          <div class="ds-highlight-val">${specs['Color Coverage'] || '99% sRGB'}</div>
-        </div>
-        <div class="ds-highlight-card" style="border-left-color:#059669;">
-          <div class="ds-highlight-label">Eye Protection</div>
-          <div class="ds-highlight-val">${specs['Eye Care Technology'] || 'TÜV Low Blue Light'}</div>
-        </div>
-      </div>
-
-      <div class="ds-section-title">
-        <span>Optical & Display Characteristics</span>
-      </div>
-      ${renderSpecTable(specs)}
-
-      <div class="ds-section-title" style="margin-top:0.75rem;">
-        <span>Ergonomics & Hub Connectivity</span>
-      </div>
-      <div class="ds-feature-pills">
-        ${features.map(f => `<span class="ds-pill">• ${f}</span>`).join('')}
-      </div>
-    `;
-  } else if (cat === 'Interactive Touch Screens') {
-    layoutHtml = `
-      <div class="ds-highlight-grid-3">
-        <div class="ds-highlight-card" style="border-left-color:#ea580c;">
-          <div class="ds-highlight-label">Touch Precision</div>
-          <div class="ds-highlight-val">${specs['Touch Technology'] || '40-Point Touch'}</div>
-        </div>
-        <div class="ds-highlight-card" style="border-left-color:#ea580c;">
-          <div class="ds-highlight-label">Dual Operating System</div>
-          <div class="ds-highlight-val">${specs['Dual OS Architecture'] || 'Android + Windows OPS'}</div>
-        </div>
-        <div class="ds-highlight-card" style="border-left-color:#ea580c;">
-          <div class="ds-highlight-label">Camera & Audio</div>
-          <div class="ds-highlight-val">${specs['AI Collaboration Camera'] || '4K ePTZ & 8-Mic Array'}</div>
-        </div>
-      </div>
-
-      <div class="ds-section-title">
-        <span>Interactive Panel Specifications</span>
-      </div>
-      ${renderSpecTable(specs)}
-
-      <div class="ds-section-title" style="margin-top:0.75rem;">
-        <span>Collaboration & Smart Software</span>
-      </div>
-      <div class="ds-feature-pills">
-        ${features.map(f => `<span class="ds-pill">• ${f}</span>`).join('')}
-      </div>
-    `;
-  } else if (cat === 'UPS & Power Systems') {
-    layoutHtml = `
-      <div class="ds-highlight-grid-4">
-        <div class="ds-highlight-card" style="border-left-color:#dc2626;">
-          <div class="ds-highlight-label">Topology</div>
-          <div class="ds-highlight-val">${specs['Topology'] || 'True Online Double-Conversion'}</div>
-        </div>
-        <div class="ds-highlight-card" style="border-left-color:#dc2626;">
-          <div class="ds-highlight-label">Transfer Time</div>
-          <div class="ds-highlight-val">${specs['Transfer Time'] || '0 ms (Zero Interruption)'}</div>
-        </div>
-        <div class="ds-highlight-card" style="border-left-color:#dc2626;">
-          <div class="ds-highlight-label">Power Factor</div>
-          <div class="ds-highlight-val">${specs['Power Factor & THDi'] || 'PF 1.0 (Unity)'}</div>
-        </div>
-        <div class="ds-highlight-card" style="border-left-color:#dc2626;">
-          <div class="ds-highlight-label">Efficiency</div>
-          <div class="ds-highlight-val">${specs['System Efficiency'] || 'Up to 96%'}</div>
-        </div>
-      </div>
-
-      <div class="ds-section-title">
-        <span>Electrical Input / Output Ratings</span>
-      </div>
-      ${renderSpecTable(specs)}
-
-      <div class="ds-section-title" style="margin-top:0.75rem;">
-        <span>Power Protection & Telemetry</span>
-      </div>
-      <div class="ds-feature-pills">
-        ${features.map(f => `<span class="ds-pill">• ${f}</span>`).join('')}
-      </div>
-    `;
-  } else if (cat === 'CCTV & Surveillance') {
-    layoutHtml = `
-      <div class="ds-highlight-grid-4">
-        <div class="ds-highlight-card" style="border-left-color:#4f46e5;">
-          <div class="ds-highlight-label">Sensor & Resolution</div>
-          <div class="ds-highlight-val">${specs['Image Sensor & Resolution'] || '4MP / 5MP / 4K 8MP'}</div>
-        </div>
-        <div class="ds-highlight-card" style="border-left-color:#4f46e5;">
-          <div class="ds-highlight-label">Smart Night Vision</div>
-          <div class="ds-highlight-val">${specs['Night Vision'] || 'Dual-Light Smart IR 50m'}</div>
-        </div>
-        <div class="ds-highlight-card" style="border-left-color:#4f46e5;">
-          <div class="ds-highlight-label">AI Edge Analytics</div>
-          <div class="ds-highlight-val">${specs['AI Edge Analytics'] || 'Human & Vehicle Detection'}</div>
-        </div>
-        <div class="ds-highlight-card" style="border-left-color:#4f46e5;">
-          <div class="ds-highlight-label">Protection Enclosure</div>
-          <div class="ds-highlight-val">${specs['Housing & Protection'] || 'IP67 & IK10 Vandal'}</div>
-        </div>
-      </div>
-
-      <div class="ds-section-title">
-        <span>Optical & Video Analytics Schedule</span>
-      </div>
-      ${renderSpecTable(specs)}
-
-      <div class="ds-section-title" style="margin-top:0.75rem;">
-        <span>Compression & Compliance</span>
-      </div>
-      <div class="ds-feature-pills">
-        ${features.map(f => `<span class="ds-pill">• ${f}</span>`).join('')}
-      </div>
-    `;
-  } else if (cat === 'Charge Carts & Accessories') {
-    layoutHtml = `
-      <div class="ds-highlight-grid-3">
-        <div class="ds-highlight-card" style="border-left-color:#0891b2;">
-          <div class="ds-highlight-label">Device Capacity</div>
-          <div class="ds-highlight-val">${specs['Device Capacity'] || '36 Devices'}</div>
-        </div>
-        <div class="ds-highlight-card" style="border-left-color:#0891b2;">
-          <div class="ds-highlight-label">Smart Power Delivery</div>
-          <div class="ds-highlight-val">${specs['USB-C Power Output'] || '65W USB-C PD'}</div>
-        </div>
-        <div class="ds-highlight-card" style="border-left-color:#0891b2;">
-          <div class="ds-highlight-label">Chassis & Security</div>
-          <div class="ds-highlight-val">${specs['Chassis & Security'] || 'Cold-Rolled SPCC Steel'}</div>
-        </div>
-      </div>
-
-      <div class="ds-section-title">
-        <span>Electrical & Mobility Specifications</span>
-      </div>
-      ${renderSpecTable(specs)}
-
-      <div class="ds-section-title" style="margin-top:0.75rem;">
-        <span>Safety & Cable Routing</span>
-      </div>
-      <div class="ds-feature-pills">
-        ${features.map(f => `<span class="ds-pill">• ${f}</span>`).join('')}
-      </div>
-    `;
-  } else {
-    layoutHtml = `
-      <div class="ds-section-title">
-        <span>Technical Schedule & Guaranteed Ratings</span>
-      </div>
-      ${renderSpecTable(specs)}
-
-      <div class="ds-section-title" style="margin-top:0.75rem;">
-        <span>Design & Engineering Features</span>
-      </div>
-      <div class="ds-feature-pills">
-        ${features.map(f => `<span class="ds-pill">• ${f}</span>`).join('')}
+      <div class="metric-card">
+        <div class="metric-label">Chassis & Security</div>
+        <div class="metric-value" contenteditable="true" spellcheck="false">${escapeHtml(m4)}</div>
+        <div class="metric-sub">Hardware Protected</div>
       </div>
     `;
   }
 
-  container.innerHTML = layoutHtml;
+  // 2. Dynamic 4-Pillars Features Row (Sajaya Reference Standard)
+  const featuresRow = document.getElementById('dsFeaturesRow');
+  if (featuresRow) {
+    const f1 = features[0] || 'Enterprise Computing Performance';
+    const f2 = features[1] || 'Industrial Reliability & Thermal Design';
+    const f3 = features[2] || 'Integrated HD Audio & Visual Interfaces';
+    const f4 = features[3] || 'Hardware TPM 2.0 Security & Windows 11 Ready';
+
+    featuresRow.innerHTML = `
+      <div class="feature-box">
+        <div class="feature-box-title">Enterprise Power</div>
+        <div class="feature-box-desc" contenteditable="true" spellcheck="false">${escapeHtml(f1)}</div>
+      </div>
+      <div class="feature-box">
+        <div class="feature-box-title">System Reliability</div>
+        <div class="feature-box-desc" contenteditable="true" spellcheck="false">${escapeHtml(f2)}</div>
+      </div>
+      <div class="feature-box">
+        <div class="feature-box-title">Multimedia & I/O</div>
+        <div class="feature-box-desc" contenteditable="true" spellcheck="false">${escapeHtml(f3)}</div>
+      </div>
+      <div class="feature-box">
+        <div class="feature-box-title">Enterprise Security</div>
+        <div class="feature-box-desc" contenteditable="true" spellcheck="false">${escapeHtml(f4)}</div>
+      </div>
+    `;
+  }
+
+  // 3. Technical Specifications Matrix Container
+  container.innerHTML = `
+    <div class="specs-matrix-container">
+      <div class="specs-table-title" style="display:flex; justify-content:space-between; align-items:center;">
+        <span>Full System Technical Specifications Matrix</span>
+        <span style="font-size:8.5px; font-weight:500; color:var(--text-subtle); text-transform:none;">Guaranteed Engineering Ratings</span>
+      </div>
+      ${renderSpecTable(specs)}
+    </div>
+  `;
 }
 
 function renderSpecTable(specs) {
-  const rows = Object.entries(specs).map(([k, v]) => `
+  const entries = Object.entries(specs || {});
+  if (!entries.length) {
+    return `
+      <table class="specs-matrix-table ds-spec-table">
+        <thead>
+          <tr>
+            <th style="width:28%;">Technical Characteristic / Subsystem</th>
+            <th style="width:72%;">Factory Guaranteed Engineering Specification</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th class="specs-param-name" contenteditable="true" spellcheck="false" data-col="key">Standard Rating</th>
+            <td class="specs-param-detail mono" contenteditable="true" spellcheck="false" data-col="val">Per Factory Technical Schedule</td>
+          </tr>
+        </tbody>
+      </table>
+    `;
+  }
+
+  const rows = entries.map(([k, v]) => `
     <tr data-spec-key="${escapeAttr(k)}">
-      <th contenteditable="true" spellcheck="false" data-orig-key="${escapeAttr(k)}" data-col="key">${escapeHtml(k)}</th>
-      <td contenteditable="true" spellcheck="false" data-orig-key="${escapeAttr(k)}" data-col="val" class="mono">${escapeHtml(v)}</td>
+      <th class="specs-param-name" contenteditable="true" spellcheck="false" data-orig-key="${escapeAttr(k)}" data-col="key">${escapeHtml(k)}</th>
+      <td class="specs-param-detail mono" contenteditable="true" spellcheck="false" data-orig-key="${escapeAttr(k)}" data-col="val">${escapeHtml(v)}</td>
     </tr>
   `).join('');
 
   return `
-    <table class="ds-spec-table">
+    <table class="specs-matrix-table ds-spec-table">
       <thead>
         <tr>
-          <th style="width:28%;">Characteristic / Parameter</th>
-          <th style="width:72%;">Guaranteed Factory Value</th>
+          <th style="width:28%;">Technical Characteristic / Subsystem</th>
+          <th style="width:72%;">Factory Guaranteed Engineering Specification</th>
         </tr>
       </thead>
-      <tbody>${rows || '<tr><th contenteditable="true" spellcheck="false" data-col="key">Standard Rating</th><td contenteditable="true" spellcheck="false" data-col="val" class="mono">Per Factory Technical Schedule</td></tr>'}</tbody>
+      <tbody>
+        ${rows}
+      </tbody>
     </table>
   `;
 }
@@ -892,8 +717,8 @@ function bindDatasheetInPlaceEvents() {
           leftInput.value = td.innerText;
         }
 
-        // Sync highlight card if matching
-        const hl = document.querySelector(`.ds-highlight-val[data-spec-highlight="${CSS.escape(origKey)}"]`);
+        // Sync highlight / metric card if matching
+        const hl = document.querySelector(`.ds-highlight-val[data-spec-highlight="${CSS.escape(origKey)}"], .metric-value[data-spec-highlight="${CSS.escape(origKey)}"]`);
         if (hl && hl !== td) {
           hl.innerText = td.innerText;
         }
@@ -906,8 +731,8 @@ function bindDatasheetInPlaceEvents() {
       return;
     }
 
-    // 3. Highlight Cards
-    const hlCard = target.closest('.ds-highlight-val[data-spec-highlight]');
+    // 3. Highlight / Key Metric Cards
+    const hlCard = target.closest('.ds-highlight-val[data-spec-highlight], .metric-value[data-spec-highlight]');
     if (hlCard) {
       const specKey = hlCard.dataset.specHighlight;
       const product = getSelectedProduct();
