@@ -261,10 +261,19 @@ function updateDatasheetPreview(syncEditor = true) {
     page2Sub.textContent = `Comprehensive hardware parameters and engineering characteristics for ${product.Name} (${product.SKU}).`;
   }
 
-  // Meta strip
-  document.getElementById('previewFactoryOrigin').textContent = factory ? `${factory.Name} (${factory.Country})` : 'Matrix Main Plant';
-  document.getElementById('previewWarranty').textContent = `${product.WarrantyMonths || 36} Months Factory Warranty`;
-  document.getElementById('previewCompliance').textContent = product.ComplianceStandards || 'ISO 9001, CE, RoHS, JSMO';
+  // Meta strip (optional elements)
+  const previewFactoryOrigin = document.getElementById('previewFactoryOrigin');
+  if (previewFactoryOrigin) {
+    previewFactoryOrigin.textContent = factory ? `${factory.Name} (${factory.Country})` : 'Matrix Main Plant';
+  }
+  const previewWarranty = document.getElementById('previewWarranty');
+  if (previewWarranty) {
+    previewWarranty.textContent = `${product.WarrantyMonths || 36} Months Factory Warranty`;
+  }
+  const previewCompliance = document.getElementById('previewCompliance');
+  if (previewCompliance) {
+    previewCompliance.textContent = product.ComplianceStandards || 'ISO 9001, CE, RoHS, JSMO';
+  }
 
   const previewAuth = document.getElementById('previewAuthority');
   if (previewAuth) {
