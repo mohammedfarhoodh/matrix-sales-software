@@ -809,6 +809,33 @@ table.data-table tbody tr:hover th {
   max-width: 100%;
 }
 
+.datasheet-pages-preview-pane {
+  max-height: calc(100vh - 140px);
+  overflow-y: auto;
+  overflow-x: auto;
+  padding: 0.5rem 1rem 2rem 0.5rem;
+  scrollbar-gutter: stable;
+  border-radius: var(--radius-sm);
+  background: var(--bg-body, #f1f5f9);
+}
+
+/* Custom sleek scrollbar for datasheet pages viewer */
+.datasheet-pages-preview-pane::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+.datasheet-pages-preview-pane::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.04);
+  border-radius: 4px;
+}
+.datasheet-pages-preview-pane::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+.datasheet-pages-preview-pane::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
 /* =============================================================================
    SAJAYA / MATRIX DESIGN STANDARD (Datasheet Layout & Design)
    Reference: Sajaya-B1Q-Datasheet.html
@@ -1747,10 +1774,14 @@ dialog.app-dialog::backdrop {
   .app-layout,
   .main-area,
   .workspace-content,
-  .datasheet-workspace {
+  .datasheet-workspace,
+  .datasheet-pages-preview-pane {
     display: block !important;
     padding: 0 !important;
     margin: 0 !important;
+    max-height: none !important;
+    overflow: visible !important;
+    background: transparent !important;
   }
   .datasheet-pages-container {
     display: block !important;
