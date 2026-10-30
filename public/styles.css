@@ -851,7 +851,13 @@ table.data-table tbody tr:hover th {
 .brand-group {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 16px;
+}
+
+.brand-logo-img {
+  height: 38px;
+  width: auto;
+  object-fit: contain;
 }
 
 .brand-mark-sajaya {
@@ -885,11 +891,11 @@ table.data-table tbody tr:hover th {
 }
 
 .brand-subtext {
-  font-size: 8.5px;
+  font-size: 9px;
   font-weight: 700;
-  letter-spacing: 1px;
+  letter-spacing: 1.1px;
   text-transform: uppercase;
-  color: #64748b;
+  color: var(--text-subtle, #64748b);
   line-height: 1.3;
 }
 

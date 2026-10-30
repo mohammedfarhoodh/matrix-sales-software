@@ -213,11 +213,15 @@ function updateDatasheetPreview(syncEditor = true) {
 
   const factory = appState.factories.find(f => f.Id === product.FactoryId) || appState.factories[0];
 
-  // Factory Header
-  document.getElementById('dsFactoryHeaderName').textContent = factory ? factory.Name.toUpperCase() : 'MATRIX MAIN INDUSTRIAL PLANT';
-  document.getElementById('dsFactoryHeaderSub').textContent = factory
-    ? `${factory.Certifications || 'ISO 9001'} • ${factory.City ? factory.City + ', ' : ''}${factory.Country}`
-    : 'ISO 9001 • Certified Industrial Manufacturing Facility • Amman, Jordan';
+  // Factory / Brand Header
+  const headerNameEl = document.getElementById('dsFactoryHeaderName');
+  if (headerNameEl) {
+    headerNameEl.textContent = factory ? factory.Name.toUpperCase() : 'MATRIX MAIN INDUSTRIAL PLANT';
+  }
+  const headerSubEl = document.getElementById('dsFactoryHeaderSub');
+  if (headerSubEl && !headerSubEl.dataset.userEdited) {
+    headerSubEl.textContent = 'Commercial & Enterprise Hardware Systems';
+  }
 
   // Submittal Meta
   document.getElementById('previewDocCode').textContent = document.getElementById('dsDocCode')?.value || 'DS-MTX-2026-001';
