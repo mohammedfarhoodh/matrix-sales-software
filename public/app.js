@@ -325,102 +325,27 @@ function renderProductUniqueLayout(product) {
         'Hardware TPM 2.0 Security & Windows 11 Enterprise Ready'
       ];
 
-  // 1. Dynamic 4-Metric Grid in Hero Showcase (Sajaya 2x2 Grid)
-  const metricsGrid = document.getElementById('dsKeyMetricsGrid');
-  if (metricsGrid) {
-    const m1 = specs['Processor'] || specs['Processors'] || specs['CPU'] || specs['Engine'] || '14th Gen Intel®';
-    const m2 = specs['Memory (RAM)'] || specs['System Memory'] || specs['RAM'] || specs['Memory'] || 'Up to 64GB DDR5';
-    const m3 = specs['Storage Drive'] || specs['Storage'] || specs['Primary Storage'] || specs['Drive'] || '512GB - 2TB NVMe';
-    const m4 = specs['Security'] || specs['Form Factor'] || specs['Form Factor & Chassis'] || specs['Chassis'] || 'TPM 2.0 Cryptographic';
+  // 1. Page 1 Main Specs Squares: CPU, RAM, Storage, GPU
+  const cpuVal = specs['Processor'] || specs['Processors'] || specs['CPU'] || '14th Gen Intel®';
+  const ramVal = specs['Memory (RAM)'] || specs['System Memory'] || specs['RAM'] || 'Up to 64GB DDR5';
+  const storageVal = specs['Storage Drive'] || specs['Storage'] || specs['Primary Storage'] || '512GB - 2TB NVMe';
+  const gpuVal = specs['Graphics Processing'] || specs['Graphics'] || specs['Video Output'] || 'Integrated Intel® HD';
 
-    metricsGrid.innerHTML = `
-      <div class="metric-card">
-        <div class="metric-label">Processor Engine</div>
-        <div class="metric-value" contenteditable="true" spellcheck="false" data-spec-highlight="Processor">${escapeHtml(m1)}</div>
-        <div class="metric-sub">Enterprise Architecture</div>
-      </div>
-      <div class="metric-card">
-        <div class="metric-label">Memory Architecture</div>
-        <div class="metric-value" contenteditable="true" spellcheck="false" data-spec-highlight="Memory (RAM)">${escapeHtml(m2)}</div>
-        <div class="metric-sub">High-Bandwidth DDR5/4</div>
-      </div>
-      <div class="metric-card">
-        <div class="metric-label">Storage Capacity</div>
-        <div class="metric-value" contenteditable="true" spellcheck="false" data-spec-highlight="Storage Drive">${escapeHtml(m3)}</div>
-        <div class="metric-sub">PCIe NVMe Solid-State</div>
-      </div>
-      <div class="metric-card">
-        <div class="metric-label">Chassis & Security</div>
-        <div class="metric-value" contenteditable="true" spellcheck="false">${escapeHtml(m4)}</div>
-        <div class="metric-sub">Hardware Protected</div>
-      </div>
-    `;
+  const cpuEl = document.getElementById('p1SpecValCPU');
+  if (cpuEl) cpuEl.innerText = cpuVal;
+  const ramEl = document.getElementById('p1SpecValRAM');
+  if (ramEl) ramEl.innerText = ramVal;
+  const storageEl = document.getElementById('p1SpecValStorage');
+  if (storageEl) storageEl.innerText = storageVal;
+  const gpuEl = document.getElementById('p1SpecValGPU');
+  if (gpuEl) gpuEl.innerText = gpuVal;
+
+  const projEl = document.getElementById('previewProjectTitle');
+  if (projEl) {
+    projEl.textContent = document.getElementById('dsCustomProject')?.value || 'National IT & Data Infrastructure Submittal';
   }
 
-  // 2. Dynamic 4-Pillars Features Row (Sajaya Reference Standard)
-  const featuresRow = document.getElementById('dsFeaturesRow');
-  if (featuresRow) {
-    const f1 = features[0] || 'Enterprise Computing Performance';
-    const f2 = features[1] || 'Industrial Reliability & Thermal Design';
-    const f3 = features[2] || 'Integrated HD Audio & Visual Interfaces';
-    const f4 = features[3] || 'Hardware TPM 2.0 Security & Windows 11 Ready';
-
-    featuresRow.innerHTML = `
-      <div class="feature-box">
-        <div class="feature-box-title">Enterprise Power</div>
-        <div class="feature-box-desc" contenteditable="true" spellcheck="false">${escapeHtml(f1)}</div>
-      </div>
-      <div class="feature-box">
-        <div class="feature-box-title">System Reliability</div>
-        <div class="feature-box-desc" contenteditable="true" spellcheck="false">${escapeHtml(f2)}</div>
-      </div>
-      <div class="feature-box">
-        <div class="feature-box-title">Multimedia & I/O</div>
-        <div class="feature-box-desc" contenteditable="true" spellcheck="false">${escapeHtml(f3)}</div>
-      </div>
-      <div class="feature-box">
-        <div class="feature-box-title">Enterprise Security</div>
-        <div class="feature-box-desc" contenteditable="true" spellcheck="false">${escapeHtml(f4)}</div>
-      </div>
-    `;
-  }
-
-  // 3. Page 1 Quick Spec Summary Table
-  const quickSpecsTable = document.getElementById('dsQuickSpecsTable');
-  if (quickSpecsTable) {
-    const q1 = specs['Processor'] || specs['Processors'] || specs['CPU'] || 'Intel® Core™ 14th Gen Series';
-    const q2 = specs['Memory (RAM)'] || specs['System Memory'] || specs['RAM'] || 'Up to 64GB DDR5 Dual-Channel';
-    const q3 = specs['Storage Drive'] || specs['Storage'] || 'M.2 PCIe NVMe Solid State Drive';
-    const q4 = specs['Graphics'] || specs['Video Output'] || 'Integrated Intel® Graphics • HDMI Ultra HD';
-    const q5 = specs['I/O Ports'] || specs['Ports'] || specs['Networking'] || 'Gigabit RJ-45 LAN • USB-C • USB 3.1 Type-A • Audio Combo Jack';
-
-    quickSpecsTable.innerHTML = `
-      <tbody>
-        <tr>
-          <td class="qs-col-label">CPU Options</td>
-          <td class="qs-col-val" contenteditable="true" spellcheck="false" data-orig-key="Processor" data-col="val">${escapeHtml(q1)}</td>
-        </tr>
-        <tr>
-          <td class="qs-col-label">System RAM</td>
-          <td class="qs-col-val" contenteditable="true" spellcheck="false" data-orig-key="Memory (RAM)" data-col="val">${escapeHtml(q2)}</td>
-        </tr>
-        <tr>
-          <td class="qs-col-label">Storage Drive</td>
-          <td class="qs-col-val" contenteditable="true" spellcheck="false" data-orig-key="Storage Drive" data-col="val">${escapeHtml(q3)}</td>
-        </tr>
-        <tr>
-          <td class="qs-col-label">Graphics & Video</td>
-          <td class="qs-col-val" contenteditable="true" spellcheck="false">${escapeHtml(q4)}</td>
-        </tr>
-        <tr>
-          <td class="qs-col-label">Networking & Ports</td>
-          <td class="qs-col-val" contenteditable="true" spellcheck="false">${escapeHtml(q5)}</td>
-        </tr>
-      </tbody>
-    `;
-  }
-
-  // 4. Technical Specifications Matrix Container (Page 2)
+  // 2. Technical Specifications Matrix Container (Page 2)
   container.innerHTML = `
     <div class="specs-matrix-container">
       <div class="specs-table-title" style="display:flex; justify-content:space-between; align-items:center;">
@@ -778,8 +703,8 @@ function bindDatasheetInPlaceEvents() {
           leftInput.value = td.innerText;
         }
 
-        // Sync highlight / metric card if matching
-        const hl = document.querySelector(`.ds-highlight-val[data-spec-highlight="${CSS.escape(origKey)}"], .metric-value[data-spec-highlight="${CSS.escape(origKey)}"]`);
+        // Sync highlight / metric card / main spec square if matching
+        const hl = document.querySelector(`.ds-highlight-val[data-spec-highlight="${CSS.escape(origKey)}"], .metric-value[data-spec-highlight="${CSS.escape(origKey)}"], .p1-spec-value[data-spec-highlight="${CSS.escape(origKey)}"]`);
         if (hl && hl !== td) {
           hl.innerText = td.innerText;
         }
@@ -792,8 +717,8 @@ function bindDatasheetInPlaceEvents() {
       return;
     }
 
-    // 3. Highlight / Key Metric Cards
-    const hlCard = target.closest('.ds-highlight-val[data-spec-highlight], .metric-value[data-spec-highlight]');
+    // 3. Highlight / Key Metric Cards / Main Spec Squares (Page 1)
+    const hlCard = target.closest('.ds-highlight-val[data-spec-highlight], .metric-value[data-spec-highlight], .p1-spec-value[data-spec-highlight]');
     if (hlCard) {
       const specKey = hlCard.dataset.specHighlight;
       const product = getSelectedProduct();

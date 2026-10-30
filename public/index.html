@@ -373,108 +373,80 @@
                     <div class="form-factor-badge" id="previewCategory">SFF Business Series</div>
                   </div>
 
-                  <!-- Main Visual & Brief Grid -->
-                  <div class="hero-main-grid">
-                    <!-- Left: Image Showcase Box with Required Notice -->
-                    <div class="image-showcase-box">
-                      <div class="product-img-wrap" id="dsTopImageContainer">
-                        <div class="ds-top-image-placeholder" id="dsImagePlaceholder">
-                          <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-                          <div style="font-size:0.75rem; font-weight:600; color:#64748b; margin-top:0.25rem;">Product Hardware Showcase</div>
-                          <div style="font-size:0.68rem; color:#94a3b8;">Click 'Browse Image' on the left to upload photo</div>
+                  <!-- Page 1 Hero: Big Product Image Showcase -->
+                  <div class="p1-hero-container">
+                    <div class="p1-image-stage">
+                      <div class="p1-product-img-wrap" id="dsTopImageContainer">
+                        <div class="p1-image-placeholder" id="dsImagePlaceholder">
+                          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                          <div style="font-size:0.88rem; font-weight:700; color:#475569; margin-top:0.4rem;">Product Hardware Showcase</div>
+                          <div style="font-size:0.75rem; color:#94a3b8; margin-top:0.2rem;">Click 'Browse Image' in the left panel to load high-resolution hardware photography</div>
                         </div>
-                        <img id="dsTopImage" class="product-img" alt="Product Image" style="display:none;" />
+                        <img id="dsTopImage" class="p1-product-img" alt="Product Hardware Image" style="display:none;" />
                       </div>
-                      <div class="disclaimer-note">
-                        <strong>* Display Notice:</strong> Product image shown is for display purposes. Final product exterior finish and exact port orientation may vary during mass manufacturing.
+                      <div class="disclaimer-note" style="margin-top:10px;">
+                        <strong>* Display Notice:</strong> Product image shown is for display and illustration purposes. Final product exterior finish, bezel accents, and exact port orientation may vary during mass manufacturing.
                       </div>
                     </div>
 
-                    <!-- Right: Executive Overview, Key Metrics & Highlights -->
-                    <div class="executive-brief">
-                      <div class="key-metrics-grid" id="dsKeyMetricsGrid">
-                        <div class="metric-card">
-                          <div class="metric-label">Processor Engine</div>
-                          <div class="metric-value" contenteditable="true" spellcheck="false" data-spec-highlight="Processor">14th Gen Intel®</div>
-                          <div class="metric-sub">Enterprise Architecture</div>
-                        </div>
-                        <div class="metric-card">
-                          <div class="metric-label">Memory Architecture</div>
-                          <div class="metric-value" contenteditable="true" spellcheck="false" data-spec-highlight="Memory (RAM)">Up to 64GB</div>
-                          <div class="metric-sub">High-Bandwidth DDR5</div>
-                        </div>
-                        <div class="metric-card">
-                          <div class="metric-label">Storage Capacity</div>
-                          <div class="metric-value" contenteditable="true" spellcheck="false" data-spec-highlight="Storage Drive">512GB - 2TB</div>
-                          <div class="metric-sub">PCIe NVMe SSD</div>
-                        </div>
-                        <div class="metric-card">
-                          <div class="metric-label">Enterprise Security</div>
-                          <div class="metric-value" contenteditable="true" spellcheck="false">TPM 2.0</div>
-                          <div class="metric-sub">Hardware Protected</div>
-                        </div>
+                    <!-- Submittal Authority & Project Strip -->
+                    <div class="p1-submittal-strip">
+                      <div class="p1-submittal-box">
+                        <span class="p1-submittal-label">Authority / Issued To</span>
+                        <span class="p1-submittal-val" id="previewAuthority" contenteditable="true" spellcheck="false">Ministry of Digital Economy & Entrepreneurship</span>
                       </div>
+                      <div class="p1-submittal-box">
+                        <span class="p1-submittal-label">Project Submittal</span>
+                        <span class="p1-submittal-val" id="previewProjectTitle" contenteditable="true" spellcheck="false">National IT & Data Infrastructure Submittal</span>
+                      </div>
+                      <div class="p1-submittal-box">
+                        <span class="p1-submittal-label">Issuing Authority / Lead</span>
+                        <span class="p1-submittal-val" id="previewIssuedBy" contenteditable="true" spellcheck="false">Eng. Mohammed Al-Mansoor</span>
+                      </div>
+                    </div>
 
-                      <!-- Submittal Authority & Issuer Box -->
-                      <div class="submittal-info-grid">
-                        <div class="submittal-info-box">
-                          <div class="submittal-info-label">ISSUED TO / AUTHORITY</div>
-                          <div class="submittal-info-val" id="previewAuthority" contenteditable="true" spellcheck="false">Ministry of Digital Economy & Entrepreneurship</div>
+                    <!-- 4 Main Specs Squares at Bottom of Page 1 (CPU, RAM, Storage, GPU) -->
+                    <div class="p1-main-specs-grid" id="dsMainSpecsSquares">
+                      <!-- 1. CPU Square -->
+                      <div class="p1-spec-square">
+                        <div class="p1-spec-header">
+                          <span class="p1-spec-badge">CPU</span>
+                          <span class="p1-spec-tag">Processor</span>
                         </div>
-                        <div class="submittal-info-box">
-                          <div class="submittal-info-label">ISSUED BY / LEAD</div>
-                          <div class="submittal-info-val" id="previewIssuedBy" contenteditable="true" spellcheck="false">Eng. Mohammed Al-Mansoor</div>
-                        </div>
+                        <div class="p1-spec-value" contenteditable="true" spellcheck="false" data-spec-highlight="Processor" id="p1SpecValCPU">14th Gen Intel®</div>
+                        <div class="p1-spec-sub">Multi-Threaded Architecture</div>
                       </div>
 
-                      <ul class="summary-highlights" id="dsSummaryHighlights">
-                        <li class="summary-item">
-                          <span class="summary-bullet">✦</span>
-                          <span><strong>Manufacturing Plant:</strong> <span id="previewFactoryOrigin">Matrix Main Assembly & Testing Plant</span>.</span>
-                        </li>
-                        <li class="summary-item">
-                          <span class="summary-bullet">✦</span>
-                          <span><strong>Factory Warranty:</strong> <span id="previewWarranty" contenteditable="true" spellcheck="false">36 Months Factory Warranty</span> with local Jordan SLA & spare parts support.</span>
-                        </li>
-                        <li class="summary-item">
-                          <span class="summary-bullet">✦</span>
-                          <span><strong>Compliance Standards:</strong> <span id="previewCompliance" contenteditable="true" spellcheck="false">ISO 9001, CE, RoHS, JSMO</span> certified.</span>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
+                      <!-- 2. RAM Square -->
+                      <div class="p1-spec-square">
+                        <div class="p1-spec-header">
+                          <span class="p1-spec-badge">RAM</span>
+                          <span class="p1-spec-tag">Memory</span>
+                        </div>
+                        <div class="p1-spec-value" contenteditable="true" spellcheck="false" data-spec-highlight="Memory (RAM)" id="p1SpecValRAM">Up to 64GB DDR5</div>
+                        <div class="p1-spec-sub">High-Bandwidth Dual Channel</div>
+                      </div>
 
-                  <!-- 4-Pillars Features Row -->
-                  <div class="features-row" id="dsFeaturesRow">
-                    <div class="feature-box">
-                      <div class="feature-box-title">Intel® 14th Gen Power</div>
-                      <div class="feature-box-desc">Flexible CPU compatibility across Core i7, i5, and i3 delivering multi-threaded enterprise business performance.</div>
-                    </div>
-                    <div class="feature-box">
-                      <div class="feature-box-title">PCIe x16 Expansion</div>
-                      <div class="feature-box-desc">Dedicated PCIe expansion slot accommodates add-in graphics adapters, fiber NICs, or enterprise controllers.</div>
-                    </div>
-                    <div class="feature-box">
-                      <div class="feature-box-title">Integrated HD Audio</div>
-                      <div class="feature-box-desc">Built-in high-definition sound system with universal combo audio jack for conference headsets.</div>
-                    </div>
-                    <div class="feature-box">
-                      <div class="feature-box-title">Windows 11 Certified</div>
-                      <div class="feature-box-desc">Pre-configured with TPM 2.0 cryptographic chip for Windows 11 Pro/Home and secure enterprise boot.</div>
-                    </div>
-                  </div>
+                      <!-- 3. Storage Square -->
+                      <div class="p1-spec-square">
+                        <div class="p1-spec-header">
+                          <span class="p1-spec-badge">STORAGE</span>
+                          <span class="p1-spec-tag">Solid-State</span>
+                        </div>
+                        <div class="p1-spec-value" contenteditable="true" spellcheck="false" data-spec-highlight="Storage Drive" id="p1SpecValStorage">512GB - 2TB NVMe</div>
+                        <div class="p1-spec-sub">PCIe High-Speed Drive</div>
+                      </div>
 
-                  <!-- Page 1 Quick Spec Summary Table (Matching Reference Standard) -->
-                  <div class="quick-specs-container" id="dsQuickSpecsContainer">
-                    <div class="quick-specs-header">
-                      Core Hardware Summary
-                      <span>Complete Technical Matrix on Page 2</span>
+                      <!-- 4. GPU Square -->
+                      <div class="p1-spec-square">
+                        <div class="p1-spec-header">
+                          <span class="p1-spec-badge">GPU</span>
+                          <span class="p1-spec-tag">Graphics</span>
+                        </div>
+                        <div class="p1-spec-value" contenteditable="true" spellcheck="false" data-spec-highlight="Graphics" id="p1SpecValGPU">Integrated Intel®</div>
+                        <div class="p1-spec-sub">4K UHD Display Support</div>
+                      </div>
                     </div>
-                    <table class="quick-specs-table" id="dsQuickSpecsTable">
-                      <tbody>
-                        <!-- Dynamically populated or editable summary rows -->
-                      </tbody>
-                    </table>
                   </div>
                 </div>
 
