@@ -823,19 +823,34 @@ table.data-table tbody tr:hover th {
   --sajaya-navy-light: #2D549E;
 }
 
-.datasheet-paper {
+.datasheet-pages-container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  align-items: center;
+  width: 100%;
+}
+
+.datasheet-paper,
+.sheet-page {
+  width: 210mm;
+  min-height: 297mm;
+  max-width: 100%;
   background: #ffffff;
   color: #0f172a;
   border: 1px solid var(--border-color);
   border-top: 5px solid var(--sajaya-navy);
   border-radius: var(--radius-sm);
-  padding: 1.5rem 1.85rem;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
-  min-width: 0;
-  max-width: 100%;
+  padding: 13mm 16mm 11mm 16mm;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   overflow-wrap: break-word;
   word-break: break-word;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-sizing: border-box;
+  position: relative;
 }
 
 /* Header Styling */
@@ -1328,6 +1343,89 @@ table.data-table tbody tr:hover th {
   color: #334155;
 }
 
+/* Page 1 Quick Spec Summary Table */
+.quick-specs-container {
+  margin-top: 10px;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.quick-specs-header {
+  background: var(--sajaya-navy);
+  color: #ffffff;
+  padding: 6px 12px;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.quick-specs-header span {
+  color: #fbd38d;
+  font-size: 8.5px;
+  font-weight: 600;
+  text-transform: none;
+}
+
+.quick-specs-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 8.5px;
+}
+
+.quick-specs-table td {
+  padding: 5.5px 12px;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.quick-specs-table tr:last-child td {
+  border-bottom: none;
+}
+
+.quick-specs-table tr:nth-child(even) {
+  background: #fafcff;
+}
+
+.qs-col-label {
+  width: 25%;
+  font-weight: 700;
+  color: #475569;
+}
+
+.qs-col-val {
+  width: 75%;
+  font-weight: 600;
+  color: #0f172a;
+}
+
+/* Page 2 Typography & Layout */
+.page2-header-title {
+  font-family: 'Oxanium', 'Inter', sans-serif;
+  font-size: 18px;
+  font-weight: 900;
+  color: var(--sajaya-navy);
+  letter-spacing: 0.5px;
+  margin-top: 6px;
+  margin-bottom: 3px;
+}
+
+.page2-header-sub {
+  font-size: 10px;
+  color: #475569;
+  margin-bottom: 10px;
+}
+
+.page2-bottom-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 12px;
+  margin-bottom: 4px;
+}
+
 /* Sheet Footer */
 .sheet-footer {
   border-top: 1.5px solid #e2e8f0;
@@ -1625,17 +1723,25 @@ dialog.app-dialog::backdrop {
   }
 }
 
-/* Print CSS: Only print the Datasheet Paper cleanly on A4 */
+@page {
+  size: A4 portrait;
+  margin: 0;
+}
+
+/* Print CSS: Print both A4 Pages cleanly */
 @media print {
   body {
-    background: #fff !important;
+    background: transparent !important;
     color: #000 !important;
+    padding: 0 !important;
+    margin: 0 !important;
   }
   .sidebar,
   .topbar,
   .no-print,
   .section-header,
-  .datasheet-controls {
+  .datasheet-controls,
+  .ds-view-switcher {
     display: none !important;
   }
   .app-layout,
@@ -1646,14 +1752,37 @@ dialog.app-dialog::backdrop {
     padding: 0 !important;
     margin: 0 !important;
   }
-  .datasheet-paper {
-    box-shadow: none !important;
-    border: 1px solid #cbd5e1 !important;
-    border-top: 6px solid #1e3a8a !important;
-    width: 100% !important;
-    padding: 1rem !important;
+  .datasheet-pages-container {
+    display: block !important;
+    gap: 0 !important;
+    width: 210mm !important;
+    margin: 0 auto !important;
   }
-  .ds-editable, .ds-editable:hover, .ds-editable:focus {
+  .sheet-page,
+  .datasheet-paper {
+    width: 210mm !important;
+    height: 297mm !important;
+    max-height: 297mm !important;
+    min-height: 297mm !important;
+    margin: 0 !important;
+    box-shadow: none !important;
+    border: none !important;
+    border-radius: 0 !important;
+    padding: 13mm 16mm 11mm 16mm !important;
+    page-break-after: always !important;
+    break-after: page !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+  }
+  .sheet-page:last-child {
+    page-break-after: avoid !important;
+    break-after: avoid !important;
+  }
+  .ds-editable, .ds-editable:hover, .ds-editable:focus,
+  [contenteditable="true"] {
     background-color: transparent !important;
     outline: none !important;
     box-shadow: none !important;

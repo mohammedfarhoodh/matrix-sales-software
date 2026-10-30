@@ -342,183 +342,239 @@
               </div>
             </div>
 
-            <!-- Right Live Printable A4 Datasheet Sheet (Sajaya / Matrix Reference Design Standard) -->
-            <div class="datasheet-paper" id="printableDatasheet">
-              <!-- Header -->
-              <header class="ds-header">
-                <div class="brand-group">
-                  <img src="sajaya-tech-logo.png" id="dsBrandLogo" class="brand-logo-img" alt="sajaytech Logo" />
-                  <div class="brand-divider"></div>
-                  <span class="brand-subtext" id="dsFactoryHeaderSub" contenteditable="true" spellcheck="false">Commercial & Enterprise Hardware Systems</span>
-                </div>
-                <div class="header-doc-meta">
-                  <div class="doc-pill" id="previewSKU" contenteditable="true" spellcheck="false">SAJAYA-B1Q</div>
-                  <div class="doc-date">DOC: <span id="previewDocCode" contenteditable="true" spellcheck="false">DS-MTX-2026-001</span> • <span id="previewDate" contenteditable="true" spellcheck="false">OCTOBER 2026</span></div>
-                </div>
-              </header>
+            <!-- Right Live Printable A4 Datasheet (2 Pages - Sajaya / Matrix Reference Design Standard) -->
+            <div class="datasheet-pages-container" id="printableDatasheet">
 
-              <!-- Hero Title Banner -->
-              <div class="hero-banner">
+              <!-- ========================================================
+                   PAGE 1: PRODUCT SHOWCASE & ARCHITECTURAL HIGHLIGHTS
+                   ======================================================== -->
+              <div class="sheet-page" id="datasheetPage1">
                 <div>
-                  <h1 class="model-code-title" id="previewProductName" contenteditable="true" spellcheck="false">SAJAYA B1Q</h1>
-                  <div class="model-subtitle" id="previewSummary" contenteditable="true" spellcheck="false">High-Efficiency Small Form Factor (SFF) Business Desktop</div>
+                  <!-- Header Page 1 -->
+                  <header class="ds-header">
+                    <div class="brand-group">
+                      <img src="sajaya-tech-logo.png" class="brand-logo-img" alt="sajaytech Logo" />
+                      <div class="brand-divider"></div>
+                      <span class="brand-subtext" id="dsFactoryHeaderSub" contenteditable="true" spellcheck="false">Commercial & Enterprise Hardware Systems</span>
+                    </div>
+                    <div class="header-doc-meta">
+                      <div class="doc-pill" id="previewSKU" contenteditable="true" spellcheck="false">SAJAYA-B1Q</div>
+                      <div class="doc-date">DOC: <span id="previewDocCode" contenteditable="true" spellcheck="false">DS-MTX-2026-001</span> • <span id="previewDate" contenteditable="true" spellcheck="false">OCTOBER 2026</span></div>
+                    </div>
+                  </header>
+
+                  <!-- Hero Title Banner -->
+                  <div class="hero-banner">
+                    <div>
+                      <h1 class="model-code-title" id="previewProductName" contenteditable="true" spellcheck="false">SAJAYA B1Q</h1>
+                      <div class="model-subtitle" id="previewSummary" contenteditable="true" spellcheck="false">High-Efficiency Small Form Factor (SFF) Business Desktop</div>
+                    </div>
+                    <div class="form-factor-badge" id="previewCategory">SFF Business Series</div>
+                  </div>
+
+                  <!-- Main Visual & Brief Grid -->
+                  <div class="hero-main-grid">
+                    <!-- Left: Image Showcase Box with Required Notice -->
+                    <div class="image-showcase-box">
+                      <div class="product-img-wrap" id="dsTopImageContainer">
+                        <div class="ds-top-image-placeholder" id="dsImagePlaceholder">
+                          <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                          <div style="font-size:0.75rem; font-weight:600; color:#64748b; margin-top:0.25rem;">Product Hardware Showcase</div>
+                          <div style="font-size:0.68rem; color:#94a3b8;">Click 'Browse Image' on the left to upload photo</div>
+                        </div>
+                        <img id="dsTopImage" class="product-img" alt="Product Image" style="display:none;" />
+                      </div>
+                      <div class="disclaimer-note">
+                        <strong>* Display Notice:</strong> Product image shown is for display purposes. Final product exterior finish and exact port orientation may vary during mass manufacturing.
+                      </div>
+                    </div>
+
+                    <!-- Right: Executive Overview, Key Metrics & Highlights -->
+                    <div class="executive-brief">
+                      <div class="key-metrics-grid" id="dsKeyMetricsGrid">
+                        <div class="metric-card">
+                          <div class="metric-label">Processor Engine</div>
+                          <div class="metric-value" contenteditable="true" spellcheck="false" data-spec-highlight="Processor">14th Gen Intel®</div>
+                          <div class="metric-sub">Enterprise Architecture</div>
+                        </div>
+                        <div class="metric-card">
+                          <div class="metric-label">Memory Architecture</div>
+                          <div class="metric-value" contenteditable="true" spellcheck="false" data-spec-highlight="Memory (RAM)">Up to 64GB</div>
+                          <div class="metric-sub">High-Bandwidth DDR5</div>
+                        </div>
+                        <div class="metric-card">
+                          <div class="metric-label">Storage Capacity</div>
+                          <div class="metric-value" contenteditable="true" spellcheck="false" data-spec-highlight="Storage Drive">512GB - 2TB</div>
+                          <div class="metric-sub">PCIe NVMe SSD</div>
+                        </div>
+                        <div class="metric-card">
+                          <div class="metric-label">Enterprise Security</div>
+                          <div class="metric-value" contenteditable="true" spellcheck="false">TPM 2.0</div>
+                          <div class="metric-sub">Hardware Protected</div>
+                        </div>
+                      </div>
+
+                      <!-- Submittal Authority & Issuer Box -->
+                      <div class="submittal-info-grid">
+                        <div class="submittal-info-box">
+                          <div class="submittal-info-label">ISSUED TO / AUTHORITY</div>
+                          <div class="submittal-info-val" id="previewAuthority" contenteditable="true" spellcheck="false">Ministry of Digital Economy & Entrepreneurship</div>
+                        </div>
+                        <div class="submittal-info-box">
+                          <div class="submittal-info-label">ISSUED BY / LEAD</div>
+                          <div class="submittal-info-val" id="previewIssuedBy" contenteditable="true" spellcheck="false">Eng. Mohammed Al-Mansoor</div>
+                        </div>
+                      </div>
+
+                      <ul class="summary-highlights" id="dsSummaryHighlights">
+                        <li class="summary-item">
+                          <span class="summary-bullet">✦</span>
+                          <span><strong>Manufacturing Plant:</strong> <span id="previewFactoryOrigin">Matrix Main Assembly & Testing Plant</span>.</span>
+                        </li>
+                        <li class="summary-item">
+                          <span class="summary-bullet">✦</span>
+                          <span><strong>Factory Warranty:</strong> <span id="previewWarranty" contenteditable="true" spellcheck="false">36 Months Factory Warranty</span> with local Jordan SLA & spare parts support.</span>
+                        </li>
+                        <li class="summary-item">
+                          <span class="summary-bullet">✦</span>
+                          <span><strong>Compliance Standards:</strong> <span id="previewCompliance" contenteditable="true" spellcheck="false">ISO 9001, CE, RoHS, JSMO</span> certified.</span>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <!-- 4-Pillars Features Row -->
+                  <div class="features-row" id="dsFeaturesRow">
+                    <div class="feature-box">
+                      <div class="feature-box-title">Intel® 14th Gen Power</div>
+                      <div class="feature-box-desc">Flexible CPU compatibility across Core i7, i5, and i3 delivering multi-threaded enterprise business performance.</div>
+                    </div>
+                    <div class="feature-box">
+                      <div class="feature-box-title">PCIe x16 Expansion</div>
+                      <div class="feature-box-desc">Dedicated PCIe expansion slot accommodates add-in graphics adapters, fiber NICs, or enterprise controllers.</div>
+                    </div>
+                    <div class="feature-box">
+                      <div class="feature-box-title">Integrated HD Audio</div>
+                      <div class="feature-box-desc">Built-in high-definition sound system with universal combo audio jack for conference headsets.</div>
+                    </div>
+                    <div class="feature-box">
+                      <div class="feature-box-title">Windows 11 Certified</div>
+                      <div class="feature-box-desc">Pre-configured with TPM 2.0 cryptographic chip for Windows 11 Pro/Home and secure enterprise boot.</div>
+                    </div>
+                  </div>
+
+                  <!-- Page 1 Quick Spec Summary Table (Matching Reference Standard) -->
+                  <div class="quick-specs-container" id="dsQuickSpecsContainer">
+                    <div class="quick-specs-header">
+                      Core Hardware Summary
+                      <span>Complete Technical Matrix on Page 2</span>
+                    </div>
+                    <table class="quick-specs-table" id="dsQuickSpecsTable">
+                      <tbody>
+                        <!-- Dynamically populated or editable summary rows -->
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
-                <div class="form-factor-badge" id="previewCategory">SFF Business Series</div>
+
+                <!-- Page 1 Footer -->
+                <footer class="sheet-footer">
+                  <span class="footer-brand">sajaytech • Matrix Business Technology Co. • Amman, Jordan</span>
+                  <span>Official Technical Submittal Datasheet</span>
+                  <span class="footer-page-num">Page 1 of 2</span>
+                </footer>
               </div>
 
-              <!-- Main Visual & Brief Grid -->
-              <div class="hero-main-grid">
-                <!-- Left: Image Showcase Box with Required Notice -->
-                <div class="image-showcase-box">
-                  <div class="product-img-wrap" id="dsTopImageContainer">
-                    <div class="ds-top-image-placeholder" id="dsImagePlaceholder">
-                      <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-                      <div style="font-size:0.75rem; font-weight:600; color:#64748b; margin-top:0.25rem;">Product Hardware Showcase</div>
-                      <div style="font-size:0.68rem; color:#94a3b8;">Click 'Browse Image' on the left to upload photo</div>
+              <!-- ========================================================
+                   PAGE 2: COMPLETE SPECIFICATION MATRIX & TECHNICAL COMPLIANCE
+                   ======================================================== -->
+              <div class="sheet-page" id="datasheetPage2">
+                <div>
+                  <!-- Header Page 2 -->
+                  <header class="ds-header">
+                    <div class="brand-group">
+                      <img src="sajaya-tech-logo.png" class="brand-logo-img" alt="sajaytech Logo" />
+                      <div class="brand-divider"></div>
+                      <span class="brand-subtext">Commercial & Enterprise Hardware Systems</span>
                     </div>
-                    <img id="dsTopImage" class="product-img" alt="Product Image" style="display:none;" />
+                    <div class="header-doc-meta">
+                      <div class="doc-pill" id="previewSKUPage2">SAJAYA-B1Q</div>
+                      <div class="doc-date">DOC: <span id="previewDocCodePage2">DS-MTX-2026-001</span> • <span id="previewDatePage2">OCTOBER 2026</span></div>
+                    </div>
+                  </header>
+
+                  <!-- Page 2 Sub-Banner -->
+                  <h2 class="page2-header-title">TECHNICAL SPECIFICATIONS</h2>
+                  <div class="page2-header-sub" id="previewPage2Sub">Comprehensive hardware parameters and engineering characteristics for official tender evaluation.</div>
+
+                  <!-- I/O Ports Visual Summary Box -->
+                  <div class="io-layout-block" id="dsIoLayoutBlock">
+                    <div class="io-title">
+                      <span>Standard Input / Output Configuration</span>
+                      <span style="font-size: 8px; color: var(--text-subtle); text-transform: none; font-weight: 500;">Front & Rear Distribution</span>
+                    </div>
+                    <div class="io-ports-grid" id="dsIoPortsGrid">
+                      <div class="io-chip">
+                        <div class="io-chip-icon">HDMI</div>
+                        <div class="io-chip-name">1x HDMI Output</div>
+                        <div class="io-chip-spec">4K UHD @ 60Hz Support</div>
+                      </div>
+                      <div class="io-chip">
+                        <div class="io-chip-icon">TYPE-C</div>
+                        <div class="io-chip-name">1x USB Type-C</div>
+                        <div class="io-chip-spec">High-Speed Front Access</div>
+                      </div>
+                      <div class="io-chip">
+                        <div class="io-chip-icon">USB 3.1</div>
+                        <div class="io-chip-name">4x USB Type-A</div>
+                        <div class="io-chip-spec">Peripheral & Data Ports</div>
+                      </div>
+                      <div class="io-chip">
+                        <div class="io-chip-icon">RJ-45</div>
+                        <div class="io-chip-name">1x Network RJ-45</div>
+                        <div class="io-chip-spec">Gigabit LAN 10/100/1000</div>
+                      </div>
+                      <div class="io-chip">
+                        <div class="io-chip-icon">AUDIO</div>
+                        <div class="io-chip-name">1x Combo Jack</div>
+                        <div class="io-chip-spec">3.5mm Headphone / Mic</div>
+                      </div>
+                    </div>
                   </div>
-                  <div class="disclaimer-note">
-                    <strong>* Display Notice:</strong> Product image shown is for display purposes. Final product exterior finish and exact port orientation may vary during mass manufacturing.
+
+                  <!-- Full Specifications Matrix Schedule Container -->
+                  <div id="previewUniqueLayout"></div>
+
+                  <!-- Bottom Compliance & Engineering Notice Grid -->
+                  <div class="page2-bottom-grid">
+                    <div class="disclaimer-box-full">
+                      <strong>* Engineering & Manufacturing Notice:</strong> The product image in this datasheet is for display purposes only. Component layouts, port orientations, and chassis aesthetics are subject to technical refinement during mass manufacturing under ISO 9001 standards.
+                    </div>
+                    <div class="cert-box">
+                      <div class="cert-heading">Compliance & Quality Standards</div>
+                      <div class="cert-tags">
+                        <span class="cert-tag">ISO 9001</span>
+                        <span class="cert-tag">CE Certified</span>
+                        <span class="cert-tag">FCC Class B</span>
+                        <span class="cert-tag">RoHS Compliant</span>
+                        <span class="cert-tag">TPM 2.0</span>
+                        <span class="cert-tag">JSMO Standard</span>
+                      </div>
+                    </div>
                   </div>
                 </div>
 
-                <!-- Right: Executive Overview, Key Metrics & Highlights -->
-                <div class="executive-brief">
-                  <div class="key-metrics-grid" id="dsKeyMetricsGrid">
-                    <div class="metric-card">
-                      <div class="metric-label">Processor Engine</div>
-                      <div class="metric-value" contenteditable="true" spellcheck="false" data-spec-highlight="Processor">14th Gen Intel®</div>
-                      <div class="metric-sub">Enterprise Architecture</div>
-                    </div>
-                    <div class="metric-card">
-                      <div class="metric-label">Memory Architecture</div>
-                      <div class="metric-value" contenteditable="true" spellcheck="false" data-spec-highlight="Memory (RAM)">Up to 64GB</div>
-                      <div class="metric-sub">High-Bandwidth DDR5</div>
-                    </div>
-                    <div class="metric-card">
-                      <div class="metric-label">Storage Capacity</div>
-                      <div class="metric-value" contenteditable="true" spellcheck="false" data-spec-highlight="Storage Drive">512GB - 2TB</div>
-                      <div class="metric-sub">PCIe NVMe SSD</div>
-                    </div>
-                    <div class="metric-card">
-                      <div class="metric-label">Enterprise Security</div>
-                      <div class="metric-value" contenteditable="true" spellcheck="false">TPM 2.0</div>
-                      <div class="metric-sub">Hardware Protected</div>
-                    </div>
+                <!-- Page 2 Footer -->
+                <footer class="sheet-footer">
+                  <span class="footer-brand">sajaytech • Matrix Business Technology Co. • Amman, Jordan</span>
+                  <span>Official Technical Submittal Datasheet</span>
+                  <div style="display:flex; align-items:center; gap:0.5rem;">
+                    <span class="footer-page-num" id="previewRev" contenteditable="true" spellcheck="false">Rev 2026.1</span>
+                    <span class="footer-page-num">Page 2 of 2</span>
                   </div>
-
-                  <!-- Submittal Authority & Issuer Box -->
-                  <div class="submittal-info-grid">
-                    <div class="submittal-info-box">
-                      <div class="submittal-info-label">ISSUED TO / AUTHORITY</div>
-                      <div class="submittal-info-val" id="previewAuthority" contenteditable="true" spellcheck="false">Ministry of Digital Economy & Entrepreneurship</div>
-                    </div>
-                    <div class="submittal-info-box">
-                      <div class="submittal-info-label">ISSUED BY / LEAD</div>
-                      <div class="submittal-info-val" id="previewIssuedBy" contenteditable="true" spellcheck="false">Eng. Mohammed Al-Mansoor</div>
-                    </div>
-                  </div>
-
-                  <ul class="summary-highlights" id="dsSummaryHighlights">
-                    <li class="summary-item">
-                      <span class="summary-bullet">✦</span>
-                      <span><strong>Manufacturing Plant:</strong> <span id="previewFactoryOrigin">Matrix Main Assembly & Testing Plant</span>.</span>
-                    </li>
-                    <li class="summary-item">
-                      <span class="summary-bullet">✦</span>
-                      <span><strong>Factory Warranty:</strong> <span id="previewWarranty" contenteditable="true" spellcheck="false">36 Months Factory Warranty</span> with local Jordan SLA & spare parts support.</span>
-                    </li>
-                    <li class="summary-item">
-                      <span class="summary-bullet">✦</span>
-                      <span><strong>Compliance Standards:</strong> <span id="previewCompliance" contenteditable="true" spellcheck="false">ISO 9001, CE, RoHS, JSMO</span> certified.</span>
-                    </li>
-                  </ul>
-                </div>
+                </footer>
               </div>
 
-              <!-- 4-Pillars Features Row -->
-              <div class="features-row" id="dsFeaturesRow">
-                <div class="feature-box">
-                  <div class="feature-box-title">Intel® 14th Gen Power</div>
-                  <div class="feature-box-desc">Flexible CPU compatibility across Core i7, i5, and i3 delivering multi-threaded enterprise business performance.</div>
-                </div>
-                <div class="feature-box">
-                  <div class="feature-box-title">PCIe x16 Expansion</div>
-                  <div class="feature-box-desc">Dedicated PCIe expansion slot accommodates add-in graphics adapters, fiber NICs, or enterprise controllers.</div>
-                </div>
-                <div class="feature-box">
-                  <div class="feature-box-title">Integrated HD Audio</div>
-                  <div class="feature-box-desc">Built-in high-definition sound system with universal combo audio jack for conference headsets.</div>
-                </div>
-                <div class="feature-box">
-                  <div class="feature-box-title">Windows 11 Certified</div>
-                  <div class="feature-box-desc">Pre-configured with TPM 2.0 cryptographic chip for Windows 11 Pro/Home and secure enterprise boot.</div>
-                </div>
-              </div>
-
-              <!-- I/O Ports Visual Summary Box -->
-              <div class="io-layout-block" id="dsIoLayoutBlock">
-                <div class="io-title">
-                  <span>Standard Input / Output Configuration</span>
-                  <span style="font-size: 8px; color: var(--text-subtle); text-transform: none; font-weight: 500;">Front & Rear Distribution</span>
-                </div>
-                <div class="io-ports-grid" id="dsIoPortsGrid">
-                  <div class="io-chip">
-                    <div class="io-chip-icon">HDMI</div>
-                    <div class="io-chip-name">1x HDMI Output</div>
-                    <div class="io-chip-spec">4K UHD @ 60Hz Support</div>
-                  </div>
-                  <div class="io-chip">
-                    <div class="io-chip-icon">TYPE-C</div>
-                    <div class="io-chip-name">1x USB Type-C</div>
-                    <div class="io-chip-spec">High-Speed Front Access</div>
-                  </div>
-                  <div class="io-chip">
-                    <div class="io-chip-icon">USB 3.1</div>
-                    <div class="io-chip-name">4x USB Type-A</div>
-                    <div class="io-chip-spec">Peripheral & Data Ports</div>
-                  </div>
-                  <div class="io-chip">
-                    <div class="io-chip-icon">RJ-45</div>
-                    <div class="io-chip-name">1x Network RJ-45</div>
-                    <div class="io-chip-spec">Gigabit LAN 10/100/1000</div>
-                  </div>
-                  <div class="io-chip">
-                    <div class="io-chip-icon">AUDIO</div>
-                    <div class="io-chip-name">1x Combo Jack</div>
-                    <div class="io-chip-spec">3.5mm Headphone / Mic</div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Dynamic Category Specification Schedule Area -->
-              <div id="previewUniqueLayout"></div>
-
-              <!-- Bottom Compliance & Engineering Notice Grid -->
-              <div class="page-bottom-grid">
-                <div class="disclaimer-box-full">
-                  <strong>* Engineering & Manufacturing Notice:</strong> The product image in this datasheet is for display purposes only. Component layouts, port orientations, and chassis aesthetics are subject to technical refinement during mass manufacturing under ISO 9001 standards.
-                </div>
-                <div class="cert-box">
-                  <div class="cert-heading">Compliance & Quality Standards</div>
-                  <div class="cert-tags">
-                    <span class="cert-tag">ISO 9001</span>
-                    <span class="cert-tag">CE Certified</span>
-                    <span class="cert-tag">FCC Class B</span>
-                    <span class="cert-tag">RoHS Compliant</span>
-                    <span class="cert-tag">TPM 2.0</span>
-                    <span class="cert-tag">JSMO Standard</span>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Sheet Footer -->
-              <footer class="sheet-footer">
-                <span class="footer-brand">sajaytech • Matrix Business Technology Co. • Amman, Jordan</span>
-                <span>Official Technical Submittal Datasheet</span>
-                <span class="footer-page-num" id="previewRev" contenteditable="true" spellcheck="false">Rev 2026.1</span>
-              </footer>
             </div>
           </div>
 

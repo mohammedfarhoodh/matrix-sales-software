@@ -224,20 +224,42 @@ function updateDatasheetPreview(syncEditor = true) {
   }
 
   // Submittal Meta
-  document.getElementById('previewDocCode').textContent = document.getElementById('dsDocCode')?.value || 'DS-MTX-2026-001';
-  document.getElementById('previewSKU').textContent = product.SKU;
-  document.getElementById('previewRev').textContent = product.Revision || 'Rev 2026.1';
+  const docCodeVal = document.getElementById('dsDocCode')?.value || 'DS-MTX-2026-001';
+  const skuVal = product.SKU || 'SAJAYA-B1Q';
+  const revVal = product.Revision || 'Rev 2026.1';
+
+  const previewDocCode = document.getElementById('previewDocCode');
+  if (previewDocCode) previewDocCode.textContent = docCodeVal;
+  const previewDocCodeP2 = document.getElementById('previewDocCodePage2');
+  if (previewDocCodeP2) previewDocCodeP2.textContent = docCodeVal;
+
+  const previewSKU = document.getElementById('previewSKU');
+  if (previewSKU) previewSKU.textContent = skuVal;
+  const previewSKUP2 = document.getElementById('previewSKUPage2');
+  if (previewSKUP2) previewSKUP2.textContent = skuVal;
+
+  const previewRev = document.getElementById('previewRev');
+  if (previewRev) previewRev.textContent = revVal;
 
   const issueDateInput = document.getElementById('dsIssueDate');
   if (issueDateInput && !issueDateInput.value) {
     issueDateInput.value = new Date().toISOString().slice(0, 10);
   }
-  document.getElementById('previewDate').textContent = issueDateInput?.value || new Date().toISOString().slice(0, 10);
+  const dateVal = issueDateInput?.value || new Date().toISOString().slice(0, 10);
+  const previewDate = document.getElementById('previewDate');
+  if (previewDate) previewDate.textContent = dateVal;
+  const previewDateP2 = document.getElementById('previewDatePage2');
+  if (previewDateP2) previewDateP2.textContent = dateVal;
 
   // Title Banner
   document.getElementById('previewCategory').textContent = product.Category;
   document.getElementById('previewProductName').textContent = product.Name;
   document.getElementById('previewSummary').textContent = product.Summary || '';
+
+  const page2Sub = document.getElementById('previewPage2Sub');
+  if (page2Sub) {
+    page2Sub.textContent = `Comprehensive hardware parameters and engineering characteristics for ${product.Name} (${product.SKU}).`;
+  }
 
   // Meta strip
   document.getElementById('previewFactoryOrigin').textContent = factory ? `${factory.Name} (${factory.Country})` : 'Matrix Main Plant';
@@ -363,7 +385,42 @@ function renderProductUniqueLayout(product) {
     `;
   }
 
-  // 3. Technical Specifications Matrix Container
+  // 3. Page 1 Quick Spec Summary Table
+  const quickSpecsTable = document.getElementById('dsQuickSpecsTable');
+  if (quickSpecsTable) {
+    const q1 = specs['Processor'] || specs['Processors'] || specs['CPU'] || 'Intel® Core™ 14th Gen Series';
+    const q2 = specs['Memory (RAM)'] || specs['System Memory'] || specs['RAM'] || 'Up to 64GB DDR5 Dual-Channel';
+    const q3 = specs['Storage Drive'] || specs['Storage'] || 'M.2 PCIe NVMe Solid State Drive';
+    const q4 = specs['Graphics'] || specs['Video Output'] || 'Integrated Intel® Graphics • HDMI Ultra HD';
+    const q5 = specs['I/O Ports'] || specs['Ports'] || specs['Networking'] || 'Gigabit RJ-45 LAN • USB-C • USB 3.1 Type-A • Audio Combo Jack';
+
+    quickSpecsTable.innerHTML = `
+      <tbody>
+        <tr>
+          <td class="qs-col-label">CPU Options</td>
+          <td class="qs-col-val" contenteditable="true" spellcheck="false" data-orig-key="Processor" data-col="val">${escapeHtml(q1)}</td>
+        </tr>
+        <tr>
+          <td class="qs-col-label">System RAM</td>
+          <td class="qs-col-val" contenteditable="true" spellcheck="false" data-orig-key="Memory (RAM)" data-col="val">${escapeHtml(q2)}</td>
+        </tr>
+        <tr>
+          <td class="qs-col-label">Storage Drive</td>
+          <td class="qs-col-val" contenteditable="true" spellcheck="false" data-orig-key="Storage Drive" data-col="val">${escapeHtml(q3)}</td>
+        </tr>
+        <tr>
+          <td class="qs-col-label">Graphics & Video</td>
+          <td class="qs-col-val" contenteditable="true" spellcheck="false">${escapeHtml(q4)}</td>
+        </tr>
+        <tr>
+          <td class="qs-col-label">Networking & Ports</td>
+          <td class="qs-col-val" contenteditable="true" spellcheck="false">${escapeHtml(q5)}</td>
+        </tr>
+      </tbody>
+    `;
+  }
+
+  // 4. Technical Specifications Matrix Container (Page 2)
   container.innerHTML = `
     <div class="specs-matrix-container">
       <div class="specs-table-title" style="display:flex; justify-content:space-between; align-items:center;">
@@ -778,6 +835,8 @@ function bindDatasheetInPlaceEvents() {
     if (target.id === 'previewDocCode') {
       const el = document.getElementById('dsDocCode');
       if (el) el.value = target.innerText;
+      const p2 = document.getElementById('previewDocCodePage2');
+      if (p2) p2.textContent = target.innerText;
       return;
     }
 
@@ -788,6 +847,8 @@ function bindDatasheetInPlaceEvents() {
         product.SKU = target.innerText;
         const el = document.getElementById('dsEditSKU');
         if (el) el.value = product.SKU;
+        const p2 = document.getElementById('previewSKUPage2');
+        if (p2) p2.textContent = product.SKU;
       }
       return;
     }
