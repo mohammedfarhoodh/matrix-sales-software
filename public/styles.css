@@ -972,7 +972,7 @@ table.data-table tbody tr:hover th {
 .hero-banner {
   display: flex;
   justify-content: space-between;
-  align-items: flex-end;
+  align-items: center;
   border-bottom: 1px solid #e2e8f0;
   padding-bottom: 8px;
   margin-bottom: 12px;

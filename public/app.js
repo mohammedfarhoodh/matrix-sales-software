@@ -252,9 +252,12 @@ function updateDatasheetPreview(syncEditor = true) {
   if (previewDateP2) previewDateP2.textContent = dateVal;
 
   // Title Banner
-  document.getElementById('previewCategory').textContent = product.Category;
-  document.getElementById('previewProductName').textContent = product.Name;
-  document.getElementById('previewSummary').textContent = product.Summary || '';
+  const prevCat = document.getElementById('previewCategory');
+  if (prevCat) prevCat.textContent = product.Category || '';
+  const prevName = document.getElementById('previewProductName');
+  if (prevName) prevName.textContent = product.Name || '';
+  const prevSummary = document.getElementById('previewSummary');
+  if (prevSummary) prevSummary.textContent = product.Summary || '';
 
   const page2Sub = document.getElementById('previewPage2Sub');
   if (page2Sub) {
