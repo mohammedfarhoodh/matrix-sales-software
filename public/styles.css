@@ -1098,7 +1098,7 @@ table.data-table tbody tr:hover th {
 .p1-main-specs-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 12px;
+  gap: 8px;
   margin-top: auto;
   margin-bottom: 6px;
 }
@@ -1108,12 +1108,13 @@ table.data-table tbody tr:hover th {
   border: 1.5px solid #cbd5e1;
   border-top: 4px solid var(--sajaya-navy);
   border-radius: 8px;
-  padding: 10px 12px;
+  padding: 8px 10px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start;
+  gap: 4px;
   box-shadow: 0 4px 12px rgba(30, 55, 104, 0.05);
-  min-height: 76px;
+  min-height: 68px;
   position: relative;
   transition: transform 0.15s ease;
 }
@@ -1127,23 +1128,23 @@ table.data-table tbody tr:hover th {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 4px;
+  margin-bottom: 2px;
 }
 
 .p1-spec-badge {
   font-family: 'Oxanium', sans-serif;
-  font-size: 9px;
+  font-size: 8.5px;
   font-weight: 800;
   color: var(--sajaya-navy);
   background: #eef3fc;
   border: 1px solid #cbd5e1;
-  padding: 2px 7px;
+  padding: 1.5px 6px;
   border-radius: 4px;
   letter-spacing: 0.5px;
 }
 
 .p1-spec-tag {
-  font-size: 8px;
+  font-size: 7.5px;
   font-weight: 700;
   color: var(--sajaya-gold);
   text-transform: uppercase;
@@ -1152,14 +1153,14 @@ table.data-table tbody tr:hover th {
 
 .p1-spec-value {
   font-family: 'Oxanium', 'Inter', sans-serif;
-  font-size: 13.5px;
-  font-weight: 800;
+  font-size: 11px;
+  font-weight: 700;
   color: var(--sajaya-navy);
-  line-height: 1.25;
-  margin-top: 2px;
+  line-height: 1.28;
+  margin-top: 1px;
   margin-bottom: 0;
   overflow-wrap: break-word;
-  word-break: break-word;
+  word-break: normal;
 }
 
 .image-showcase-box {
