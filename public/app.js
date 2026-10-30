@@ -357,10 +357,6 @@ function renderProductUniqueLayout(product) {
   // 2. Technical Specifications Matrix Container (Page 2)
   container.innerHTML = `
     <div class="specs-matrix-container">
-      <div class="specs-table-title" style="display:flex; justify-content:space-between; align-items:center;">
-        <span>Full System Technical Specifications Matrix</span>
-        <span style="font-size:8.5px; font-weight:500; color:var(--text-subtle); text-transform:none;">Guaranteed Engineering Ratings</span>
-      </div>
       ${renderSpecTable(specs)}
     </div>
   `;
